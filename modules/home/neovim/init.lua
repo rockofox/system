@@ -173,16 +173,6 @@ local get_hex = require('cokeline/utils').get_hex
 local yellow = vim.g.terminal_color_3
 
 require('cokeline').setup({
-  default_hl = {
-    focused = function(buffer)
-      return
-        buffer.is_focused
-        and get_hex('Normal', 'fg')
-         or get_hex('Comment', 'fg')
-    end,
-    bg = get_hex('ColorColumn', 'bg'),
-  },
-
   sidebar = {
     filetype = 'NvimTree',
     components = {
@@ -772,7 +762,7 @@ local cmp = require'cmp'
   })
 
   -- Setup lspconfig.
-  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   -- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
   --   capabilities = capabilities
@@ -1057,28 +1047,6 @@ map("n", "<Leader>fm", [[<Cmd> Neoformat<CR>]], opt)
 vim.o.termguicolors = true
 
 
-g.nvim_tree_show_icons = {
-    git = 1,
-    folders = 1,
-    files = 1
-}
-
-g.nvim_tree_icons = {
-    default = " ",
-    symlink = " ",
-    git = {
-        unstaged = "✗",
-        staged = "✓",
-        unmerged = "",
-        renamed = "➜",
-        untracked = "★"
-    },
-    folder = {
-        default = "",
-        open = "",
-        symlink = ""
-    }
-}
 
 local get_lua_cb = function(cb_name)
     return string.format(":lua require'nvim-tree'.on_keypress('%s')<CR>", cb_name)

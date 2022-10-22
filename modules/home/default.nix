@@ -46,8 +46,5 @@
       theme = "arrow";
     };
   };
-  imports = [ 
-    ./neovim 
-    ./yabai.nix 
-  ];
+  imports = [ ./neovim ./yabai.nix ];
 }

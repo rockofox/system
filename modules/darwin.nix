@@ -1,5 +1,5 @@
 { config, lib, pkgs, inputs, ... }: {
-    documentation.enable = false;
+  documentation.enable = false;
   documentation.doc.enable = false;
   nix.useDaemon = true;
   # List packages installed in system profile. To search by name, run:
@@ -7,6 +7,7 @@
   environment.systemPackages = with pkgs; [
     # vim
     # neovim
+    nixfmt
     curl
     fzf
     git

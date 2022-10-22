@@ -1,6 +1,5 @@
 { pkgs, lib, ... }:
-let
-  vim-plugins = import ./plugins.nix { inherit pkgs lib; };
+let vim-plugins = import ./plugins.nix { inherit pkgs lib; };
 in {
   home.packages = with pkgs; [
     tree-sitter
@@ -15,7 +14,7 @@ in {
     sumneko-lua-language-server
     # haskell-language-server
   ];
-   programs.neovim = {
+  programs.neovim = {
     enable = true;
     # package = nixos-unstable.neovim-unwrapped;
     viAlias = true;
@@ -25,12 +24,12 @@ in {
       csv-vim
       copilot-vim
       onedark-vim
-      vim-surround  # fix config
+      vim-surround # fix config
       vim-repeat
       # vim-speeddating  # makes statusline buggy??
       vim-commentary
       vim-unimpaired
-      vim-sleuth  # adjusts shiftwidth and expandtab based on the current file
+      vim-sleuth # adjusts shiftwidth and expandtab based on the current file
       # vim-startify
       vim-multiple-cursors
       gundo-vim
@@ -42,7 +41,7 @@ in {
       vim-nix
       robotframework-vim
       # vimspector
-      vim-plugins.nvim-base16  # the one packaged in nixpkgs is different
+      vim-plugins.nvim-base16 # the one packaged in nixpkgs is different
       popup-nvim
       plenary-nvim
       telescope-nvim
@@ -72,7 +71,7 @@ in {
       vim-auto-save
       vim-plugins.neoscroll-nvim
       vim-plugins.zenmode-nvim
-      vim-plugins.indent-blankline-nvim  # using my own derivation because the nixpkgs still uses the master branch
+      vim-plugins.indent-blankline-nvim # using my own derivation because the nixpkgs still uses the master branch
       vim-easymotion
       quick-scope
       matchit-zip
@@ -89,7 +88,11 @@ in {
       vim-plugins.hydra-nvim
     ];
 
-    extraConfig = "lua << EOF\n" + builtins.readFile ./init.lua + "\nEOF";
+    extraConfig = ''
+      lua << EOF
+    '' + builtins.readFile ./init.lua + ''
+
+      EOF'';
   };
 
 }
