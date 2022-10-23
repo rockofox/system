@@ -5,36 +5,35 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    # vim
-    # neovim
-    nixfmt
+    bat
     curl
+    entr
+    exa
+    expect
+    fd
+    fx
     fzf
-    git
+    jq
+    moreutils
+    nixfmt
+    nixfmt
     nixfmt
     nixos-rebuild
+    ripgrep
+    skhd
+    tealdeer
     thefuck
     wget
-    skhd
-    nixfmt
-    nodejs-16_x
-    gradle
-    ripgrep
-    fd
-    maven
-    tealdeer
-    #    ghc
+    xh
     neofetch
+    tmux
+    tmate
     fortune
     cowsay
     # gpg
     htop
-    mono
     dotnet-sdk
     nodePackages.prettier
-    # stack
-    # gcc
-    # llvm
   ];
   homebrew = {
     enable = true;
@@ -46,10 +45,10 @@
     brews = [
       "yabai"
       "skhd"
-      "haskell-language-server"
+      # "haskell-language-server"
       "gpg"
-      "haskell-stack"
-      "ghcup"
+      # "haskell-stack"
+      # "ghcup"
       "python"
     ];
     casks = [ "kitty" "anaconda" "ilspy" ];

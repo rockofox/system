@@ -1,5 +1,6 @@
 { pkgs, lib }:
 
+# TODO: add these plugins to nixpkgs
 {
   vim-bepoptimist = pkgs.vimUtils.buildVimPlugin rec {
     pname = "vim-bepoptimist";

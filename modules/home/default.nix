@@ -18,33 +18,11 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   # programs.home-manager.manual.manpages.enable = false;
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    enableSyntaxHighlighting = true;
-    shellAliases = {
-      ll = "ls -la";
-      update = "sudo nixos-rebuild switch";
-      hr = "home-manager switch";
-    };
-    initExtra = ''
-      if test -e /etc/static/zshrc; then . /etc/static/zshrc; fi
-      export NIX_PATH=darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$HOME/.nix-defexpr/channels''${NIX_PATH:+:}$NIX_PATH;
-      export PATH=/run/current-system/sw/bin:$PATH
-      export PATH=$HOME/.spicetify:$PATH
-      source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
-      export EDITOR=nvim
-      export VISUAL=$EDITOR
-      	'';
-    history = {
-      size = 10000;
-      path = "$HOME/zsh/history";
-    };
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" "thefuck" ];
-      theme = "arrow";
-    };
-  };
-  imports = [ ./neovim ./yabai.nix ];
+
+  imports = [
+    ./git.nix
+    ./neovim
+    ./yabai.nix
+    ./zsh
+  ];
 }

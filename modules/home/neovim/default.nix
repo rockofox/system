@@ -1,18 +1,58 @@
 { pkgs, lib, ... }:
-let vim-plugins = import ./plugins.nix { inherit pkgs lib; };
+let
+  loadPlugin = plugin: ''
+    set rtp^=${plugin}
+    set rtp+=${plugin}/after
+  '';
+  loadPlugins = ps: lib.pipe ps [
+    (builtins.map loadPlugin)
+    (builtins.concatStringsSep "\n")
+  ];
+  plugins = with pkgs.vimPlugins; [
+    # use Treesitter for many languages
+    (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
+
+    # autocompletion
+    cmp-buffer
+    cmp-cmdline
+    cmp-nvim-lsp
+    cmp-omni
+    cmp-path
+    cmp-treesitter
+    cmp_luasnip
+    nvim-cmp
+
+    # LSP
+    cmp-nvim-lsp
+    fzf-lsp-nvim
+    lsp_extensions-nvim
+    lsp_signature-nvim
+    lspkind-nvim
+    nvim-lspconfig
+    luasnip
+
+    # other useful things :^)
+    direnv-vim
+    fidget-nvim
+    fzf-vim
+    fzfWrapper
+    gitsigns-nvim
+    impatient-nvim
+    incsearch-vim
+    lualine-nvim
+    nvim-autopairs
+    nvim-base16
+    nvim-tree-lua
+    nvim-web-devicons
+    plenary-nvim
+    rust-tools-nvim
+    trouble-nvim
+  ];
+  # only here for the TODO item :)
+  extra-plugins = import ./plugins.nix { inherit pkgs lib; };
+
 in {
   home.packages = with pkgs; [
-    tree-sitter
-    nodePackages.vim-language-server
-    nodePackages.bash-language-server
-    rnix-lsp
-    nodePackages.vscode-json-languageserver-bin
-    nodePackages.vscode-css-languageserver-bin
-    kotlin-language-server
-    nodePackages.vscode-html-languageserver-bin
-    yaml-language-server
-    sumneko-lua-language-server
-    # haskell-language-server
   ];
   programs.neovim = {
     enable = true;
@@ -20,79 +60,30 @@ in {
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
-    plugins = with pkgs.vimPlugins; [
-      csv-vim
-      copilot-vim
-      onedark-vim
-      vim-surround # fix config
-      vim-repeat
-      # vim-speeddating  # makes statusline buggy??
-      vim-commentary
-      vim-unimpaired
-      vim-sleuth # adjusts shiftwidth and expandtab based on the current file
-      # vim-startify
-      vim-multiple-cursors
-      gundo-vim
-      vim-easy-align
-      vim-table-mode
-      editorconfig-vim
-      vim-markdown
-      ansible-vim
-      vim-nix
-      robotframework-vim
-      # vimspector
-      vim-plugins.nvim-base16 # the one packaged in nixpkgs is different
-      popup-nvim
-      plenary-nvim
-      telescope-nvim
-      telescope-symbols-nvim
-      # telescope-media-files  # doesn't support wayland yet
-      nvim-colorizer-lua
-      nvim-treesitter
-      nvim-lspconfig
-      lsp_extensions-nvim
-      # completion-nvim
-      cmp-nvim-lsp
-      nvim-cmp
-      lspkind-nvim
-      gitsigns-nvim
-      neogit
-      diffview-nvim
-      # bufferline-nvim
-      vim-plugins.nvim-cokeline
-      nvim-autopairs
-      galaxyline-nvim
-      vim-closetag
-      friendly-snippets
-      vim-vsnip
-      nvim-tree-lua
-      nvim-web-devicons
-      vim-devicons
-      vim-auto-save
-      vim-plugins.neoscroll-nvim
-      vim-plugins.zenmode-nvim
-      vim-plugins.indent-blankline-nvim # using my own derivation because the nixpkgs still uses the master branch
-      vim-easymotion
-      quick-scope
-      matchit-zip
-      targets-vim
-      neoformat
-      vim-numbertoggle
-      # vim-markdown-composer
-      vimwiki
-      pkgs.vimwiki-markdown
-      vim-python-pep8-indent
-      lsp_signature-nvim
-      rust-tools-nvim
-      vim-plugins.keymap-layer-nvim
-      vim-plugins.hydra-nvim
-    ];
-
+    withNodeJs = true;
+    withPython3 = true;
     extraConfig = ''
+      " Workaround for broken handling of packpath by vim8/neovim for ftplugins -- see https://github.com/NixOS/nixpkgs/issues/39364#issuecomment-425536054 for more info
+      filetype off | syn off
+      ${loadPlugins plugins}
+      filetype indent plugin on | syn on
+      ${builtins.readFile ./init.vim}
       lua << EOF
-    '' + builtins.readFile ./init.lua + ''
-
+        ${builtins.readFile ./init.lua}
       EOF'';
   };
 
+  xdg.configFile = {
+    # Lua files in this directory will be available for Lua `require`
+    "nvim/lua".source = ./lua;
+
+    # Lua files in this directory will be evaluated on startup
+    "nvim/plugin".source = ./plugin;
+   
+    # per-language configuration in either Lua or VimL
+    "nvim/ftplugin".source = ./ftplugin;
+
+    # initial configuration for GUIs like Neovim-Qt or VimR
+    "nvim/ginit.vim".source = ./ginit.vim;
+  };
 }
