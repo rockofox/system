@@ -63,10 +63,11 @@
     ];
   };
 
-  fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [ nerdfonts recursive ];
-  };
+# Font support seems broken on macOS Ventura: https://github.com/LnL7/nix-darwin/issues/559
+#  fonts = {
+#    fontDir.enable = true;
+#    fonts = with pkgs; [ nerdfonts recursive ];
+#  };
   system = {
     defaults = {
       NSGlobalDomain = { NSAutomaticSpellingCorrectionEnabled = false; };
