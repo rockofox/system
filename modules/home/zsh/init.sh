@@ -13,3 +13,5 @@ export PATH=/run/current-system/sw/bin:$PATH
 export PATH=$HOME/.spicetify:$PATH
 export EDITOR=nvim
 export VISUAL=$EDITOR
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
