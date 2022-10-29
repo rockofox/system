@@ -1,5 +1,5 @@
 -- Pick from here: https://github.com/RRethy/nvim-base16#builtin-colorschemes
-vim.cmd('colorscheme base16-default-dark')
+vim.cmd('colorscheme base16-ayu-dark')
 
 require 'lualine'.setup {
 	options = {

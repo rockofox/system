@@ -32,6 +32,7 @@ let
     luasnip
 
     # other useful things :^)
+    barbar-nvim
     direnv-vim
     fidget-nvim
     fzf-vim

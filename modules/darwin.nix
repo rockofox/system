@@ -6,34 +6,35 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     bat
+    cowsay
     curl
+    dotnet-sdk
     entr
     exa
     expect
     fd
+    fortune
     fx
     fzf
+    gh
+    gitui
+    htop
     jq
     moreutils
+    neofetch
     nixfmt
     nixfmt
     nixfmt
     nixos-rebuild
+    nodePackages.prettier
     ripgrep
     skhd
     tealdeer
     thefuck
+    tmate
+    tmux
     wget
     xh
-    neofetch
-    tmux
-    tmate
-    fortune
-    cowsay
-    # gpg
-    htop
-    dotnet-sdk
-    nodePackages.prettier
   ];
   homebrew = {
     enable = true;
@@ -45,21 +46,21 @@
     brews = [
       "yabai"
       "skhd"
-      # "haskell-language-server"
       "gpg"
-      # "haskell-stack"
-      # "ghcup"
       "python"
+      "qmk/qmk/qmk"
     ];
-    casks = [ "kitty" "anaconda" "ilspy" ];
+    casks = [ "anaconda" "ilspy" ];
     taps = [
-      # default
       "homebrew/bundle"
       "homebrew/cask"
       "homebrew/cask-drivers"
       "homebrew/core"
       "homebrew/services"
       "koekeishiya/formulae"
+      "osx-cross/arm"
+      "osx-cross/avr"
+      "qmk/qmk"
     ];
   };
 
@@ -88,6 +89,7 @@
   nix.gc.automatic = true;
 
   nix.extraOptions = ''
+    extra-platforms = aarch64-darwin x86_64-darwin
     auto-optimise-store = true
     experimental-features = nix-command flakes
   '';

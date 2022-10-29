@@ -13,18 +13,15 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, darwin, nixpkgs-unstable, home-manager, ... }@inputs:
     let
 
       inherit (darwin.lib) darwinSystem;
       inherit (inputs.nixpkgs-unstable.lib)
         attrValues makeOverridable optionalAttrs singleton;
 
-      # Configuration for `nixpkgs`
-      nixpkgsConfig = {
-        # Forgive me Stallman, for I have sinned
-        config = { allowUnfree = true; };
-      };
+      lib = nixpkgs-unstable.lib;
+
     in {
       darwin.manual.manpages.enable = false;
 

@@ -15,6 +15,7 @@
       exa = "exa --tree --icons";
       update = "sudo nixos-rebuild switch";
       hr = "home-manager switch";
+      ".." = "cd ..";
     };
     initExtra = ''
       source "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"

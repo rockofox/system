@@ -19,6 +19,27 @@
   programs.home-manager.enable = true;
   # programs.home-manager.manual.manpages.enable = false;
 
+  programs.kitty.enable = true;
+  programs.kitty.darwinLaunchOptions = [
+    "--single-instance"
+    "--directory=~"
+  ];
+  programs.kitty.font.name = "JetBrainsMono Nerd Font";
+  programs.kitty.font.size = 15;
+  programs.kitty.settings = {
+    # background_opacity = "0.85";
+    copy_on_select = true;
+    cursor_blink_interval = 0;
+    editor = "vim";
+    hide_window_decorations = true;
+    scrollback_pager_history_size = 1;
+    update_check_interval = 0;
+  };
+  programs.kitty.extraConfig = "
+  term xterm-256color
+  ";
+  programs.kitty.theme = "Ayu";
+
   imports = [
     ./git.nix
     ./neovim
