@@ -48,6 +48,7 @@
       "qmk/qmk/qmk"
     ];
     casks = [ "anaconda" "ilspy" ];
+    casks = [ "anaconda" "ilspy" "vimr" ];
     taps = [
       "homebrew/bundle"
       "homebrew/cask"

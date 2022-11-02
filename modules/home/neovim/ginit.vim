@@ -1,0 +1,2 @@
+NVimTreeClose
+BarbarDisable
