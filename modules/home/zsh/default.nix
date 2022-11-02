@@ -13,6 +13,7 @@
       ls = "exa --icons -L1";
       ll = "exa --tree --icons --long -L1";
       exa = "exa --tree --icons";
+      rebuild = "cd ~/Repositories/system && git add -A && darwin-rebuild switch --flake .#darwin && cd -";
       ".." = "cd ..";
     };
     initExtra = ''
