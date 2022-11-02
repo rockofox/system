@@ -137,7 +137,7 @@
       alt - p : yabai -m window --toggle sticky;\
                 yabai -m window --toggle topmost;\
                 yabai -m window --toggle pip
-      ctrl - return : /etc/profiles/per-user/rocko/bin/kitty --single-instance -d ~
+      ctrl - return : kitty --single-instance -d ~
       ctrl - q : /Applications/Firefox.app/Contents/MacOS/firefox
       # ctrl - e : open ~
       alt - t : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
