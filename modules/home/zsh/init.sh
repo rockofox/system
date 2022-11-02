@@ -16,3 +16,5 @@ export VISUAL=$EDITOR
 export TERM=xterm-256color
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+bindkey "\e[1;3D" backward-word # ⌥←
+bindkey "\e[1;3C" forward-word # ⌥→

@@ -35,9 +35,6 @@ opt.softtabstop = 4 -- edit as if the tabs are 4 characters wide
 opt.shiftwidth = 4 -- number of spaces to use for indent and unindent
 opt.shiftround = true -- round indent to a multiple of 'shiftwidth'
 
--- Use hard tabs, soft tabs can be enabled on filetype basis
-vim.opt.expandtab = false
-
 -- Autoindent
 vim.opt.autoindent = true
 vim.opt.smartindent = true
@@ -73,3 +70,6 @@ vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
 -- Prevent strange file save behaviour.
 -- https://github.com/srid/emanote/issues/180
 vim.opt.backupcopy = 'yes'
+
+-- Use system clipboard
+vim.opt.clipboard = 'unnamed'

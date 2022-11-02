@@ -23,14 +23,11 @@
     moreutils
     neofetch
     nixfmt
-    nixfmt
-    nixfmt
     nixos-rebuild
     nodePackages.prettier
     ripgrep
     skhd
     tealdeer
-    thefuck
     tmate
     tmux
     wget
@@ -64,11 +61,6 @@
     ];
   };
 
-# Font support seems broken on macOS Ventura: https://github.com/LnL7/nix-darwin/issues/559
-#  fonts = {
-#    fontDir.enable = true;
-#    fonts = with pkgs; [ nerdfonts recursive ];
-#  };
   system = {
     defaults = {
       NSGlobalDomain = { NSAutomaticSpellingCorrectionEnabled = false; };
@@ -79,20 +71,37 @@
       };
     };
   };
+
+  users.users.rocko = {
+        name = "rocko";
+        home = "/Users/rocko";
+    };
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  nix.package = pkgs.nixFlakes;
+  nix.package = pkgs.nixUnstable;
   nix.gc.automatic = true;
+  nix.gc.options = "--delete-older-than 8d";
 
   nix.extraOptions = ''
     extra-platforms = aarch64-darwin x86_64-darwin
     auto-optimise-store = true
     experimental-features = nix-command flakes
   '';
+
+  # Binary Cache for Haskell.nix  
+  nix.settings.trusted-public-keys = [
+#    "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+    "loony-tools:pr9m4BkM/5/eSTZlkQyRt57Jz7OMBxNSUiMC4FkcNfk="
+    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+  ];
+  nix.settings.substituters = [
+#    "https://cache.iog.io"
+    "https://cache.zw3rk.com"
+  ];
 
   # nix.package = pkgs.nix;
 

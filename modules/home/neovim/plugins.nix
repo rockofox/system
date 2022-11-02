@@ -110,5 +110,16 @@
     meta.homepage = "https://github.com/noib3/nvim-cokeline";
   };
 
+  copilot-lua = pkgs.vimUtils.buildVimPlugin rec {
+    pname = "copilot-lua";
+    version = "2022-10-29";
+    src = pkgs.fetchFromGitHub {
+      owner = "zbirenbaum";
+      repo = "copilot.lua";
+      rev = "81ffc4971c3fde809f90bc92232fd0d14bd6bc09";
+      sha256 = "sha256-ExxG3G2oldyPshuGr6qhJTGnbapyErlmVFXoINkrLbk=";
+    };
+    meta.homepage = "https://github.com/zbirenbaum/copilot.lua";
+  };
 }
 

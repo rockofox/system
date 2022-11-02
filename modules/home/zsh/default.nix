@@ -13,8 +13,6 @@
       ls = "exa --icons -L1";
       ll = "exa --tree --icons --long -L1";
       exa = "exa --tree --icons";
-      update = "sudo nixos-rebuild switch";
-      hr = "home-manager switch";
       ".." = "cd ..";
     };
     initExtra = ''
