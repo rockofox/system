@@ -26,6 +26,7 @@
     nixos-rebuild
     nodePackages.prettier
     ripgrep
+    silver-searcher
     skhd
     tealdeer
     tmate

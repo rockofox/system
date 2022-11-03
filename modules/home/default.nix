@@ -45,6 +45,11 @@
   programs.kitty.extraConfig = "
   term xterm-256color
   window_padding_width 4
+  tab_bar_style powerline
+  tab_powerline_style slanted
+  kitty_mod cmd
+  map kitty_mod+t     new_tab_with_cwd
+  confirm_os_window_close 0
   ";
   programs.kitty.theme = "Ayu";
 
