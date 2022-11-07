@@ -1,4 +1,8 @@
-{ config, lib, pkgs, inputs, ... }: {
+{ config, lib, pkgs, inputs, ... }: 
+let
+  vars = import ./vars.nix;
+in
+{
   documentation.enable = false;
   documentation.doc.enable = false;
   nix.useDaemon = true;
@@ -73,9 +77,9 @@
     };
   };
 
-  users.users.rocko = {
-        name = "rocko";
-        home = "/Users/rocko";
+  users.users.${vars.username} = {
+        name = vars.username;
+        home = vars.homeDirectory;
     };
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix

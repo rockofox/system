@@ -1,8 +1,12 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+let
+    vars = import ../vars.nix;
+in
+{
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "rocko";
-  home.homeDirectory = "/Users/rocko";
+  home.username = vars.username;
+  home.homeDirectory = vars.homeDirectory;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
