@@ -54,6 +54,7 @@ in
   kitty_mod cmd
   map kitty_mod+t     new_tab_with_cwd
   confirm_os_window_close 0
+  enable_audio_bell no
   ";
   programs.kitty.theme = "Ayu";
 

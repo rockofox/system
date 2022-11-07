@@ -41,16 +41,14 @@ in
   homebrew = {
     enable = true;
     onActivation = {
-      # "zap" removes manually installed brews and casks
-      cleanup = "zap";
       autoUpdate = true;
     };
     brews = [
       "yabai"
       "skhd"
-      "gpg"
-      "python"
-      "qmk/qmk/qmk"
+      # "gpg"
+      # "python"
+      # "qmk/qmk/qmk"
     ];
     casks = [ "anaconda" "ilspy" "vimr" ];
     taps = [

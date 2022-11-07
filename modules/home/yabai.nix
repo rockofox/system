@@ -5,7 +5,7 @@
     text = ''
       #!/usr/bin/env sh
       yabai -m config mouse_follows_focus          off
-      yabai -m config focus_follows_mouse          off
+      yabai -m config focus_follows_mouse          autoraise
       yabai -m config window_origin_display        default
       yabai -m config window_placement             second_child
       yabai -m config window_topmost               off
