@@ -15,7 +15,7 @@ in
       ls = "exa --icons -L1";
       ll = "exa --tree --icons --long -L1";
       exa = "exa --tree --icons";
-      rebuild = "cd ${vars.systemFlakePath} && git add -A && darwin-rebuild switch --flake .#darwin && cd -";
+      rebuild = "cd ${vars.systemFlakePath} && git add -NA . && git add -Nf modules/vars.nix && darwin-rebuild switch --flake .#darwin && cd -";
       ".." = "cd ..";
     };
     initExtra = ''

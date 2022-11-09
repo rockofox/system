@@ -10,6 +10,9 @@ let
   ];
   extra-plugins = import ./plugins.nix { inherit pkgs lib; };
   plugins = with pkgs.vimPlugins; [
+    extra-plugins.copilot-lua
+    extra-plugins.copilot-cmp
+
     # use Treesitter for many languages
     (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
     kotlin-vim
@@ -22,7 +25,6 @@ let
     cmp-path
     cmp-treesitter
     cmp_luasnip
-    copilot-vim
     nvim-cmp
 
     # LSP

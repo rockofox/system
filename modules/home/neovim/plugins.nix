@@ -112,14 +112,26 @@
 
   copilot-lua = pkgs.vimUtils.buildVimPlugin rec {
     pname = "copilot-lua";
-    version = "2022-10-29";
+    version = "2022-11-09";
+    src = pkgs.fetchFromGitHub {
+      owner = "rockofox";
+      repo = "copilot.lua";
+      rev = "b4a460a001fa332d2ecf8b67d1c1db21b72d09eb";
+      sha256 = "sha256-4fCHmOfy+F4/v+/jSgnOTSeIlq1Yei8Hj7l9I2cUtKk=";
+    };
+    meta.homepage = "https://github.com/rockofox/copilot.lua";
+  };
+
+  copilot-cmp = pkgs.vimUtils.buildVimPlugin rec {
+    pname = "copilot-cmp";
+    version = "2022-11-09";
     src = pkgs.fetchFromGitHub {
       owner = "zbirenbaum";
-      repo = "copilot.lua";
-      rev = "81ffc4971c3fde809f90bc92232fd0d14bd6bc09";
-      sha256 = "sha256-ExxG3G2oldyPshuGr6qhJTGnbapyErlmVFXoINkrLbk=";
+      repo = "copilot-cmp";
+      rev = "84d5a0e8e4d1638e7554899cb7b642fa24cf463f";
+      sha256 = "sha256-cU3WC5mEYh6pJFZ2ezV01dCq/FTtfAdpvLTRlVAzHqA=";
     };
-    meta.homepage = "https://github.com/zbirenbaum/copilot.lua";
+    meta.homepage = "https://github.com/zbirenbaum/copilot-cmp";
   };
 }
 
