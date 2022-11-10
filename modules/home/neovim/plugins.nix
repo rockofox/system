@@ -116,8 +116,8 @@
     src = pkgs.fetchFromGitHub {
       owner = "rockofox";
       repo = "copilot.lua";
-      rev = "b4a460a001fa332d2ecf8b67d1c1db21b72d09eb";
-      sha256 = "sha256-4fCHmOfy+F4/v+/jSgnOTSeIlq1Yei8Hj7l9I2cUtKk=";
+      rev = "1d90c8c9a6c6168b4201110b2a0fcb4692781670";
+      sha256 = "sha256-Ht+ujNg+2gbcZt8mEtGKXKJqvJ6h0ssi9j4x9eARcv8=";
     };
     meta.homepage = "https://github.com/rockofox/copilot.lua";
   };
