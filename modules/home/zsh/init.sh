@@ -15,9 +15,11 @@ export EDITOR=nvim
 export VISUAL=$EDITOR
 export TERM=xterm-256color
 export FZF_DEFAULT_COMMAND='ag -g ""'
+export DIRENV_LOG_FORMAT=
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 bindkey "\e[1;3D" backward-word # ⌥←
 bindkey "\e[1;3C" forward-word # ⌥→
+bindkey "^[[3~" delete-char
 
 precmd () {print -Pn "\e]0;%2~\a"}
