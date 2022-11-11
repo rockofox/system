@@ -5,7 +5,7 @@
     text = ''
       #!/usr/bin/env sh
       yabai -m config mouse_follows_focus          off
-      yabai -m config focus_follows_mouse          autoraise
+      yabai -m config focus_follows_mouse          off
       yabai -m config window_origin_display        default
       yabai -m config window_placement             second_child
       yabai -m config window_topmost               off
@@ -129,18 +129,10 @@
       # toggle window split type
       alt - e : yabai -m window --toggle split
 
-      # float / unfloat window and center on screen
-      alt - t : yabai -m window --toggle float;\
-                yabai -m window --grid 4:4:1:1:2:2
-
-      # toggle sticky(+float), topmost, picture-in-picture
-      alt - p : yabai -m window --toggle sticky;\
-                yabai -m window --toggle topmost;\
-                yabai -m window --toggle pip
       ctrl - return : kitty --single-instance -d ~
       ctrl - q : /Applications/Firefox.app/Contents/MacOS/firefox
       # ctrl - e : open ~
-      alt - t : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
+      alt - t : /opt/homebrew/bin/yabai -m space --layout $(/opt/homebrew/bin/yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
     '';
   };
 }
