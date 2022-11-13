@@ -88,6 +88,7 @@ cmp.setup {
 		{ name = "path" },
 		{ name = "treesitter" },
 		{ name = "buffer" },
+        { name = "copilot" },
 	},
 }
 
