@@ -29,11 +29,10 @@ vim.opt.signcolumn = 'yes'
 vim.opt.showcmd = true
 
 -- Tab control
-opt.smarttab = true -- tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
-opt.tabstop = 4 -- the visible width of tabs
-opt.softtabstop = 4 -- edit as if the tabs are 4 characters wide
-opt.shiftwidth = 4 -- number of spaces to use for indent and unindent
-opt.shiftround = true -- round indent to a multiple of 'shiftwidth'
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 -- Autoindent
 vim.opt.autoindent = true

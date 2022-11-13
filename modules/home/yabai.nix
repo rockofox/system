@@ -16,7 +16,7 @@
       yabai -m config normal_window_opacity        0.90
       yabai -m config window_border                on
       yabai -m config window_border_width          6
-      yabai -m config active_window_border_color   0xFF3b2a7b
+      yabai -m config active_window_border_color   0xFF4d432c
       yabai -m config normal_window_border_color   0x006453a3
       yabai -m config insert_feedback_color        0xffd75f5f
       yabai -m config split_ratio                  0.50
@@ -28,11 +28,11 @@
 
       # general space settings
       yabai -m config layout                       bsp
-      yabai -m config top_padding                  32
-      yabai -m config bottom_padding               32
-      yabai -m config left_padding                 32
-      yabai -m config right_padding                32
-      yabai -m config window_gap                   32
+      yabai -m config top_padding                  24
+      yabai -m config bottom_padding               24
+      yabai -m config left_padding                 24
+      yabai -m config right_padding                24
+      yabai -m config window_gap                   24
 
       # system floating windows
       # yabai -m rule --add app="^Finder$" manage=off

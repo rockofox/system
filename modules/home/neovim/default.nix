@@ -15,7 +15,7 @@ let
 
     # use Treesitter for many languages
     (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
-    kotlin-vim
+    # kotlin-vim
 
     # autocompletion
     cmp-buffer
