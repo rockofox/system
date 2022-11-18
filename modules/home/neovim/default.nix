@@ -10,8 +10,9 @@ let
   ];
   extra-plugins = import ./plugins.nix { inherit pkgs lib; };
   plugins = with pkgs.vimPlugins; [
-    extra-plugins.copilot-lua
-    extra-plugins.copilot-cmp
+    # extra-plugins.copilot-lua
+    # extra-plugins.copilot-cmp
+    cmp-tabnine
 
     # use Treesitter for many languages
     (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
@@ -56,6 +57,7 @@ let
     rust-tools-nvim
     toggleterm-nvim
     trouble-nvim
+    comment-nvim
   ];
   
 
@@ -64,10 +66,11 @@ in {
     # Copilot doesn't work with Node.js 18 yet
     # TODO: Find a solution that donesn't pollute global namespace
     nodejs-16_x
+    tabnine
   ];
   programs.neovim = {
     enable = true;
-    # package = nixos-unstable.neovim-unwrapped;
+    package = pkgs.neovim-nightly;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;

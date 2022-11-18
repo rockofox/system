@@ -1,8 +1,6 @@
-{ config, lib, pkgs, inputs, ... }: 
-let
-  vars = import ./vars.nix;
-in
-{
+{ config, lib, pkgs, inputs, ... }:
+let vars = import ./vars.nix;
+in {
   documentation.enable = false;
   documentation.doc.enable = false;
   nix.useDaemon = true;
@@ -10,6 +8,7 @@ in
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     bat
+    bottom
     cowsay
     curl
     dotnet-sdk
@@ -27,7 +26,6 @@ in
     moreutils
     neofetch
     nixfmt
-    nixos-rebuild
     nodePackages.prettier
     ripgrep
     silver-searcher
@@ -35,17 +33,29 @@ in
     tealdeer
     tmate
     tmux
+    tree
     wget
     xh
   ];
   homebrew = {
     enable = true;
-    onActivation = {
-      autoUpdate = true;
-    };
+    onActivation = { autoUpdate = false; };
     brews = [
-      "yabai"
-      "skhd"
+      {
+        name = "yabai";
+        start_service = true;
+        restart_service = "changed";
+      }
+      {
+        name = "skhd";
+        start_service = true;
+        restart_service = "changed";
+      }
+      {
+        name = "autoraise";
+        start_service = true;
+        restart_service = "changed";
+      }
       # "gpg"
       # "python"
       # "qmk/qmk/qmk"
@@ -60,6 +70,7 @@ in
       "koekeishiya/formulae"
       "osx-cross/arm"
       "osx-cross/avr"
+      "dimentium/autoraise"
       "qmk/qmk"
     ];
   };
@@ -76,9 +87,9 @@ in
   };
 
   users.users.${vars.username} = {
-        name = vars.username;
-        home = vars.homeDirectory;
-    };
+    name = vars.username;
+    home = vars.homeDirectory;
+  };
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
@@ -86,7 +97,9 @@ in
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   nix.package = pkgs.nixUnstable;
+
   nix.gc.automatic = true;
+  nix.gc.interval = { Day = 7; };
   nix.gc.options = "--delete-older-than 8d";
 
   nix.extraOptions = ''
@@ -97,12 +110,12 @@ in
 
   # Binary Cache for Haskell.nix  
   nix.settings.trusted-public-keys = [
-#    "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+    #    "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
     "loony-tools:pr9m4BkM/5/eSTZlkQyRt57Jz7OMBxNSUiMC4FkcNfk="
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
   ];
   nix.settings.substituters = [
-#    "https://cache.iog.io"
+    #    "https://cache.iog.io"
     "https://cache.zw3rk.com"
   ];
 
@@ -110,7 +123,9 @@ in
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
-  # programs.fish.enable = true;
+  
+  # Add ability to used TouchID for sudo authentication
+  security.pam.enableSudoTouchIdAuth = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

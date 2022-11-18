@@ -1,12 +1,8 @@
 { pkgs, ... }:
-let
-  vars = import ../../vars.nix;
-in
-{
-  home.packages = with pkgs; [
-    fzf
-  ];
-  
+let vars = import ../../vars.nix;
+in {
+  home.packages = with pkgs; [ fzf ];
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -15,7 +11,8 @@ in
       ls = "exa --icons -L1";
       ll = "exa --tree --icons --long -L1";
       exa = "exa --tree --icons";
-      rebuild = "cd ${vars.systemFlakePath} && git add -NA . && git add -Nf modules/vars.nix && darwin-rebuild switch --flake .#darwin && cd -";
+      rebuild =
+        "cd ${vars.systemFlakePath} && git add -NA . && git add -Nf modules/vars.nix && darwin-rebuild switch --flake .#darwin && cd -";
       ".." = "cd ..";
     };
     initExtra = ''
@@ -44,9 +41,28 @@ in
     enableZshIntegration = true;
     settings = {
       character = {
-        success_symbol = "🦊";
-        error_symbol = "😿";
-        vicmd_symbol = "😸";
+        success_symbol = " ";
+        error_symbol = " ";
+        vicmd_symbol = " ";
+      };
+      gcloud.disabled = true;
+      nodejs.symbol = " ";
+      java.symbol = " ";
+      rust.symbol = " ";
+      package.symbol = " ";
+      hostname = { ssh_only = true; };
+      git_status = {
+        format = "([\\[ $all_status$ahead_behind\\]]($style) )";
+        conflicted = " ";
+        deleted = "﫧";
+        modified = " ";
+        stashed = " ";
+        staged = "ﱐ ";
+        renamed = " ";
+        untracked = " ";
+        diverged = " ";
+        ahead = " ";
+        behind = " ";
       };
     };
   };

@@ -15,6 +15,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = { self, darwin, nixpkgs-unstable, home-manager, ... }@inputs:
@@ -25,9 +26,9 @@
         attrValues makeOverridable optionalAttrs singleton;
 
       lib = nixpkgs-unstable.lib;
-      nixpkgsConfig = { config = { allowUnfree = true; }; };
-      vars = import ./modules/vars.nix;
+      overlays = [ inputs.neovim-nightly-overlay.overlay ];
 
+      vars = import ./modules/vars.nix;
     in {
       darwin.manual.manpages.enable = false;
 
@@ -38,7 +39,8 @@
             ./modules/darwin.nix
             home-manager.darwinModules.home-manager
             {
-              nixpkgs = nixpkgsConfig;
+              nixpkgs.overlays = overlays;
+              nixpkgs.config.allowUnfree = true;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.${vars.username} = {
@@ -50,3 +52,4 @@
       };
     };
 }
+

@@ -15,7 +15,7 @@
       root = "rev-parse --show-toplevel";
     };
     extraConfig = {
-      init.defaultBranch = "master";
+      init.defaultBranch = "main";
       merge.conflictStyle = "diff3";
       diff.colorMoved = "default";
       pull.rebase = true;

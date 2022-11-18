@@ -35,7 +35,7 @@ in
     "--single-instance"
     "--directory=~"
   ];
-  programs.kitty.font.name = "JetBrainsMono Nerd Font";
+  programs.kitty.font.name = "CaskaydiaCove Nerd Font";
   programs.kitty.font.size = 15;
   programs.kitty.settings = {
     # background_opacity = "0.85";
@@ -53,6 +53,7 @@ in
   tab_powerline_style slanted
   kitty_mod cmd
   map kitty_mod+t     new_tab_with_cwd
+  map kitty_mod+enter new_window_with_cwd
   confirm_os_window_close 0
   enable_audio_bell no
   macos_option_as_alt yes
