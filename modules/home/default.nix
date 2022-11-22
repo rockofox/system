@@ -61,6 +61,7 @@ in
   programs.kitty.theme = "Ayu";
 
   imports = [
+    ./autoraise.nix
     ./git.nix
     ./neovim
     ./yabai.nix

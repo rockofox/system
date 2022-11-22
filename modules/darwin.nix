@@ -51,14 +51,6 @@ in {
         start_service = true;
         restart_service = "changed";
       }
-      {
-        name = "autoraise";
-        start_service = true;
-        restart_service = "changed";
-      }
-      # "gpg"
-      # "python"
-      # "qmk/qmk/qmk"
     ];
     casks = [ "anaconda" "ilspy" "vimr" ];
     taps = [
