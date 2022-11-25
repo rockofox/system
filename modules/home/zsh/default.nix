@@ -22,6 +22,7 @@ in {
       source "${pkgs.fzf}/share/fzf/key-bindings.zsh"
       source "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
       source "${pkgs.zsh-fzf-tab}/share/fzf-tab/lib/zsh-ls-colors/ls-colors.zsh"
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
       ${builtins.readFile ./init.sh}
     '';
     history = {
