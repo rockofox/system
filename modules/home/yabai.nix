@@ -123,7 +123,7 @@
       ctrl - return : kitty --single-instance -d ~
       ctrl - q : /Applications/Firefox.app/Contents/MacOS/firefox
       # ctrl - e : open ~
-      alt - t : /opt/homebrew/bin/yabai -m space --layout $(/opt/homebrew/bin//opt/homebrew/bin/yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
+      alt - t : /opt/homebrew/bin/yabai -m space --layout $(/opt/homebrew/bin/yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
 
       alt - y : /opt/homebrew/bin/yabai -m window --focus west || /opt/homebrew/bin/yabai -m display --focus west
       alt - n : /opt/homebrew/bin/yabai -m window --focus south || /opt/homebrew/bin/yabai -m display --focus south
