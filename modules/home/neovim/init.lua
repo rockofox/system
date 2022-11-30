@@ -72,3 +72,6 @@ vim.opt.backupcopy = 'yes'
 
 -- Use system clipboard
 vim.opt.clipboard = 'unnamed'
+
+-- Don't wrap
+vim.o.wrap = false
