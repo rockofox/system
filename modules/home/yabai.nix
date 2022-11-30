@@ -67,6 +67,28 @@
       echo "yabai configuration loaded.."
     '';
   };
+  home.file.stack = {
+    target = ".config/skhd/stack";
+    executable = true;
+    text = ''
+      #!/usr/bin/env bash
+
+      dir=$1
+      # dir should be one of east,west,north,south
+
+      window=$(/opt/homebrew/bin/yabai -m query --windows --window | jq -r '.id') 
+
+      # Stack this window onto existing stack if possible
+      /opt/homebrew/bin/yabai -m window $dir --stack $window 
+      if [[ $? -ne 0 ]]; then
+      # otherwise, float and un-float this window to reinsert it into 
+      # the bsp tree as a new window
+      /opt/homebrew/bin/yabai -m window --insert $dir
+      /opt/homebrew/bin/yabai -m window $window --toggle float 
+      /opt/homebrew/bin/yabai -m window $window --toggle float
+      fi
+    '';
+  };
 
   home.file.skhd = {
     target = ".config/skhd/skhdrc";
@@ -133,6 +155,10 @@
       alt + shift - n : /opt/homebrew/bin/yabai -m window --swap south || $(/opt/homebrew/bin/yabai -m window --display south; /opt/homebrew/bin/yabai -m display --focus south)
       alt + shift - i : /opt/homebrew/bin/yabai -m window --swap north || $(/opt/homebrew/bin/yabai -m window --display north; /opt/homebrew/bin/yabai -m display --focus north)
       alt + shift - o : /opt/homebrew/bin/yabai -m window --swap east || $(/opt/homebrew/bin/yabai -m window --display east; /opt/homebrew/bin/yabai -m display --focus east)
-      '';
+      alt + cmd - y : ~/.config/skhd/stack north
+      alt + cmd - n : ~/.config/skhd/stack south
+      alt + cmd - i : ~/.config/skhd/stack east
+      alt + cmd - o : ~/.config/skhd/stack west
+    '';
   };
 }
