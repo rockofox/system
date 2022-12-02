@@ -64,6 +64,8 @@
       #/opt/homebrew/bin/yabai -m config --space 2 layout float
       #/opt/homebrew/bin/yabai -m config --space 2  focus_follows_mouse off
 
+      /opt/homebrew/bin/yabai -m config window_border_blur off
+
       echo "yabai configuration loaded.."
     '';
   };
@@ -155,10 +157,10 @@
       alt + shift - n : /opt/homebrew/bin/yabai -m window --swap south || $(/opt/homebrew/bin/yabai -m window --display south; /opt/homebrew/bin/yabai -m display --focus south)
       alt + shift - i : /opt/homebrew/bin/yabai -m window --swap north || $(/opt/homebrew/bin/yabai -m window --display north; /opt/homebrew/bin/yabai -m display --focus north)
       alt + shift - o : /opt/homebrew/bin/yabai -m window --swap east || $(/opt/homebrew/bin/yabai -m window --display east; /opt/homebrew/bin/yabai -m display --focus east)
-      alt + cmd - y : ~/.config/skhd/stack north
+      alt + cmd - y : ~/.config/skhd/stack west 
       alt + cmd - n : ~/.config/skhd/stack south
-      alt + cmd - i : ~/.config/skhd/stack east
-      alt + cmd - o : ~/.config/skhd/stack west
+      alt + cmd - i : ~/.config/skhd/stack north
+      alt + cmd - o : ~/.config/skhd/stack east
     '';
   };
 }
