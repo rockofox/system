@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, nix-colors, ... }:
 let
   loadPlugin = plugin: ''
     set rtp^=${plugin}
@@ -8,6 +8,7 @@ let
     (builtins.map loadPlugin)
     (builtins.concatStringsSep "\n")
   ];
+  nix-colors-lib = nix-colors.lib-contrib { inherit pkgs; };
   extra-plugins = import ./plugins.nix { inherit pkgs lib; };
   plugins = with pkgs.vimPlugins; [
     # extra-plugins.copilot-lua
@@ -39,6 +40,7 @@ let
 
     # other useful things :^)
     barbar-nvim
+    comment-nvim
     direnv-vim
     editorconfig-nvim
     fidget-nvim
@@ -50,6 +52,7 @@ let
     lualine-nvim
     nvim-autopairs
     nvim-base16
+    nvim-highlight-colors
     nvim-surround
     nvim-tree-lua
     nvim-web-devicons
@@ -57,7 +60,7 @@ let
     rust-tools-nvim
     toggleterm-nvim
     trouble-nvim
-    comment-nvim
+    vim-sleuth
   ];
   
 
@@ -76,6 +79,11 @@ in {
     vimdiffAlias = true;
     withNodeJs = true;
     withPython3 = true;
+    plugins = [    {
+      plugin = nix-colors-lib.vimThemeFromScheme { scheme = config.colorScheme; };
+      config = "colorscheme nix-${config.colorScheme.slug}";
+    }
+];
 
     extraConfig = ''
       " Workaround for broken handling of packpath by vim8/neovim for ftplugins -- see https://github.com/NixOS/nixpkgs/issues/39364#issuecomment-425536054 for more info

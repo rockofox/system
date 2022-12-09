@@ -6,7 +6,7 @@
       #!/usr/bin/env sh
       /opt/homebrew/bin/yabai -m config mouse_follows_focus          off
       /opt/homebrew/bin/yabai -m config focus_follows_mouse          autoraise
-      /opt/homebrew/bin/yabai -m config eindow_origin_display        default
+      /opt/homebrew/bin/yabai -m config window_origin_display        default
       /opt/homebrew/bin/yabai -m config window_placement             second_child
       /opt/homebrew/bin/yabai -m config window_topmost               off
       /opt/homebrew/bin/yabai -m config window_shadow                on
@@ -16,9 +16,9 @@
       /opt/homebrew/bin/yabai -m config normal_window_opacity        0.90
       /opt/homebrew/bin/yabai -m config window_border                on
       /opt/homebrew/bin/yabai -m config window_border_width          6
-      /opt/homebrew/bin/yabai -m config active_window_border_color   0xFF4d432c
-      /opt/homebrew/bin/yabai -m config normal_window_border_color   0x006453a3
-      /opt/homebrew/bin/yabai -m config insert_feedback_color        0xffd75f5f
+      /opt/homebrew/bin/yabai -m config active_window_border_color   0xff${config.colorScheme.colors.base03}
+      /opt/homebrew/bin/yabai -m config normal_window_border_color   0xff${config.colorScheme.colors.base00}
+      /opt/homebrew/bin/yabai -m config insert_feedback_color        0xff${config.colorScheme.colors.base05}
       /opt/homebrew/bin/yabai -m config split_ratio                  0.50
       /opt/homebrew/bin/yabai -m config auto_balance                 off
       /opt/homebrew/bin/yabai -m config mouse_modifier               ctrl

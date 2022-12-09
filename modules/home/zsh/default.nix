@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let vars = import ../../vars.nix;
 in {
   home.packages = with pkgs; [ fzf ];
@@ -6,7 +6,7 @@ in {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableSyntaxHighlighting = true;
+    # enableSyntaxHighlighting = true;
     shellAliases = {
       ls = "exa --icons -L1";
       ll = "exa --tree --icons --long -L1";
@@ -23,6 +23,10 @@ in {
       source "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
       source "${pkgs.zsh-fzf-tab}/share/fzf-tab/lib/zsh-ls-colors/ls-colors.zsh"
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+      export ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=#${builtins.substring 0 3 config.colorScheme.colors.base08}
+      export ZSH_HIGHLIGHT_STYLES[precommand]=fg=#${builtins.substring 0 3 config.colorScheme.colors.base08}
+      export ZSH_HIGHLIGHT_STYLES[arg0]=fg=#${builtins.substring 0 3 config.colorScheme.colors.base08}
       ${builtins.readFile ./init.sh}
     '';
     history = {
@@ -42,9 +46,9 @@ in {
     enableZshIntegration = true;
     settings = {
       character = {
-        success_symbol = " ";
-        error_symbol = " ";
-        vicmd_symbol = " ";
+        success_symbol = "❯";
+        error_symbol = "[❯](bold red)";
+        vicmd_symbol = "[❮](bold green)";
       };
       gcloud.disabled = true;
       nodejs.symbol = " ";

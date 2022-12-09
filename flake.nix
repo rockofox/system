@@ -16,9 +16,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, darwin, nixpkgs-unstable, home-manager, ... }@inputs:
+  outputs = { self, darwin, nixpkgs-unstable, home-manager, nix-colors, ... }@inputs:
     let
 
       inherit (darwin.lib) darwinSystem;
@@ -46,6 +47,7 @@
               home-manager.users.${vars.username} = {
                 imports = [ ./modules/home ];
               };
+              home-manager.extraSpecialArgs = { inherit nix-colors; };
             }
           ];
         };

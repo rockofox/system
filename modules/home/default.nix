@@ -1,8 +1,8 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, nix-colors, ... }:
 let
     vars = import ../vars.nix;
 in
-{
+rec {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = vars.username;
@@ -29,6 +29,7 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   # programs.home-manager.manual.manpages.enable = false;
+  colorScheme = nix-colors.colorSchemes.default-dark;
 
   programs.kitty.enable = true;
   programs.kitty.darwinLaunchOptions = [
@@ -45,6 +46,8 @@ in
     hide_window_decorations = true;
     scrollback_pager_history_size = 1;
     update_check_interval = 0;
+    foreground = "#${colorScheme.colors.base05}";
+    background = "#${colorScheme.colors.base00}";
   };
   programs.kitty.extraConfig = "
   term xterm-256color
@@ -58,7 +61,26 @@ in
   enable_audio_bell no
   macos_option_as_alt yes
   ";
-  programs.kitty.theme = "Ayu";
+  programs.discocss = {
+    enable = true;
+    discordAlias = false;
+    css = ''
+      .theme-light {
+        --background-primary: #f3f4f644;
+        --background-primary-alt: #eeeff244;
+        --background-secondary: #e5e7eb44;
+        --background-secondary-alt: #d1d5db44;
+        --background-tertiary: #dfe2e744;
+      }
+      .theme-dark {
+        --background-primary: #${colorScheme.colors.base00};
+        --background-secondary: #${colorScheme.colors.base01};
+        /* --background-primary-alt: #eeeff244;
+        --background-secondary-alt: #d1d5db44;
+        --background-tertiary: #dfe2e744; */
+        }
+    '';
+    };
 
   imports = [
     ./autoraise.nix
@@ -66,5 +88,6 @@ in
     ./neovim
     ./yabai.nix
     ./zsh
+    nix-colors.homeManagerModule
   ];
 }
