@@ -51,8 +51,9 @@ in {
         start_service = true;
         restart_service = "changed";
       }
+      "cava"
     ];
-    casks = [ "anaconda" "ilspy" "vimr" ];
+    casks = [ "anaconda" "ilspy" "vimr" "background-music" ];
     taps = [
       "homebrew/bundle"
       "homebrew/cask"
