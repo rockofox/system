@@ -16,13 +16,13 @@ in rec {
   # changes in each release.
   home.stateVersion = "22.05";
 
-  home.packages = with pkgs; [ nerdfonts julia-mono lato jetbrains-mono ];
+  # home.packages = with pkgs; [ nerdfonts julia-mono lato jetbrains-mono ];
 
   manual.manpages.enable = false;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   # programs.home-manager.manual.manpages.enable = false;
-  colorScheme = nix-colors.colorSchemes.default-dark;
+  colorScheme = nix-colors.colorSchemes.tomorrow-night;
 
   programs.kitty.enable = true;
   programs.kitty.darwinLaunchOptions = [ "--single-instance" "--directory=~" ];
@@ -107,11 +107,7 @@ in rec {
         "browser.startup.homepage" = "about:blank";
         "browser.newtabpage.enabled" = false;
 
-        "browser.toolbars.bookmarks.visibility" = "always";
-
-        # not necessary, just prevents url bar from erronously displaying
-        # "Google" on first run
-        "browser.urlbar.placeholderName" = "DuckDuckGo";
+        "browser.toolbars.bookmarks.visibility" = "never";
 
         # disable first-run onboarding
         "browser.aboutwelcome.enabled" = false;

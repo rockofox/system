@@ -27,6 +27,7 @@ in {
     neofetch
     nixfmt
     nodePackages.prettier
+    postgresql
     ripgrep
     silver-searcher
     skhd
@@ -67,6 +68,8 @@ in {
       "qmk/qmk"
     ];
   };
+  fonts.fonts = with pkgs; [ nerdfonts julia-mono lato jetbrains-mono ];
+  fonts.fontDir.enable = true;
 
   system = {
     defaults = {
