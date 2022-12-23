@@ -17,9 +17,13 @@
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nix-colors.url = "github:misterio77/nix-colors";
+    nix-monitored = {
+      url = "github:ners/nix-monitored";
+      flake = false;
+    };
   };
 
-  outputs = { self, darwin, nixpkgs-unstable, home-manager, nix-colors, ... }@inputs:
+  outputs = { self, darwin, nixpkgs-unstable, home-manager, nix-colors, nix-monitored, ... }@inputs:
     let
 
       inherit (darwin.lib) darwinSystem;
@@ -40,7 +44,17 @@
             ./modules/darwin.nix
             home-manager.darwinModules.home-manager
             {
-              nixpkgs.overlays = overlays;
+              nixpkgs.overlays = [
+                (self: super: {
+                  nix-monitored = self.callPackage inputs.nix-monitored { };
+                  nixos-rebuild = super.nixos-rebuild.override {
+                    nix = nix-monitored;
+                  };
+                  nix-direnv = super.nix-direnv.override {
+                    nix = nix-monitored;
+                  };
+                })
+              ];
               nixpkgs.config.allowUnfree = true;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
