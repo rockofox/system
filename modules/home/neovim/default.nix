@@ -59,6 +59,7 @@ let
     plenary-nvim
     rust-tools-nvim
     # tabby-nvim
+    telescope-nvim
     toggleterm-nvim
     trouble-nvim
     vim-sleuth
