@@ -53,6 +53,9 @@
                   nix-direnv = super.nix-direnv.override {
                     nix = nix-monitored;
                   };
+                  darwin-rebuild = super.darwin-rebuild.override {
+                      nix = nix-monitored;
+                  };
                 })
               ];
               nixpkgs.config.allowUnfree = true;
