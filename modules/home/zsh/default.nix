@@ -24,9 +24,15 @@ in {
       source "${pkgs.zsh-fzf-tab}/share/fzf-tab/lib/zsh-ls-colors/ls-colors.zsh"
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
       source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-      export ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=#${builtins.substring 0 3 config.colorScheme.colors.base08}
-      export ZSH_HIGHLIGHT_STYLES[precommand]=fg=#${builtins.substring 0 3 config.colorScheme.colors.base08}
-      export ZSH_HIGHLIGHT_STYLES[arg0]=fg=#${builtins.substring 0 3 config.colorScheme.colors.base08}
+      export ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=#${
+        builtins.substring 0 3 config.colorScheme.colors.base08
+      }
+      export ZSH_HIGHLIGHT_STYLES[precommand]=fg=#${
+        builtins.substring 0 3 config.colorScheme.colors.base08
+      }
+      export ZSH_HIGHLIGHT_STYLES[arg0]=fg=#${
+        builtins.substring 0 3 config.colorScheme.colors.base08
+      }
       ${builtins.readFile ./init.sh}
     '';
     history = {

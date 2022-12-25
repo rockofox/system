@@ -23,7 +23,8 @@
     };
   };
 
-  outputs = { self, darwin, nixpkgs-unstable, home-manager, nix-colors, nix-monitored, ... }@inputs:
+  outputs = { self, darwin, nixpkgs-unstable, home-manager, nix-colors
+    , nix-monitored, ... }@inputs:
     let
 
       inherit (darwin.lib) darwinSystem;
@@ -47,15 +48,12 @@
               nixpkgs.overlays = [
                 (self: super: {
                   nix-monitored = self.callPackage inputs.nix-monitored { };
-                  nixos-rebuild = super.nixos-rebuild.override {
-                    nix = nix-monitored;
-                  };
-                  nix-direnv = super.nix-direnv.override {
-                    nix = nix-monitored;
-                  };
-                  darwin-rebuild = super.darwin-rebuild.override {
-                      nix = nix-monitored;
-                  };
+                  nixos-rebuild =
+                    super.nixos-rebuild.override { nix = nix-monitored; };
+                  nix-direnv =
+                    super.nix-direnv.override { nix = nix-monitored; };
+                  darwin-rebuild =
+                    super.darwin-rebuild.override { nix = nix-monitored; };
                 })
               ];
               nixpkgs.config.allowUnfree = true;

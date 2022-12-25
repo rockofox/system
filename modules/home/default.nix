@@ -1,7 +1,7 @@
 { pkgs, lib, nix-colors, mySchemes, ... }:
-let 
-    vars = import ../vars.nix;
-    mySchemes = import ./colorschemes.nix;
+let
+  vars = import ../vars.nix;
+  mySchemes = import ./colorschemes.nix;
 in rec {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -87,9 +87,9 @@ in rec {
     enable = true;
     package = pkgs.hello;
     profiles.clean = {
-        isDefault = false;
-        id = 1;
-      };
+      isDefault = false;
+      id = 1;
+    };
     profiles.default = {
       isDefault = true;
       userChrome = ''
@@ -99,13 +99,13 @@ in rec {
             ref = "main";
             rev = "96da97aa71ef4bf61feaa4d54395598e3bd7f0d3";
           }
-          }/userChrome.css";
+        }/userChrome.css";
       '';
       userContent = ''
         /* Hide scrollbar in FF Quantum */
         *{scrollbar-width:none !important}
       '';
-            settings = {
+      settings = {
         # enable chrome/* customizations
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
