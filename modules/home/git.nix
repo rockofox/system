@@ -5,7 +5,7 @@
     enable = true;
     package = pkgs.gitAndTools.gitFull;
     difftastic.enable = true;
-    userName = "rocko";
+    userName = "rockofox";
     userEmail = "ofelix@pm.me";
     ignores = [ ".*" "!.envrc" "!.gitignore" "!.gitkeep" ];
     aliases = {

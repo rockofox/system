@@ -35,6 +35,7 @@ in {
     tmate
     tmux
     tree
+    unixtools.watch
     wget
     xh
   ];
@@ -53,6 +54,7 @@ in {
         restart_service = "changed";
       }
       "cava"
+      "sketchybar"
     ];
     casks = [ "anaconda" "ilspy" "vimr" "background-music" ];
     taps = [
@@ -65,6 +67,7 @@ in {
       "osx-cross/arm"
       "osx-cross/avr"
       "dimentium/autoraise"
+      "FelixKratz/formulae"
       "qmk/qmk"
     ];
   };
@@ -73,7 +76,17 @@ in {
 
   system = {
     defaults = {
-      NSGlobalDomain = { NSAutomaticSpellingCorrectionEnabled = false; };
+      NSGlobalDomain = {
+        NSAutomaticSpellingCorrectionEnabled = false;
+        NSAutomaticCapitalizationEnabled = false;
+        NSAutomaticDashSubstitutionEnabled = false;
+        NSAutomaticPeriodSubstitutionEnabled = false;
+        NSAutomaticQuoteSubstitutionEnabled = false;
+        NSAutomaticWindowAnimationsEnabled = false;
+        NSDocumentSaveNewDocumentsToCloud = false;
+        NSNavPanelExpandedStateForSaveMode = true;
+        NSNavPanelExpandedStateForSaveMode2 = true;
+      };
       dock = {
         autohide = true;
         autohide-delay = 0.0;
@@ -94,8 +107,8 @@ in {
   services.nix-daemon.enable = true;
 
   nix.gc.automatic = true;
-  nix.gc.interval = { Day = 7; };
-  nix.gc.options = "--delete-older-than 8d";
+  nix.gc.interval = { Day = 1; };
+  nix.gc.options = "--delete-older-than 1d";
 
   nix.extraOptions = ''
     extra-platforms = aarch64-darwin x86_64-darwin

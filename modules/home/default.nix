@@ -1,5 +1,7 @@
-{ pkgs, lib, nix-colors, ... }:
-let vars = import ../vars.nix;
+{ pkgs, lib, nix-colors, mySchemes, ... }:
+let 
+    vars = import ../vars.nix;
+    mySchemes = import ./colorschemes.nix;
 in rec {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -22,12 +24,13 @@ in rec {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   # programs.home-manager.manual.manpages.enable = false;
-  colorScheme = nix-colors.colorSchemes.tomorrow-night;
+  colorScheme = nix-colors.colorSchemes.horizon-dark;
+  # colorScheme = mySchemes.doomVibrant;
 
   programs.kitty.enable = true;
   programs.kitty.darwinLaunchOptions = [ "--single-instance" "--directory=~" ];
-  programs.kitty.font.name = "CaskaydiaCove Nerd Font";
-  programs.kitty.font.size = 15;
+  programs.kitty.font.name = "BlexMono Nerd Font Mono";
+  programs.kitty.font.size = 14.5;
   programs.kitty.settings = {
     # background_opacity = "0.85";
     copy_on_select = true;
@@ -50,6 +53,14 @@ in rec {
     confirm_os_window_close 0
     enable_audio_bell no
     macos_option_as_alt yes
+    allow_remote_control yes
+    listen_on unix:/tmp/mykitty
+
+    modify_font                     strikethrough_position 120%
+    modify_font                     strikethrough_thickness 250%
+    modify_font                     underline_position 125%
+    modify_font                     underline_thickness 3px
+    modify_font                     cell_height 105%
   '';
   programs.discocss = {
     enable = true;
@@ -75,15 +86,20 @@ in rec {
   programs.firefox = {
     enable = true;
     package = pkgs.hello;
+    profiles.clean = {
+        isDefault = false;
+        id = 1;
+      };
     profiles.default = {
       isDefault = true;
       userChrome = ''
         @import "${
-          builtins.fetchurl {
-          url = "https://raw.githubusercontent.com/rockofox/firefox-minima/main/userChrome.css";
-          sha256 = "cda5fb7a9e75b0b149a7bffc1a678f198ee77b6ac09d58eaed36776d2150d597";
+          builtins.fetchGit {
+            url = "https://github.com/rockofox/firefox-minima";
+            ref = "main";
+            rev = "96da97aa71ef4bf61feaa4d54395598e3bd7f0d3";
           }
-        }";
+          }/userChrome.css";
       '';
       userContent = ''
         /* Hide scrollbar in FF Quantum */
@@ -129,6 +145,9 @@ in rec {
 
         # disable spellcheck for form inputs
         "layout.spellcheckDefault" = 0;
+
+        # when you open a link image or media in a new tab switch to it immediately
+        "browser.tabs.loadInBackground" = false;
       };
     };
   };
@@ -137,6 +156,7 @@ in rec {
     ./autoraise.nix
     ./git.nix
     ./neovim
+    ./sketchybar.nix
     ./yabai.nix
     ./zsh
     nix-colors.homeManagerModule
