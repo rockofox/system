@@ -15,8 +15,9 @@
       /opt/homebrew/bin/yabai -m config active_window_opacity        1.0
       /opt/homebrew/bin/yabai -m config normal_window_opacity        0.90
       /opt/homebrew/bin/yabai -m config window_border                on
-      /opt/homebrew/bin/yabai -m config window_border_width          6
-      /opt/homebrew/bin/yabai -m config active_window_border_color   0xff${config.colorScheme.colors.base03}
+      /opt/homebrew/bin/yabai -m config window_border_width          2
+      /opt/homebrew/bin/yabai -m config window_border_radius         0
+      /opt/homebrew/bin/yabai -m config active_window_border_color   0xff${config.colorScheme.colors.base09}
       /opt/homebrew/bin/yabai -m config normal_window_border_color   0xff${config.colorScheme.colors.base00}
       /opt/homebrew/bin/yabai -m config insert_feedback_color        0xff${config.colorScheme.colors.base05}
       /opt/homebrew/bin/yabai -m config split_ratio                  0.50
@@ -28,7 +29,7 @@
 
       # general space settings
       /opt/homebrew/bin/yabai -m config layout                       bsp
-      /opt/homebrew/bin/yabai -m config top_padding                  24
+      /opt/homebrew/bin/yabai -m config top_padding                  56
       /opt/homebrew/bin/yabai -m config bottom_padding               24
       /opt/homebrew/bin/yabai -m config left_padding                 24
       /opt/homebrew/bin/yabai -m config right_padding                24
@@ -145,7 +146,7 @@
       alt - e : /opt/homebrew/bin/yabai -m window --toggle split
 
       ctrl - return : kitty --single-instance -d ~
-      ctrl - q : /Applications/Firefox.app/Contents/MacOS/firefox
+      ctrl - q : open http://
       # ctrl - e : open ~
       alt - t : /opt/homebrew/bin/yabai -m space --layout $(/opt/homebrew/bin/yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
 
@@ -161,6 +162,8 @@
       alt + cmd - n : ~/.config/skhd/stack south
       alt + cmd - i : ~/.config/skhd/stack north
       alt + cmd - o : ~/.config/skhd/stack east
+
+      shift + ctrl - e : /Applications/Neovide.app/Contents/MacOS/neovide --frame none --multigrid
     '';
   };
 }
