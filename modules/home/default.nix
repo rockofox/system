@@ -29,8 +29,8 @@ in rec {
 
   programs.kitty.enable = true;
   programs.kitty.darwinLaunchOptions = [ "--single-instance" "--directory=~" ];
-  programs.kitty.font.name = "BlexMono Nerd Font Mono";
-  programs.kitty.font.size = 14.5;
+  programs.kitty.font.name = "FiraCode Nerd Font Mono";
+  programs.kitty.font.size = 15;
   programs.kitty.settings = {
     # background_opacity = "0.85";
     copy_on_select = true;
@@ -59,7 +59,7 @@ in rec {
     modify_font                     strikethrough_position 120%
     modify_font                     strikethrough_thickness 250%
     modify_font                     underline_position 125%
-    modify_font                     underline_thickness 3px
+    modify_font                     underline_thickness 2px
     modify_font                     cell_height 105%
   '';
   programs.discocss = {
@@ -94,12 +94,19 @@ in rec {
       isDefault = true;
       userChrome = ''
         @import "${
-          builtins.fetchGit {
-            url = "https://github.com/rockofox/firefox-minima";
-            ref = "main";
-            rev = "96da97aa71ef4bf61feaa4d54395598e3bd7f0d3";
-          }
-        }/userChrome.css";
+            builtins.fetchGit {
+                url = "https://github.com/rockofox/firefox-minima";
+                ref = "main";
+                rev = "96da97aa71ef4bf61feaa4d54395598e3bd7f0d3";
+            }
+          }/userChrome.css";
+        :root {
+            --toolbar-bgcolor: #${colorScheme.colors.base01};
+        }
+
+        menubar, toolbar, nav-bar, #TabsToolbar > *{
+            background-color: #${colorScheme.colors.base00};
+        }
       '';
       userContent = ''
         /* Hide scrollbar in FF Quantum */
