@@ -75,3 +75,6 @@ vim.opt.clipboard = 'unnamed'
 
 -- Don't wrap
 vim.o.wrap = false
+
+-- Reclaim the empty space at the bottom
+vim.o.cmdheight = 0

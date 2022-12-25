@@ -112,11 +112,11 @@
 
   copilot-lua = pkgs.vimUtils.buildVimPlugin rec {
     pname = "copilot-lua";
-    version = "2022-11-09";
+    version = "2022-11-13";
     src = pkgs.fetchFromGitHub {
-      owner = "rockofox";
+      owner = "zbirenbaum";
       repo = "copilot.lua";
-      rev = "577c4312cbfdc17d0ced7591d903482b912043c1";
+      rev = "c65288bcba4dec780a0e21a61008b666adf29180";
       sha256 = "sha256-De7HYxbLKDSZcJzE6LUmifvSy9+ecQNHZa9YCMinEus=";
     };
     meta.homepage = "https://github.com/rockofox/copilot.lua";

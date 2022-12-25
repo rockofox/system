@@ -5,7 +5,7 @@ local opts = { noremap = true, silent = true }
 
 local function on_attach(client, buffer)
 	require 'lsp_signature'.on_attach {}
-	vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+	-- vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 	vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 	vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 	vim.api.nvim_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
@@ -22,7 +22,6 @@ local function on_attach(client, buffer)
 	vim.api.nvim_buf_set_keymap(buffer, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 	vim.api.nvim_buf_set_keymap(buffer, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 	vim.api.nvim_buf_set_keymap(buffer, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(buffer, 'n', 'rr', '<cmd>TermExec cmd="nix run"<CR>', opts)
 
 	if client.server_capabilities.documentHighlightProvider then
 		local group = vim.api.nvim_create_augroup('CursorHighlight', {})

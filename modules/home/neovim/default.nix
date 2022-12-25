@@ -11,9 +11,9 @@ let
   nix-colors-lib = nix-colors.lib-contrib { inherit pkgs; };
   extra-plugins = import ./plugins.nix { inherit pkgs lib; };
   plugins = with pkgs.vimPlugins; [
-    # extra-plugins.copilot-lua
-    # extra-plugins.copilot-cmp
-    cmp-tabnine
+    extra-plugins.copilot-lua
+    extra-plugins.copilot-cmp
+    # cmp-tabnine
 
     # use Treesitter for many languages
     (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
@@ -37,9 +37,11 @@ let
     lspkind-nvim
     luasnip
     nvim-lspconfig
+    vim-nix
 
     # other useful things :^)
-    barbar-nvim
+    # barbar-nvim
+    bufferline-nvim
     comment-nvim
     direnv-vim
     editorconfig-nvim
@@ -58,9 +60,11 @@ let
     nvim-web-devicons
     plenary-nvim
     rust-tools-nvim
+    # tabby-nvim
     toggleterm-nvim
     trouble-nvim
     vim-sleuth
+    winbar-nvim
   ];
   
 
@@ -70,6 +74,8 @@ in {
     # TODO: Find a solution that donesn't pollute global namespace
     nodejs-16_x
     tabnine
+    neovide
+    nil
   ];
   programs.neovim = {
     enable = true;
