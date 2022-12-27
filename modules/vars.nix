@@ -4,4 +4,6 @@ rec {
   username = "rocko";
   homeDirectory = "/Users/${username}";
   systemFlakePath = "${homeDirectory}/GitClones/system";
+  obsidianVault =
+    "${homeDirectory}/Library/Mobile Documents/iCloud~md~obsidian/Documents/My Vault/";
 }

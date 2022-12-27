@@ -1,7 +1,7 @@
 { pkgs, lib, nix-colors, mySchemes, ... }:
 let
   vars = import ../vars.nix;
-  mySchemes = import ./colorschemes.nix;
+  colorSchemes = import ./colorschemes.nix { nix-colors = nix-colors; };
 in rec {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -24,12 +24,12 @@ in rec {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   # programs.home-manager.manual.manpages.enable = false;
-  colorScheme = nix-colors.colorSchemes.horizon-dark;
+  colorScheme = colorSchemes.current;
   # colorScheme = mySchemes.doomVibrant;
 
   programs.kitty.enable = true;
   programs.kitty.darwinLaunchOptions = [ "--single-instance" "--directory=~" ];
-  programs.kitty.font.name = "FiraCode Nerd Font Mono";
+  programs.kitty.font.name = "Menlo";
   programs.kitty.font.size = 15;
   programs.kitty.settings = {
     # background_opacity = "0.85";
@@ -163,6 +163,7 @@ in rec {
     ./autoraise.nix
     ./git.nix
     ./neovim
+    ./obsidian.nix
     ./sketchybar.nix
     ./yabai.nix
     ./zsh

@@ -1,4 +1,6 @@
+{ nix-colors, ... }:
 {
+  current = nix-colors.colorSchemes.horizon-dark;
   pasque = {
     slug = "pasque";
     name = "Pasque";
