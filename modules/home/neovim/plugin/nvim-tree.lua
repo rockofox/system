@@ -10,13 +10,13 @@ require 'nvim-tree'.setup {
 		icons = {
 			webdev_colors = true,
 			git_placement = "before",
-			padding = " ",
+			padding = "  ",
 			symlink_arrow = " → ",
 			show = {
 				file = true,
 				folder = true,
 				folder_arrow = false,
-				git = true,
+				git = false,
 			},
 		},
 	},

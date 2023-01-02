@@ -18,6 +18,12 @@ in rec {
   # changes in each release.
   home.stateVersion = "22.05";
 
+  home.activation = {
+    discocss = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+            ${pkgs.discocss}/bin/discocss || true
+    '';
+  };
+
   # home.packages = with pkgs; [ nerdfonts julia-mono lato jetbrains-mono ];
 
   manual.manpages.enable = false;
@@ -29,7 +35,7 @@ in rec {
 
   programs.kitty.enable = true;
   programs.kitty.darwinLaunchOptions = [ "--single-instance" "--directory=~" ];
-  programs.kitty.font.name = "Menlo";
+  programs.kitty.font.name = "JetBrainsMono Nerd Font Mono";
   programs.kitty.font.size = 15;
   programs.kitty.settings = {
     # background_opacity = "0.85";
@@ -53,6 +59,7 @@ in rec {
     confirm_os_window_close 0
     enable_audio_bell no
     macos_option_as_alt yes
+    hide_window_decorations titlebar-only
     allow_remote_control yes
     listen_on unix:/tmp/mykitty
 
@@ -61,6 +68,7 @@ in rec {
     modify_font                     underline_position 125%
     modify_font                     underline_thickness 2px
     modify_font                     cell_height 105%
+    macos_thicken_font                      0.75
   '';
   programs.discocss = {
     enable = true;
@@ -94,12 +102,12 @@ in rec {
       isDefault = true;
       userChrome = ''
         @import "${
-            builtins.fetchGit {
-                url = "https://github.com/rockofox/firefox-minima";
-                ref = "main";
-                rev = "96da97aa71ef4bf61feaa4d54395598e3bd7f0d3";
-            }
-          }/userChrome.css";
+          builtins.fetchGit {
+            url = "https://github.com/rockofox/firefox-minima";
+            ref = "main";
+            rev = "96da97aa71ef4bf61feaa4d54395598e3bd7f0d3";
+          }
+        }/userChrome.css";
         :root {
             --toolbar-bgcolor: #${colorScheme.colors.base01};
         }

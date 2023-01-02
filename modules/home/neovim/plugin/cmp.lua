@@ -94,7 +94,7 @@ cmp.setup {
         { name = "cmp_tabnine" },
         { name = "treesitter" },
         { name = "buffer" },
-        -- { name = "copilot" },
+        { name = "copilot" },
     },
 }
 

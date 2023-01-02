@@ -3,7 +3,7 @@
 
   inputs = {
     # Package sets
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
+    nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Environment/system management
@@ -23,18 +23,9 @@
     };
   };
 
-  outputs = { self, darwin, nixpkgs-unstable, home-manager, nix-colors
+  outputs = { self, darwin, home-manager, nix-colors
     , nix-monitored, ... }@inputs:
-    let
-
-      inherit (darwin.lib) darwinSystem;
-      inherit (inputs.nixpkgs-unstable.lib)
-        attrValues makeOverridable optionalAttrs singleton;
-
-      lib = nixpkgs-unstable.lib;
-      overlays = [ inputs.neovim-nightly-overlay.overlay ];
-
-      vars = import ./modules/vars.nix;
+    let vars = import ./modules/vars.nix;
     in {
       darwin.manual.manpages.enable = false;
 
@@ -47,13 +38,13 @@
             {
               nixpkgs.overlays = [
                 (self: super: {
-                  nix-monitored = self.callPackage inputs.nix-monitored { };
-                  nixos-rebuild =
-                    super.nixos-rebuild.override { nix = nix-monitored; };
-                  nix-direnv =
-                    super.nix-direnv.override { nix = nix-monitored; };
-                  darwin-rebuild =
-                    super.darwin-rebuild.override { nix = nix-monitored; };
+                  # nix-monitored = self.callPackage inputs.nix-monitored { };
+                  # nixos-rebuild =
+                  #   super.nixos-rebuild.override { nix = nix-monitored; };
+                  # nix-direnv =
+                  #   super.nix-direnv.override { nix = nix-monitored; };
+                  # darwin-rebuild =
+                  #   super.darwin-rebuild.override { nix = nix-monitored; };
                 })
               ];
               nixpkgs.config.allowUnfree = true;
@@ -69,4 +60,3 @@
       };
     };
 }
-

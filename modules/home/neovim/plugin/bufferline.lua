@@ -7,9 +7,6 @@ if hasBufferline then
             middle_mouse_command = "bdelete! %d",
             show_close_icon = false,
             show_buffer_close_icons = true,
-            diagnostics = 'nvim_lsp',
-            diagnostics_indicator = function(count, level) return (icons[level] or '?') .. ' ' .. count end,
-            diagnostics_update_in_insert = false,
             hover = { enabled = true, reveal = { 'close' } },
             indicator = {
                 style = "underline",
