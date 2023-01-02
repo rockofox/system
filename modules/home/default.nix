@@ -163,6 +163,8 @@ in rec {
 
         # when you open a link image or media in a new tab switch to it immediately
         "browser.tabs.loadInBackground" = false;
+
+        "extensions.pocket.enabled" = false;
       };
     };
   };
