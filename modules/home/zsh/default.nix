@@ -18,11 +18,11 @@ in {
     initExtra = ''
       source "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
       source "${pkgs.nix-zsh-completions}/share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh"
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
       source "${pkgs.fzf}/share/fzf/completion.zsh"
       source "${pkgs.fzf}/share/fzf/key-bindings.zsh"
       source "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
       source "${pkgs.zsh-fzf-tab}/share/fzf-tab/lib/zsh-ls-colors/ls-colors.zsh"
-      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
       source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
       export ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=#${
         builtins.substring 0 3 config.colorScheme.colors.base08
@@ -33,6 +33,8 @@ in {
       export ZSH_HIGHLIGHT_STYLES[arg0]=fg=#${
         builtins.substring 0 3 config.colorScheme.colors.base08
       }
+      zvm_after_init_commands+=('source ${pkgs.fzf}/share/fzf/completion.zsh')
+      zvm_after_init_commands+=('source ${pkgs.fzf}/share/fzf/key-bindings.zsh')
       ${builtins.readFile ./init.sh}
     '';
     history = {
