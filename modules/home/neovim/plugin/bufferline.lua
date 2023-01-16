@@ -21,36 +21,36 @@ if hasBufferline then
             },
         },
         highlights = {
-            offset_separator = {
-                bg = '#06080A'
-            },
-            indicator_selected = {
-                fg = '#f24f72',
-                bg = 'bg'
-            },
-            fill = {
-                fg = 'bg',
-                bg = '#242528'
-            },
-            background = {
-                bg = '#242528'
-            },
-            close_button = {
-                bg = '#242528'
-            },
-            close_button_visible = {
-                bg = '#242528'
-            },
-            close_button_selected = {
-                bg = 'bg'
-            },
-            separator = {
-                bg = '#242528'
-            },
-            tab_close = {
-                fg = '#ccccee',
-                bg = '#ec5f67'
-            },
+            -- offset_separator = {
+            --     bg = '#06080A'
+            -- },
+            -- indicator_selected = {
+            --     fg = '#f24f72',
+            --     bg = 'bg'
+            -- },
+            -- fill = {
+            --     fg = 'bg',
+            --     bg = '#242528'
+            -- },
+            -- background = {
+            --     bg = '#242528'
+            -- },
+            -- close_button = {
+            --     bg = '#242528'
+            -- },
+            -- close_button_visible = {
+            --     bg = '#242528'
+            -- },
+            -- close_button_selected = {
+            --     bg = 'bg'
+            -- },
+            -- separator = {
+            --     bg = '#242528'
+            -- },
+            -- tab_close = {
+            --     fg = '#ccccee',
+            --     bg = '#ec5f67'
+            -- },
         },
     }
 

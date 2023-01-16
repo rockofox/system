@@ -72,7 +72,6 @@ in {
     # TODO: Find a solution that donesn't pollute global namespace
     nodejs-16_x
     tabnine
-    neovide
     nil
   ];
   programs.neovim = {
@@ -86,7 +85,17 @@ in {
     plugins = [{
       plugin =
         nix-colors-lib.vimThemeFromScheme { scheme = config.colorScheme; };
-      config = "colorscheme nix-${config.colorScheme.slug}";
+        config = ''
+          function! HasColorscheme(name) abort
+              let pat = 'colors/'.a:name.'.vim'
+              return !empty(globpath(&rtp, pat))
+          endfunction
+          if HasColorscheme('base16-${config.colorScheme.slug}')
+              colorscheme base16-${config.colorScheme.slug}
+          else
+              colorscheme nix-${config.colorScheme.slug}
+          endif
+          '';
     }];
 
     extraConfig = ''

@@ -13,10 +13,10 @@ export PATH=/run/current-system/sw/bin:$PATH
 export PATH=$HOME/.spicetify:$PATH
 export EDITOR=nvim
 export VISUAL=$EDITOR
-export TERM=xterm-256color
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export DIRENV_LOG_FORMAT=
 export BAT_STYLE=plain
+export BASE16_SHELL=$HOME/.config/base16-shell
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 bindkey "\e[1;3D" backward-word # ⌥←

@@ -22,6 +22,9 @@ in rec {
     discocss = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
             ${pkgs.discocss}/bin/discocss || true
     '';
+    kitty-colors = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+            ${pkgs.kitty}/bin/kitty @ --to unix:$(realpath /tmp/mykitty-*) set-colors -a -c ~/.config/kitty/kitty.conf
+    '';
   };
 
   # home.packages = with pkgs; [ nerdfonts julia-mono lato jetbrains-mono ];
@@ -49,7 +52,6 @@ in rec {
     background = "#${colorScheme.colors.base00}";
   };
   programs.kitty.extraConfig = ''
-    term xterm-256color
     window_padding_width 4
     tab_bar_style powerline
     tab_powerline_style slanted
@@ -87,6 +89,9 @@ in rec {
         /* --background-primary-alt: #eeeff244;
         --background-secondary-alt: #d1d5db44;
         --background-tertiary: #dfe2e744; */
+        }
+        div[class^=nowPlayingColumn] {
+          display: none !important;
         }
     '';
   };

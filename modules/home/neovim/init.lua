@@ -78,3 +78,6 @@ vim.o.wrap = false
 
 -- Reclaim the empty space at the bottom
 vim.o.cmdheight = 0
+
+-- Disable fill characters ('~')
+vim.o.fillchars='eob: '

@@ -1,6 +1,6 @@
 { nix-colors, ... }:
-{
-  current = nix-colors.colorSchemes.horizon-dark;
+rec {
+  current = nix-colors.colorSchemes.seti;
   pasque = {
     slug = "pasque";
     name = "Pasque";
