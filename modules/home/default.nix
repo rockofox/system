@@ -110,7 +110,7 @@ in rec {
           builtins.fetchGit {
             url = "https://github.com/rockofox/firefox-minima";
             ref = "main";
-            rev = "96da97aa71ef4bf61feaa4d54395598e3bd7f0d3";
+            rev = "1477b2a28091aad4ebba330c539110c311eb8084";
           }
         }/userChrome.css";
         :root {

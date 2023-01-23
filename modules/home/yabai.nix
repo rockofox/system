@@ -147,7 +147,7 @@
 
       ctrl - return : kitty --single-instance -d ~
       ctrl - q : open http://
-      # ctrl - e : open ~
+      ctrl + shift - e : open ~
       alt - t : /opt/homebrew/bin/yabai -m space --layout $(/opt/homebrew/bin/yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
 
       alt - y : /opt/homebrew/bin/yabai -m window --focus west || /opt/homebrew/bin/yabai -m display --focus west
@@ -163,7 +163,7 @@
       alt + cmd - i : ~/.config/skhd/stack north
       alt + cmd - o : ~/.config/skhd/stack east
 
-      shift + ctrl - e : /Applications/Neovide.app/Contents/MacOS/neovide --frame none --multigrid
+      alt + ctrl - e : /Applications/Neovide.app/Contents/MacOS/neovide --frame none --multigrid
     '';
   };
 }
