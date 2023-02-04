@@ -115,10 +115,12 @@ in rec {
         }/userChrome.css";
         :root {
             --toolbar-bgcolor: #${colorScheme.colors.base01};
+            color: #${colorScheme.colors.base05};
         }
 
         menubar, toolbar, nav-bar, #TabsToolbar > *{
             background-color: #${colorScheme.colors.base00};
+            color: #${colorScheme.colors.base05};
         }
       '';
       userContent = ''
