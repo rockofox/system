@@ -112,7 +112,7 @@ in {
 
   nix.extraOptions = ''
     extra-platforms = aarch64-darwin x86_64-darwin
-    auto-optimise-store = true
+    auto-optimise-store = false
     experimental-features = nix-command flakes
   '';
 
