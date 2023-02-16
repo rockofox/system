@@ -73,6 +73,7 @@ in {
     nodejs-16_x
     tabnine
     nil
+    kotlin-language-server
   ];
   programs.neovim = {
     enable = true;

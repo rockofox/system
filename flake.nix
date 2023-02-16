@@ -4,16 +4,16 @@
   inputs = {
     # Package sets
     nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Environment/system management
     darwin = {
       url = "github:lnl7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nix-colors.url = "github:misterio77/nix-colors";
@@ -21,6 +21,7 @@
       url = "github:ners/nix-monitored";
       flake = false;
     };
+    dosh.url = "github:rockofox/dosh";
   };
 
   outputs = { self, darwin, home-manager, nix-colors
@@ -32,6 +33,7 @@
       darwinConfigurations = {
         "darwin" = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
+          specialArgs = { inherit inputs; };
           modules = [
             ./modules/darwin.nix
             home-manager.darwinModules.home-manager

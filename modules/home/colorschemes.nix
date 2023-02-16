@@ -1,7 +1,7 @@
 { nix-colors, ... }:
 rec {
-  # current = nix-colors.colorSchemes.monokai;
-  current = monokai-spectrum;
+  current = nix-colors.colorSchemes.material-darker;
+  # current = monokai-spectrum;
   pasque = {
     slug = "pasque";
     name = "Pasque";

@@ -38,6 +38,7 @@ in {
     unixtools.watch
     wget
     xh
+    inputs.dosh.packages.aarch64-darwin.default
   ];
   homebrew = {
     enable = true;
