@@ -64,6 +64,7 @@ in rec {
     hide_window_decorations titlebar-only
     allow_remote_control yes
     listen_on unix:/tmp/mykitty
+    enabled_layouts fat:bias=75
 
     modify_font                     strikethrough_position 120%
     modify_font                     strikethrough_thickness 250%
