@@ -9,6 +9,7 @@ in {
   environment.systemPackages = with pkgs; [
     bat
     bottom
+    cargo
     cowsay
     curl
     dotnet-sdk
@@ -20,15 +21,20 @@ in {
     fx
     fzf
     gh
+    ghc
     gitui
     htop
     jq
     moreutils
     neofetch
     nixfmt
+    nnn
     nodePackages.prettier
     postgresql
     ripgrep
+    rust-analyzer
+    rustc
+    rustfmt
     silver-searcher
     skhd
     tealdeer
@@ -38,6 +44,7 @@ in {
     unixtools.watch
     wget
     xh
+
     inputs.dosh.packages.aarch64-darwin.default
   ];
   homebrew = {

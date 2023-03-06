@@ -86,17 +86,17 @@ in {
     plugins = [{
       plugin =
         nix-colors-lib.vimThemeFromScheme { scheme = config.colorScheme; };
-        config = ''
-          function! HasColorscheme(name) abort
-              let pat = 'colors/'.a:name.'.vim'
-              return !empty(globpath(&rtp, pat))
-          endfunction
-          if HasColorscheme('base16-${config.colorScheme.slug}')
-              colorscheme base16-${config.colorScheme.slug}
-          else
-              colorscheme nix-${config.colorScheme.slug}
-          endif
-          '';
+      config = ''
+        function! HasColorscheme(name) abort
+            let pat = 'colors/'.a:name.'.vim'
+            return !empty(globpath(&rtp, pat))
+        endfunction
+        if HasColorscheme('base16-${config.colorScheme.slug}')
+            colorscheme base16-${config.colorScheme.slug}
+        else
+            colorscheme nix-${config.colorScheme.slug}
+        endif
+      '';
     }];
 
     extraConfig = ''

@@ -1,7 +1,7 @@
-{ nix-colors, ... }:
-rec {
-  current = nix-colors.colorSchemes.material-darker;
-  # current = monokai-spectrum;
+{ nix-colors, ... }: rec {
+  current = nix-colors.colorSchemes.gruber;
+  font = "Rec Mono Semicasual";
+
   pasque = {
     slug = "pasque";
     name = "Pasque";
@@ -53,22 +53,22 @@ rec {
     name = "Darcula";
     author = "jetbrains";
     colors = {
-      base00 = "1a1a1a";           # background
-      base01 = "323232";           # line cursor
-      base02 = "323232";           # statusline
-      base03 = "606366";           # line numbers
-      base04 = "a4a3a3";           # selected line number
-      base05 = "a9b7c6";           # foreground
-      base06 = "ffc66d";           # function bright yellow
+      base00 = "1a1a1a"; # background
+      base01 = "323232"; # line cursor
+      base02 = "323232"; # statusline
+      base03 = "606366"; # line numbers
+      base04 = "a4a3a3"; # selected line number
+      base05 = "a9b7c6"; # foreground
+      base06 = "ffc66d"; # function bright yellow
       base07 = "ffffff";
-      base08 = "4eade5";           # cyan
-      base09 = "689757";           # blue
-      base0A = "bbb529";           # yellow
-      base0B = "6a8759";           # string green
-      base0C = "629755";           # comment green
-      base0D = "9876aa";           # purple
-      base0E = "cc7832";           # orange
-      base0F = "808080";           # gray
+      base08 = "4eade5"; # cyan
+      base09 = "689757"; # blue
+      base0A = "bbb529"; # yellow
+      base0B = "6a8759"; # string green
+      base0C = "629755"; # comment green
+      base0D = "9876aa"; # purple
+      base0E = "cc7832"; # orange
+      base0F = "808080"; # gray
     };
   };
   monokai-spectrum = {

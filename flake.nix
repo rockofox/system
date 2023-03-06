@@ -24,8 +24,8 @@
     dosh.url = "github:rockofox/dosh";
   };
 
-  outputs = { self, darwin, home-manager, nix-colors
-    , nix-monitored, ... }@inputs:
+  outputs = { self, darwin, home-manager, nix-colors, nix-monitored, nixpkgs
+    , ... }@inputs:
     let vars = import ./modules/vars.nix;
     in {
       darwin.manual.manpages.enable = false;
@@ -39,15 +39,16 @@
             home-manager.darwinModules.home-manager
             {
               nixpkgs.overlays = [
-                (self: super: {
-                  # nix-monitored = self.callPackage inputs.nix-monitored { };
-                  # nixos-rebuild =
-                  #   super.nixos-rebuild.override { nix = nix-monitored; };
-                  # nix-direnv =
-                  #   super.nix-direnv.override { nix = nix-monitored; };
-                  # darwin-rebuild =
-                  #   super.darwin-rebuild.override { nix = nix-monitored; };
-                })
+                (self: super:
+                  {
+                    # nix-monitored = self.callPackage inputs.nix-monitored { };
+                    # nixos-rebuild =
+                    #   super.nixos-rebuild.override { nix = nix-monitored; };
+                    # nix-direnv =
+                    #   super.nix-direnv.override { nix = nix-monitored; };
+                    # darwin-rebuild =
+                    #   super.darwin-rebuild.override { nix = nix-monitored; };
+                  })
               ];
               nixpkgs.config.allowUnfree = true;
               home-manager.useGlobalPkgs = true;

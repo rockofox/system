@@ -20,11 +20,20 @@ in rec {
 
   home.activation = {
     discocss = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-            ${pkgs.discocss}/bin/discocss || true
+      ${pkgs.discocss}/bin/discocss || true
     '';
-    kitty-colors = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-            ${pkgs.kitty}/bin/kitty @ --to unix:$(realpath /tmp/mykitty-*) set-colors -a -c ~/.config/kitty/kitty.conf
+    reloadKittyConf = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      killall -m -SIGUSR1 kitty | true
     '';
+    setMacosColorScheme = lib.hm.dag.entryAfter [ "writeBoundary" ]
+    (if lib.strings.hasInfix "light" colorSchemes.current.slug then
+      ''
+        osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
+      ''
+    else
+      ''
+        osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
+      '');
   };
 
   # home.packages = with pkgs; [ nerdfonts julia-mono lato jetbrains-mono ];
@@ -38,7 +47,7 @@ in rec {
 
   programs.kitty.enable = true;
   programs.kitty.darwinLaunchOptions = [ "--single-instance" "--directory=~" ];
-  programs.kitty.font.name = "JetBrainsMono Nerd Font Mono";
+  programs.kitty.font.name = colorSchemes.font;
   programs.kitty.font.size = 15;
   programs.kitty.settings = {
     # background_opacity = "0.85";
@@ -77,19 +86,12 @@ in rec {
     enable = true;
     discordAlias = false;
     css = ''
-      .theme-light {
-        --background-primary: #f3f4f644;
-        --background-primary-alt: #eeeff244;
-        --background-secondary: #e5e7eb44;
-        --background-secondary-alt: #d1d5db44;
-        --background-tertiary: #dfe2e744;
-      }
-      .theme-dark {
-        --background-primary: #${colorScheme.colors.base00};
-        --background-secondary: #${colorScheme.colors.base01};
-        /* --background-primary-alt: #eeeff244;
-        --background-secondary-alt: #d1d5db44;
-        --background-tertiary: #dfe2e744; */
+      .theme-dark, .theme-light {
+        --background-primary:       #${colorScheme.colors.base00};
+        --background-secondary:     #${colorScheme.colors.base01};
+        --background-primary-alt:   #${colorScheme.colors.base02};
+        --background-secondary-alt: #${colorScheme.colors.base02};
+        --background-tertiary:      #${colorScheme.colors.base03};
         }
         div[class^=nowPlayingColumn] {
           display: none !important;
@@ -180,6 +182,7 @@ in rec {
   imports = [
     ./autoraise.nix
     ./git.nix
+    ./kakoune.nix
     ./neovim
     ./obsidian.nix
     ./sketchybar.nix

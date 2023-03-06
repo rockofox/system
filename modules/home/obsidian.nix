@@ -25,8 +25,8 @@ in {
           --text-accent: #${colorScheme.colors.base08};
           --text-accent-hover: #${colorScheme.colors.base09};
           --text-normal: #${colorScheme.colors.base05};
-          --text-muted: #${colorScheme.colors.base03};
-          --text-faint: #${colorScheme.colors.base03};
+          --text-muted: #${colorScheme.colors.base04};
+          --text-faint: #${colorScheme.colors.base04};
           --text-error: #e16d76;
           --text-error-hover: #c9626a;
           --text-highlight-bg: rgba(255, 255, 0, 0.4);
