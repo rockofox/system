@@ -64,6 +64,7 @@ let
     trouble-nvim
     vim-sleuth
     winbar-nvim
+    which-key-nvim
   ];
 
 in {

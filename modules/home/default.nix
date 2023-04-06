@@ -77,7 +77,7 @@ in rec {
 
     modify_font                     strikethrough_position 120%
     modify_font                     strikethrough_thickness 250%
-    modify_font                     underline_position 125%
+    modify_font                     underline_position 150%
     modify_font                     underline_thickness 2px
     modify_font                     cell_height 105%
     macos_thicken_font                      0.75
@@ -175,6 +175,7 @@ in rec {
         "browser.tabs.loadInBackground" = false;
 
         "extensions.pocket.enabled" = false;
+        "browser.tabs.firefox-view" = false;
       };
     };
   };
