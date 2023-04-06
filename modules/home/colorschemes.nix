@@ -1,5 +1,6 @@
 { nix-colors, ... }: rec {
-  current = nix-colors.colorSchemes.gruber;
+  current = nix-colors.colorschemes.catppuccin-latte;
+  override = "light";
   font = "Rec Mono Semicasual";
 
   pasque = {

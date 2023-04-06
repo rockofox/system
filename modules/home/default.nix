@@ -26,7 +26,7 @@ in rec {
       killall -m -SIGUSR1 kitty | true
     '';
     setMacosColorScheme = lib.hm.dag.entryAfter [ "writeBoundary" ]
-    (if lib.strings.hasInfix "light" colorSchemes.current.slug then
+    (if lib.strings.hasInfix "light" colorSchemes.current.slug || colorSchemes.override == "light" && colorSchemes.override != "dark" then
       ''
         osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
       ''
