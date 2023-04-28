@@ -176,6 +176,7 @@ in rec {
 
         "extensions.pocket.enabled" = false;
         "browser.tabs.firefox-view" = false;
+        "svg.context-properties.content.enabled" = true;
       };
     };
   };

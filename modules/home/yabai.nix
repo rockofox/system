@@ -4,7 +4,7 @@
     target = ".config/yabai/yabairc";
     text = ''
       #!/usr/bin/env sh
-      /opt/homebrew/bin/yabai -m config mouse_follows_focus          off
+      /opt/homebrew/bin/yabai -m config mouse_follows_focus          on
       /opt/homebrew/bin/yabai -m config focus_follows_mouse          autoraise
       /opt/homebrew/bin/yabai -m config window_origin_display        default
       /opt/homebrew/bin/yabai -m config window_placement             second_child
@@ -15,7 +15,7 @@
       /opt/homebrew/bin/yabai -m config active_window_opacity        1.0
       /opt/homebrew/bin/yabai -m config normal_window_opacity        0.90
       /opt/homebrew/bin/yabai -m config window_border                on
-      /opt/homebrew/bin/yabai -m config window_border_width          2
+      /opt/homebrew/bin/yabai -m config window_border_width          4
       /opt/homebrew/bin/yabai -m config window_border_radius         10
       /opt/homebrew/bin/yabai -m config active_window_border_color   0xff${config.colorScheme.colors.base09}
       /opt/homebrew/bin/yabai -m config normal_window_border_color   0xff${config.colorScheme.colors.base00}
@@ -29,7 +29,7 @@
 
       # general space settings
       /opt/homebrew/bin/yabai -m config layout                       bsp
-      /opt/homebrew/bin/yabai -m config top_padding                  49
+      /opt/homebrew/bin/yabai -m config top_padding                  24
       /opt/homebrew/bin/yabai -m config bottom_padding               24
       /opt/homebrew/bin/yabai -m config left_padding                 24
       /opt/homebrew/bin/yabai -m config right_padding                24
@@ -38,7 +38,7 @@
       # system floating windows
       # /opt/homebrew/bin/yabai -m rule --add app="^Finder$" manage=off
       /opt/homebrew/bin/yabai -m rule --add app="^System Preferences$" manage=off
-      /opt/homebrew/bin/yabai -m rule --add title='Preferences$' manage=off topmost=on
+      /opt/homebrew/bin/yabai -m rule --add title='Preferences$' manage=off
       /opt/homebrew/bin/yabai -m rule --add title='Settings$' manage=off
       /opt/homebrew/bin/yabai -m rule --add app="^System Information$" manage=off
       /opt/homebrew/bin/yabai -m rule --add title="Software Update$" manage=off
@@ -60,12 +60,25 @@
       /opt/homebrew/bin/yabai -m rule --add app="^Spaceman$" manage=off
       /opt/homebrew/bin/yabai -m rule --add app="^Steam$" manage=off
       /opt/homebrew/bin/yabai -m rule --add app="Photoshop" manage=off
-      /opt/homebrew/bin/yabai -m rule --add app="Plover" topmost=on
+
+      /opt/homebrew/bin/yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+      /opt/homebrew/bin/yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+      /opt/homebrew/bin/yabai -m rule --add label="System Preferences" app="^System Preferences$" title=".*" manage=off
+      /opt/homebrew/bin/yabai -m rule --add label="App Store" app="^App Store$" manage=off
+      /opt/homebrew/bin/yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
+      /opt/homebrew/bin/yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
+      /opt/homebrew/bin/yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
+      /opt/homebrew/bin/yabai -m rule --add label="mpv" app="^mpv$" manage=off
+      /opt/homebrew/bin/yabai -m rule --add label="Software Update" title="Software Update" manage=off
+      /opt/homebrew/bin/yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 
       #/opt/homebrew/bin/yabai -m config --space 2 layout float
       #/opt/homebrew/bin/yabai -m config --space 2  focus_follows_mouse off
 
       /opt/homebrew/bin/yabai -m config window_border_blur off
+
+      # Broken for some reason
+      # /opt/homebrew/bin/yabai -m signal --add event=window_created action='/opt/homebrew/bin/yabai -m query --windows --window $YABAI_WINDOW_ID | ${pkgs.jq} -er ".\"can-resize\" or .\"is-floating\"" || yabai -m window $YABAI_WINDOW_ID --toggle float'
 
       echo "yabai configuration loaded.."
     '';
