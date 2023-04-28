@@ -16,12 +16,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    nix-colors.url = "github:misterio77/nix-colors";
+    nix-colors.url = "github:rockofox/nix-colors";
     nix-monitored.url = "github:ners/nix-monitored";
-    dosh.url = "github:ners/dosh";
+    # dosh.url = "github:ners/dosh";
   };
 
-  outputs = { self, darwin, dosh, home-manager, nix-colors, nix-monitored, nixpkgs
+  outputs = { self, darwin, /* dosh, */ home-manager, nix-colors, nix-monitored, nixpkgs
     , ... }@inputs:
     let vars = import ./modules/vars.nix;
     in {
@@ -39,13 +39,18 @@
                 (self: super:
                   {
                     nix-monitored = nix-monitored.packages.${super.system}.nix-monitored;
-                    dosh = dosh.packages.${super.system}.dosh;
-                    nixos-rebuild =
-                      super.nixos-rebuild.override { nix = nix-monitored; };
-                    nix-direnv =
-                      super.nix-direnv.override { nix = nix-monitored; };
-                    darwin-rebuild =
-                      super.darwin-rebuild.override { nix = nix-monitored; };
+                    # FIXME: Nix can't find the input for some reason
+                    # dosh = dosh.packages.${super.system}.dosh;
+
+                    # FIXME: nix-monitored breaks direnv for some reason
+                    # nixos-rebuild =
+                    #   super.nixos-rebuild.override { nix = nix-monitored; };
+                    # nix-direnv =
+                    #   super.nix-direnv.override { nix = nix-monitored; };
+                    # darwin-rebuild =
+                    #   super.darwin-rebuild.override { nix = nix-monitored; };
+
+                    discord = super.discord.override { withOpenASAR = true; };
                   })
               ];
               nixpkgs.config.allowUnfree = true;
