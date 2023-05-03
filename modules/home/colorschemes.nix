@@ -1,7 +1,7 @@
 { nix-colors, ... }: rec {
-  current = nix-colors.colorschemes.catppuccin-latte;
-  override = "light";
-  font = "Rec Mono Semicasual";
+  current = nix-colors.colorschemes.catppuccin-mocha;
+  override = "none";
+  font = "RobotoMono Nerd Font";
 
   pasque = {
     slug = "pasque";

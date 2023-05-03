@@ -80,7 +80,6 @@ in rec {
     modify_font                     underline_position 150%
     modify_font                     underline_thickness 2px
     modify_font                     cell_height 105%
-    macos_thicken_font                      0.75
   '';
   programs.discocss = {
     enable = true;
