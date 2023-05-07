@@ -1,4 +1,5 @@
-{ config, pkgs, lib, ... }: {
+{ colorScheme, font, ... }:
+{
   home.file.sketchybar = {
     executable = true;
     target = ".config/sketchybar/sketchybarrc";
@@ -13,7 +14,7 @@
                           padding_right=5 \
                           margin=0 \
                           corner_radius=0 \
-                          color=0xff${config.colorScheme.colors.base00} \
+                          color=0x7f${colorScheme.colors.base00} \
                           border_width=0 \
                           border_color=0xff2E3440
 
@@ -21,10 +22,10 @@
       sketchybar -m --default updates=when_shown \
                               drawing=on \
                               cache_scripts=on \
-                              icon.font="FuraMono Nerd Font:Regular:14.0" \
+                              icon.font="${font}:Regular:14.0" \
                               icon.color=0xffECEFF4 \
                               icon.highlight_color=0xffA3BE8C \
-                              label.font="FuraMono Nerd Font:Regular:14.0" \
+                              label.font="${font}:Regular:14.0" \
                               label.color=0xffECEFF4
 
       ############## SPACE DEFAULTS ##############
@@ -39,7 +40,7 @@
                                associated_display=1 \
                                icon=1 \
                                click_script="yabai -m space --focus 1" \
-                               background.color=0xffD8DEE9 \
+                               background.color=0x7f${colorScheme.colors.base00} \
                                background.drawing=off \
                     --subscribe productivity mouse.entered mouse.exited \
                                                                        \
@@ -48,7 +49,7 @@
                                associated_space=2 \
                                icon=2 \
                                click_script="yabai -m space --focus 2" \
-                               background.color=0xffD8DEE9 \
+                               background.color=0x7f${colorScheme.colors.base00} \
                                background.drawing=off \
                     --subscribe browser mouse.entered mouse.exited \
                                                                        \
@@ -57,7 +58,7 @@
                                associated_space=3 \
                                icon=3 \
                                click_script="yabai -m space --focus 3" \
-                               background.color=0xffD8DEE9 \
+                               background.color=0x7f${colorScheme.colors.base00} \
                                background.drawing=off \
                     --subscribe messaging mouse.entered mouse.exited
 
@@ -72,8 +73,10 @@
       sketchybar -m --add item clock right \
                     --set clock update_freq=1 \
                                 script="~/.config/sketchybar/plugins/clock.sh" \
-                                background.color=0xff3B4252 \
+                                background.color=0x00${colorScheme.colors.base00} \
                                 background.height=20 \
+                                border_width=12 \
+                                border_color=0xff2E3440
 
       sketchybar -m --add event song_update com.apple.iTunes.playerInfo
       sketchybar -m --add item music_info left \

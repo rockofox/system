@@ -27,4 +27,7 @@ bindkey "^[[3~" delete-char
 bindkey -v
 
 precmd () {print -Pn "\e]0;%2~\a"}
-eval "$(github-copilot-cli alias -- "$0")"
+if command -v github-copilot-cli &> /dev/null
+then
+    eval "$(github-copilot-cli alias -- "$0")"
+fi

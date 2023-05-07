@@ -75,6 +75,9 @@ in {
     tabnine
     nil
     kotlin-language-server
+    nodePackages.typescript-language-server
+    nodePackages.vscode-html-languageserver-bin
+    haskell-language-server
   ];
   programs.neovim = {
     enable = true;

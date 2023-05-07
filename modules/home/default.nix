@@ -1,8 +1,11 @@
-{ pkgs, lib, nix-colors, mySchemes, ... }:
+{ pkgs, lib, nix-colors, nix-doom-emacs, ... }:
 let
   vars = import ../vars.nix;
-  colorSchemes = import ./colorschemes.nix { nix-colors = nix-colors; };
+  override = "none";
+  font = "CaskaydiaCove Nerd Font";
 in rec {
+  colorScheme = nix-colors.colorschemes.catppuccin-mocha;
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = vars.username;
@@ -26,7 +29,7 @@ in rec {
       killall -m -SIGUSR1 kitty | true
     '';
     setMacosColorScheme = lib.hm.dag.entryAfter [ "writeBoundary" ]
-    (if lib.strings.hasInfix "light" colorSchemes.current.slug || colorSchemes.override == "light" && colorSchemes.override != "dark" then
+    (if lib.strings.hasInfix "light" colorScheme.slug || override == "light" && override != "dark" then
       ''
         osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
       ''
@@ -42,23 +45,21 @@ in rec {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   # programs.home-manager.manual.manpages.enable = false;
-  colorScheme = colorSchemes.current;
-  # colorScheme = mySchemes.doomVibrant;
 
   programs.kitty.enable = true;
   programs.kitty.darwinLaunchOptions = [ "--single-instance" "--directory=~" ];
-  programs.kitty.font.name = colorSchemes.font;
+  programs.kitty.font.name = font;
   programs.kitty.font.size = 15;
   programs.kitty.settings = {
     # background_opacity = "0.85";
+    foreground = "#${colorScheme.colors.base05}";
+    background = "#${colorScheme.colors.base00}";
     copy_on_select = true;
     cursor_blink_interval = 0;
     editor = "vim";
     hide_window_decorations = true;
     scrollback_pager_history_size = 1;
     update_check_interval = 0;
-    foreground = "#${colorScheme.colors.base05}";
-    background = "#${colorScheme.colors.base00}";
   };
   programs.kitty.extraConfig = ''
     window_padding_width 4
@@ -77,14 +78,14 @@ in rec {
 
     modify_font                     strikethrough_position 120%
     modify_font                     strikethrough_thickness 250%
-    modify_font                     underline_position 150%
-    modify_font                     underline_thickness 2px
+    modify_font                     underline_position 125%
+    modify_font                     underline_thickness 3px
     modify_font                     cell_height 105%
   '';
   programs.discocss = {
     enable = true;
     discordAlias = false;
-    css = ''
+    css = lib.mkDefault (lib.mkBefore ''
       .theme-dark, .theme-light {
         --background-primary:       #${colorScheme.colors.base00};
         --background-secondary:     #${colorScheme.colors.base01};
@@ -95,7 +96,7 @@ in rec {
         div[class^=nowPlayingColumn] {
           display: none !important;
         }
-    '';
+    '');
   };
 
   programs.firefox = {
@@ -115,15 +116,6 @@ in rec {
             rev = "1477b2a28091aad4ebba330c539110c311eb8084";
           }
         }/userChrome.css";
-        :root {
-            --toolbar-bgcolor: #${colorScheme.colors.base01};
-            color: #${colorScheme.colors.base05};
-        }
-
-        menubar, toolbar, nav-bar, #TabsToolbar > *{
-            background-color: #${colorScheme.colors.base00};
-            color: #${colorScheme.colors.base05};
-        }
       '';
       userContent = ''
         /* Hide scrollbar in FF Quantum */
@@ -181,14 +173,30 @@ in rec {
   };
 
   imports = [
+    nix-colors.homeManagerModule
+    nix-doom-emacs.hmModule
     ./autoraise.nix
+    (import ./colorschemes.nix {
+      inherit pkgs;
+      inherit colorScheme;
+      inherit font;
+      inherit lib;
+    })
+    (import ./emacs {
+      inherit colorScheme;
+      inherit font;
+      inherit pkgs;
+      inherit lib;
+    })
     ./git.nix
     ./kakoune.nix
     ./neovim
     ./obsidian.nix
-    ./sketchybar.nix
+    (import ./sketchybar.nix {
+      inherit colorScheme;
+      inherit font;
+    })
     ./yabai.nix
     ./zsh
-    nix-colors.homeManagerModule
   ];
 }

@@ -9,7 +9,9 @@ in {
   environment.systemPackages = with pkgs; [
     bat
     bottom
+    cabal-install
     cargo
+    cmake
     cowsay
     curl
     discord
@@ -18,12 +20,14 @@ in {
     exa
     expect
     fd
+    ffmpeg
     fortune
     fx
     fzf
     gh
     ghc
     gitui
+    gperftools
     gradle
     htop
     jq
@@ -32,6 +36,8 @@ in {
     nixfmt
     nnn
     nodePackages.prettier
+    pandoc
+    pkg-config
     postgresql
     ripgrep
     rust-analyzer
@@ -39,6 +45,7 @@ in {
     rustfmt
     silver-searcher
     skhd
+    stack
     tealdeer
     tmate
     tmux
@@ -46,7 +53,9 @@ in {
     unixtools.watch
     wget
     xh
+    helix
 
+    # dosh
     mosh
     # dosh
   ];
@@ -119,24 +128,26 @@ in {
   services.nix-daemon.enable = true;
 
   nix.gc.automatic = true;
-  nix.gc.interval = { Day = 1; };
+  nix.gc.interval = { Hour = 3; Minute = 15; } ;
   nix.gc.options = "--delete-older-than 1d";
 
   nix.extraOptions = ''
     extra-platforms = aarch64-darwin x86_64-darwin
-    auto-optimise-store = false
+    auto-optimise-store = true
     experimental-features = nix-command flakes
+    max-jobs = 4
+    cores = 0
   '';
 
-  # Binary Cache for Haskell.nix  
   nix.settings.trusted-public-keys = [
-    #    "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
-    "loony-tools:pr9m4BkM/5/eSTZlkQyRt57Jz7OMBxNSUiMC4FkcNfk="
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
   ];
   nix.settings.substituters = [
     #    "https://cache.iog.io"
     "https://cache.zw3rk.com"
+    "https://cache.nixos.org"
+    "https://nix-community.cachix.org"
   ];
 
   nix.package = pkgs.nix;

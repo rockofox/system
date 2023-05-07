@@ -1,5 +1,4 @@
 local hasBufferline, _ = pcall(require, "bufferline")
-
 if hasBufferline then
     require('bufferline').setup {
         options = {
@@ -56,7 +55,7 @@ if hasBufferline then
 
     local opts = { noremap = true, silent = true }
     vim.keymap.set('n','gD', '<Cmd>BufferLinePickClose<CR>', opts)
-    vim.keymap.set('n','gb', '<Cmd>BufferLinePick<CR>', opts)
+    vim.keymap.set('n','gB', '<Cmd>BufferLinePick<CR>', opts)
     vim.keymap.set('n','<leader><tab>', '<Cmd>BufferLineCycleNext<CR>', opts)
     vim.keymap.set('n','<S-tab>', '<Cmd>BufferLineCyclePrev<CR>', opts)
     vim.keymap.set('n','[b', '<Cmd>BufferLineMoveNext<CR>', opts)

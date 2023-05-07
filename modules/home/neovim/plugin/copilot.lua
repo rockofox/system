@@ -3,7 +3,7 @@ local hasCopilot, _ = pcall(require, "copilot")
 if hasCopilot then
     require("copilot").setup({
         cmp = {
-            enabled = true,
+            enabled = false,
             method = "getCompletionsCycling",
         },
         panel = {
@@ -19,7 +19,7 @@ if hasCopilot then
         },
         suggestion = {
             enabled = true,
-            auto_trigger = false,
+            auto_trigger = true,
             debounce = 75,
             keymap = {
                 accept = "<M-l>",
