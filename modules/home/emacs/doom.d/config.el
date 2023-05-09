@@ -28,7 +28,7 @@
   (add-to-list 'exec-path-from-shell-variables var))
 
 ;; FIXME: SPC-s-d is broken for some reason
-(map! "s a" 'consult-ripgrep)
+(map! :leader "s a" 'consult-ripgrep)
 
 ;; Navigate in treemacs with single click
 (with-eval-after-load 'treemacs
