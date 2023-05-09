@@ -14,7 +14,6 @@ in {
     cmake
     cowsay
     curl
-    discord
     dotnet-sdk
     entr
     exa

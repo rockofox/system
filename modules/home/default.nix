@@ -39,7 +39,7 @@ in rec {
       '');
   };
 
-  # home.packages = with pkgs; [ nerdfonts julia-mono lato jetbrains-mono ];
+  home.packages = with pkgs; [ discord ];
 
   manual.manpages.enable = false;
   # Let Home Manager install and manage itself.
