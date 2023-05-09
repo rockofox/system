@@ -18,6 +18,19 @@
   )
 (setq-default with-editor-emacsclient-executable "emacsclient")
 (add-to-list 'default-frame-alist '(undecorated-round . t))
-(add-to-list 'exec-path "/run/current-system/sw/bin")
-(add-to-list 'exec-path (format "/etc/profiles/per-user/%s/bin" `((user :default ,user-login-name))))
+;; FIXME: Does this have any effect?
+(setq which-key-idle-delay 0.1)
+
+;; FIXME: Is this necessary?
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+(dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH"))
+  (add-to-list 'exec-path-from-shell-variables var))
+
+;; FIXME: SPC-s-d is broken for some reason
+(map! "s a" 'consult-ripgrep)
+
+;; Navigate in treemacs with single click
+(with-eval-after-load 'treemacs
+    (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
 ;;; config.el ends here

@@ -23,7 +23,7 @@ in rec {
 
   home.activation = {
     discocss = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      ${pkgs.discocss}/bin/discocss || true
+      ${pkgs.discocss}/bin/discocss --injectOnly || true
     '';
     reloadKittyConf = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       killall -m -SIGUSR1 kitty | true

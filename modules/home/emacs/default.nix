@@ -104,8 +104,6 @@ in rec
                     ("TAB" . 'copilot-accept-completion)
                     ("C-TAB" . 'copilot-accept-completion-by-word)
                     ("C-<tab>" . 'copilot-accept-completion-by-word)))
-      (add-to-list 'exec-path "${pkgs.nodejs}/bin/node")
-      (add-to-list 'exec-path "${pkgs.ripgrep}/bin/rg")
     '';
     emacsPackage = pkgs.emacsPgtk.overrideAttrs (old: rec {
       patches =

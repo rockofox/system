@@ -56,6 +56,14 @@
                         sha256 = "sha256-7g5T2rQgD8LTmeWNcpEHFHLPE6L1jmlzXdXHEGWzuC0";
                       };
                     });
+                    discocss = super.discocss.overrideAttrs (prev: {
+                      src = self.fetchFromGitHub {
+                        owner = "rockofox";
+                        repo = "discocss";
+                        rev = "2ce50e3d79d7c45d704647414b7248dcb9846a01";
+                        sha256 = "sha256-dovk50Q0qAQ59ZrIDazvUluJyaKsUiS3MPqrUwaIaYQ=";
+                      };
+                    });
                   })
                 (import inputs.emacs-overlay)
               ];
