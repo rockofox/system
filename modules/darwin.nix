@@ -43,7 +43,6 @@ in {
     rustc
     rustfmt
     silver-searcher
-    skhd
     stack
     tealdeer
     tmate

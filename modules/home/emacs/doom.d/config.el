@@ -33,4 +33,6 @@
 ;; Navigate in treemacs with single click
 (with-eval-after-load 'treemacs
     (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
+
+(map! "<M-tab>" 'evil-window-mru)
 ;;; config.el ends here

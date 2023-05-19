@@ -4,7 +4,7 @@ let
   override = "none";
   font = "CaskaydiaCove Nerd Font";
 in rec {
-  colorScheme = nix-colors.colorschemes.catppuccin-mocha;
+  colorScheme = nix-colors.colorschemes.rose-pine-moon;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -176,7 +176,7 @@ in rec {
     nix-colors.homeManagerModule
     nix-doom-emacs.hmModule
     ./autoraise.nix
-    (import ./colorschemes.nix {
+    (import ./colorschemes-misc.nix {
       inherit pkgs;
       inherit colorScheme;
       inherit font;
