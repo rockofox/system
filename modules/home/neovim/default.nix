@@ -65,13 +65,14 @@ let
     vim-sleuth
     winbar-nvim
     which-key-nvim
+    rose-pine
   ];
 
 in {
   home.packages = with pkgs; [
     # Copilot doesn't work with Node.js 18 yet
     # TODO: Find a solution that donesn't pollute global namespace
-    nodejs-16_x
+    nodejs-18_x
     tabnine
     nil
     kotlin-language-server
@@ -91,15 +92,6 @@ in {
       plugin =
         nix-colors-lib.vimThemeFromScheme { scheme = config.colorScheme; };
       config = ''
-        function! HasColorscheme(name) abort
-            let pat = 'colors/'.a:name.'.vim'
-            return !empty(globpath(&rtp, pat))
-        endfunction
-        if HasColorscheme('base16-${config.colorScheme.slug}')
-            colorscheme base16-${config.colorScheme.slug}
-        else
-            colorscheme nix-${config.colorScheme.slug}
-        endif
       '';
     }];
 
@@ -111,7 +103,12 @@ in {
         ${builtins.readFile ./init.vim}
       lua << EOF
         ${builtins.readFile ./init.lua}
-      EOF'';
+      EOF
+      silent! colorscheme default
+      silent! colorscheme nix-${config.colorScheme.slug}
+      silent! colorscheme base16-${config.colorScheme.slug}
+      silent! colorscheme ${config.colorScheme.slug}
+      '';
   };
 
   xdg.configFile = {
