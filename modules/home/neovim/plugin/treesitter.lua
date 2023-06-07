@@ -8,7 +8,6 @@ if hasTreesitter then
         highlight = {
             enable = true,
             additional_vim_regex_highlighting = false,
-            disable = { "bash", "lua", "vim", "nix", "sql" },
         },
         indent = {
             enable = true,
