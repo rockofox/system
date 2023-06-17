@@ -42,6 +42,7 @@ let
     bufferline-nvim
     comment-nvim
     direnv-vim
+    vim-easymotion
     editorconfig-nvim
     fidget-nvim
     fzf-vim
