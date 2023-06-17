@@ -3,10 +3,33 @@ let
   vars = import ../vars.nix;
   override = "none";
   font = "CaskaydiaCove Nerd Font";
-in rec {
+  #   vscode-insider = (pkgs.vscode.override { isInsiders = true; }).overrideAttrs (oldAttrs: {
+  #   src = (builtins.fetchTarball {
+  #     url = "https://code.visualstudio.com/sha/download?build=insider&os=darwin-universal";
+  #     sha256 = "";
+  #   });
+  #   version = "latest";
+  # });
+in
+rec {
   colorScheme = nix-colors.colorschemes.rose-pine-moon;
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine-moon.yaml";
+  stylix.autoEnable = false;
+  stylix.targets.vscode.enable = true;
+  stylix.targets.kitty.enable = true;
+  stylix.targets.vim.enable = true;
+  stylix.fonts = {
+    monospace = {
+      package = pkgs.nerdfonts;
+      name = "CaskaydiaCove Nerd Font";
+    };
+    sizes = {
+      applications = 12;
+      terminal = 15;
+    };
+  };
 
-  # Home Manager needs a bit of information about you and the
+
   # paths it should manage.
   home.username = vars.username;
   home.homeDirectory = vars.homeDirectory;
@@ -26,17 +49,23 @@ in rec {
       ${pkgs.discocss}/bin/discocss --injectOnly || true
     '';
     reloadKittyConf = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      killall -m -SIGUSR1 kitty | true
+      killall -m -SIGUSR1 kitty || true
     '';
     setMacosColorScheme = lib.hm.dag.entryAfter [ "writeBoundary" ]
-    (if lib.strings.hasInfix "light" colorScheme.slug || override == "light" && override != "dark" then
-      ''
-        osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
-      ''
-    else
-      ''
-        osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
-      '');
+      (if lib.strings.hasInfix "light" colorScheme.slug || override == "light" && override != "dark" then
+        ''
+          osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false' || true
+        ''
+      else
+        ''
+          osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true' || true
+        '');
+    wasienv = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      if ! [ -d "${vars.homeDirectory}/.wasienv" ]
+      then
+        curl https://raw.githubusercontent.com/wasienv/wasienv/master/install.sh | sh
+      fi
+    '';
   };
 
   home.packages = with pkgs; [ discord ];
@@ -44,12 +73,15 @@ in rec {
   manual.manpages.enable = false;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  # programs.home-manager.manual.manpages.enable = false;
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode;
+    userSettings = builtins.fromJSON (builtins.readFile ./vscode-settings.json);
+  };
+
 
   programs.kitty.enable = true;
   programs.kitty.darwinLaunchOptions = [ "--single-instance" "--directory=~" ];
-  programs.kitty.font.name = font;
-  programs.kitty.font.size = 15;
   programs.kitty.settings = {
     # background_opacity = "0.85";
     foreground = "#${colorScheme.colors.base05}";
@@ -86,6 +118,7 @@ in rec {
     enable = true;
     discordAlias = false;
     css = lib.mkDefault (lib.mkBefore ''
+      /* ${colorScheme.slug} */
       .theme-dark, .theme-light {
         --background-primary:       #${colorScheme.colors.base00};
         --background-secondary:     #${colorScheme.colors.base01};
@@ -182,12 +215,12 @@ in rec {
       inherit font;
       inherit lib;
     })
-    (import ./emacs {
-      inherit colorScheme;
-      inherit font;
-      inherit pkgs;
-      inherit lib;
-    })
+    # (import ./emacs {
+    #   inherit colorScheme;
+    #   inherit font;
+    #   inherit pkgs;
+    #   inherit lib;
+    # })
     ./git.nix
     ./kakoune.nix
     ./neovim

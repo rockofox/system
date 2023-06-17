@@ -21,14 +21,13 @@
     # emacs-overlay pinned because https://github.com/nix-community/nix-doom-emacs/issues/409
     emacs-overlay.url = "github:nix-community/emacs-overlay/c16be6de78ea878aedd0292aa5d4a1ee0a5da501";
     # dosh.url = "github:ners/dosh";
+    stylix.url = "github:rockofox/stylix";
   };
 
   outputs = { darwin, home-manager, nix-colors, nix-doom-emacs, nix-monitored
-    , ... }@inputs:
+    , stylix, ... }@inputs:
     let vars = import ./modules/vars.nix;
     in {
-      darwin.manual.manpages.enable = false;
-
       darwinConfigurations = {
         "darwin" = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
@@ -71,7 +70,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.${vars.username} = {
-                imports = [ ./modules/home ];
+                imports = [ stylix.homeManagerModules.stylix ./modules/home ];
               };
               home-manager.extraSpecialArgs = { inherit nix-colors; inherit nix-doom-emacs; };
             }

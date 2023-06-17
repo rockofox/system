@@ -1,6 +1,7 @@
 { config, lib, pkgs, inputs, ... }:
 let vars = import ./vars.nix;
 in {
+
   documentation.enable = false;
   documentation.doc.enable = false;
   nix.useDaemon = true;
@@ -9,7 +10,6 @@ in {
   environment.systemPackages = with pkgs; [
     bat
     bottom
-    cabal-install
     cargo
     cmake
     cowsay
@@ -35,6 +35,8 @@ in {
     nixfmt
     nnn
     nodePackages.prettier
+    nodePackages.yo
+    nodePackages.generator-code
     pandoc
     pkg-config
     postgresql
@@ -49,9 +51,12 @@ in {
     tmux
     tree
     unixtools.watch
+    wasmtime
     wget
     xh
-    helix
+    # helix
+
+    nixpkgs-fmt
 
     # dosh
     mosh
@@ -126,7 +131,10 @@ in {
   services.nix-daemon.enable = true;
 
   nix.gc.automatic = true;
-  nix.gc.interval = { Hour = 3; Minute = 15; } ;
+  nix.gc.interval = {
+    Hour = 3;
+    Minute = 15;
+  };
   nix.gc.options = "--delete-older-than 1d";
 
   nix.extraOptions = ''

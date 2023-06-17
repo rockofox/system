@@ -26,6 +26,7 @@
       /opt/homebrew/bin/yabai -m config mouse_action1                move
       /opt/homebrew/bin/yabai -m config mouse_action2                resize
       /opt/homebrew/bin/yabai -m config mouse_drop_action            swap
+      /opt/homebrew/bin/yabai -m config external_bar all:25:0
 
       # general space settings
       /opt/homebrew/bin/yabai -m config layout                       bsp
@@ -79,6 +80,9 @@
 
       # Broken for some reason
       # /opt/homebrew/bin/yabai -m signal --add event=window_created action='/opt/homebrew/bin/yabai -m query --windows --window $YABAI_WINDOW_ID | ${pkgs.jq} -er ".\"can-resize\" or .\"is-floating\"" || yabai -m window $YABAI_WINDOW_ID --toggle float'
+
+      /opt/homebrew/bin/yabai -m signal --add event=dock_did_restart action="sudo /opt/homebrew/bin/yabai --load-sa"
+      sudo /opt/homebrew/bin/yabai --load-sa
 
       echo "yabai configuration loaded.."
     '';
