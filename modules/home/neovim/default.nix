@@ -14,7 +14,11 @@ let
     # cmp-tabnine
 
     # use Treesitter for many languages
-    (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
+    nvim-treesitter.withAllGrammars
+    nvim-ts-rainbow2
+    nvim-treesitter-textobjects
+    nvim-treesitter-refactor
+
     # kotlin-vim
 
     # autocompletion
