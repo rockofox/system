@@ -109,7 +109,6 @@ in {
         NSDocumentSaveNewDocumentsToCloud = false;
         NSNavPanelExpandedStateForSaveMode = true;
         NSNavPanelExpandedStateForSaveMode2 = true;
-        AppleFontSmoothing = 0;
       };
       dock = {
         autohide = true;
