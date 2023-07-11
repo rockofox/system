@@ -18,6 +18,38 @@ rec {
   stylix.targets.vscode.enable = true;
   stylix.targets.kitty.enable = true;
   stylix.targets.vim.enable = true;
+  programs.wezterm = {
+    enable = true;
+    extraConfig = ''
+      local config = {}
+      local wezterm = require 'wezterm'
+      local act = wezterm.action
+
+      config.tab_bar_at_bottom = true;
+      config.hide_tab_bar_if_only_one_tab = true;
+      config.window_decorations = "RESIZE";
+      config.keys = {
+      {
+        key = "[",
+        mods = "SUPER",
+        action = act.ActivatePaneDirection 'Prev',
+      },
+      {
+        key = "]",
+        mods = "SUPER",
+        action = act.ActivatePaneDirection 'Next',
+      },
+      {
+        key = "Enter",
+        mods = "SUPER",
+        action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+      }
+      }
+
+      return config
+      '';
+  };
+  stylix.targets.wezterm.enable = true;
   stylix.fonts = {
     monospace = {
       package = pkgs.nerdfonts;

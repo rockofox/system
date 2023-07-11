@@ -54,7 +54,7 @@ in {
     wasmtime
     wget
     xh
-    # helix
+    helix
 
     nixpkgs-fmt
 
@@ -94,8 +94,8 @@ in {
       "qmk/qmk"
     ];
   };
-  fonts.fonts = with pkgs; [ nerdfonts julia-mono lato jetbrains-mono ];
-  fonts.fontDir.enable = true;
+  # fonts.fonts = with pkgs; [ nerdfonts julia-mono lato jetbrains-mono ];
+  # fonts.fontDir.enable = true;
 
   system = {
     defaults = {
@@ -140,8 +140,6 @@ in {
     extra-platforms = aarch64-darwin x86_64-darwin
     auto-optimise-store = true
     experimental-features = nix-command flakes
-    max-jobs = 4
-    cores = 0
   '';
 
   nix.settings.trusted-public-keys = [

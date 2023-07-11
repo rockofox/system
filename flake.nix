@@ -47,14 +47,14 @@
                       # super.nix-direnv.override { nix = nix-monitored; };
                     darwin-rebuild =
                       super.darwin-rebuild.override { nix = nix-monitored; };
-                    helix = super.helix.overrideAttrs (prev: {
-                      src = self.fetchFromGitHub {
-                        owner = "AlexanderDickie";
-                        repo = "helix";
-                        rev = "360b69bf5d8ca7f7f6dca92d657e309a96e843e8";
-                        sha256 = "sha256-7g5T2rQgD8LTmeWNcpEHFHLPE6L1jmlzXdXHEGWzuC0";
-                      };
-                    });
+                    # helix = super.helix.overrideAttrs (prev: {
+                    #   src = self.fetchFromGitHub {
+                    #     owner = "AlexanderDickie";
+                    #     repo = "helix";
+                    #     rev = "360b69bf5d8ca7f7f6dca92d657e309a96e843e8";
+                    #     sha256 = "sha256-7g5T2rQgD8LTmeWNcpEHFHLPE6L1jmlzXdXHEGWzuC0";
+                    #   };
+                    # });
                     discocss = super.discocss.overrideAttrs (prev: {
                       src = self.fetchFromGitHub {
                         owner = "rockofox";

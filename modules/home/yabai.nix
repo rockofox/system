@@ -162,7 +162,7 @@
       # toggle window split type
       alt - e : /opt/homebrew/bin/yabai -m window --toggle split
 
-      ctrl - return : kitty --single-instance -d ~ & disown
+      ctrl - return : wezterm
       ctrl - q : open http://
       ctrl + shift - e : open ~
       alt - t : /opt/homebrew/bin/yabai -m space --layout $(/opt/homebrew/bin/yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')

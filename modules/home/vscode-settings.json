@@ -18,13 +18,8 @@
     },
     "workbench.tree.indent": 20,
     "editor.renderLineHighlight": "none",
-    "editor.overviewRulerBorder": false,
-    "editor.hideCursorInOverviewRuler": true,
-    "editor.folding": false,
-    "editor.occurrencesHighlight": false,
     "workbench.editor.tabCloseButton": "off",
     "indenticator.color.dark": "rgba(255,255,255,.1)",
-    "editor.guides.indentation": false,
     "vscode_custom_css.imports": [
         "file:///Users/rocko/Documents/custom_vscode.css",
         "file:///Users/rocko/Documents/custom_vscode.js"
@@ -394,5 +389,12 @@
     "[nix]": {
         "editor.defaultFormatter": "jnoortheen.nix-ide"
     },
-    "workbench.statusBar.visible": false
+    "workbench.statusBar.visible": false,
+    "haskell.formattingProvider": "fourmolu",
+    "workbench.colorCustomizations": {
+        "editorGhostText.border": "#68696f",
+        "editorGhostText.foreground": "#68696f",
+        "tab.activeBorder": "#a6e3a1",
+        "tab.border": "#262336"
+    }
 }
