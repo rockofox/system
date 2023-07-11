@@ -19,4 +19,24 @@ augroup END
 
 map <C-M> V/###dGV/##d
 onoremap <expr> *  v:count ? '*'  : '<esc>*g``'.v:operator.'gn'
+
+nnoremap <C-y> <C-W>h
+nnoremap <C-n> <C-W>j
+nnoremap <C-i> <C-W>k
+nnoremap <C-o> <C-W>l
+
+if has('nvim')
+  augroup vimrc_term
+    autocmd!
+    autocmd WinEnter term://* nohlsearch
+    autocmd WinEnter term://* startinsert
+
+    autocmd TermOpen * tnoremap <buffer> <C-y> <C-\><C-n><C-w>h
+    autocmd TermOpen * tnoremap <buffer> <C-n> <C-\><C-n><C-w>j
+    autocmd TermOpen * tnoremap <buffer> <C-i> <C-\><C-n><C-w>k
+    autocmd TermOpen * tnoremap <buffer> <C-o> <C-\><C-n><C-w>l
+    autocmd TermOpen * tnoremap <buffer> <Esc> <C-\><C-n>
+  augroup END
+endif
+
 lua require'impatient'
