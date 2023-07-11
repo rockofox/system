@@ -6,6 +6,7 @@ let
       destination = "/share/kak/autoload/${name}";
       text = ''
         set global ui_options ncurses_assistant=cat
+        map global normal <c-p> ': fzf-mode<ret>'
       '';
     });
     kak-tree = pkgs.kakouneUtils.buildKakounePluginFrom2Nix {
@@ -20,6 +21,6 @@ let
       meta.homepage = "https://github.com/ul/kak-tree/";
     };
   in pkgs.kakoune.override {
-    plugins = with pkgs.kakounePlugins; [ config parinfer-rust kak-tree ];
+    plugins = with pkgs.kakounePlugins; [ config parinfer-rust kak-tree kak-lsp fzf-kak ];
   };
 in { home.packages = [ myKakoune ]; }
