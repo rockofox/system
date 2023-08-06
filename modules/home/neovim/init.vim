@@ -25,6 +25,7 @@ nnoremap <C-n> <C-W>j
 nnoremap <C-i> <C-W>k
 nnoremap <C-o> <C-W>l
 nnoremap <leader>bd <cmd>bd<cr>
+nnoremap <leader>g <cmd>Neogit<cr>
 set shellcmdflag=-ic
 
 if has('nvim')
