@@ -2,8 +2,6 @@
 let vars = import ./vars.nix;
 in {
 
-  documentation.enable = false;
-  documentation.doc.enable = false;
   nix.useDaemon = true;
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -69,12 +67,10 @@ in {
     brews = [
       {
         name = "yabai";
-        start_service = true;
         restart_service = "changed";
       }
       {
         name = "skhd";
-        start_service = true;
         restart_service = "changed";
       }
       "cava"

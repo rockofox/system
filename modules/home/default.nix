@@ -2,8 +2,8 @@
 let
   vars = import ../vars.nix;
   override = "none";
-  font = "CaskaydiaCove Nerd Font";
-  colorscheme = "horizon-terminal-dark";
+  font = "BlexMono Nerd Font";
+  colorscheme = "ayu-dark";
 in
 rec {
   colorScheme = nix-colors.colorschemes.${colorscheme};
@@ -21,6 +21,7 @@ rec {
 
       config.tab_bar_at_bottom = true;
       config.hide_tab_bar_if_only_one_tab = true;
+      config.tab_max_width = 20;
       config.window_decorations = "RESIZE";
       config.keys = {
         {
@@ -55,7 +56,7 @@ rec {
   stylix.fonts = {
     monospace = {
       package = pkgs.hello;
-      name = "FiraCode Nerd Font";
+      name = font;
     };
     sizes = {
       applications = 12;
