@@ -3,17 +3,11 @@ let
   vars = import ../vars.nix;
   override = "none";
   font = "CaskaydiaCove Nerd Font";
-  #   vscode-insider = (pkgs.vscode.override { isInsiders = true; }).overrideAttrs (oldAttrs: {
-  #   src = (builtins.fetchTarball {
-  #     url = "https://code.visualstudio.com/sha/download?build=insider&os=darwin-universal";
-  #     sha256 = "";
-  #   });
-  #   version = "latest";
-  # });
+  colorscheme = "horizon-terminal-dark";
 in
 rec {
-  colorScheme = nix-colors.colorschemes.rose-pine-moon;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine-moon.yaml";
+  colorScheme = nix-colors.colorschemes.${colorscheme};
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${colorscheme}.yaml";
   stylix.autoEnable = false;
   stylix.targets.vscode.enable = true;
   stylix.targets.kitty.enable = true;
@@ -29,21 +23,29 @@ rec {
       config.hide_tab_bar_if_only_one_tab = true;
       config.window_decorations = "RESIZE";
       config.keys = {
-      {
-        key = "[",
-        mods = "SUPER",
-        action = act.ActivatePaneDirection 'Prev',
-      },
-      {
-        key = "]",
-        mods = "SUPER",
-        action = act.ActivatePaneDirection 'Next',
-      },
-      {
-        key = "Enter",
-        mods = "SUPER",
-        action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
-      }
+        {
+          key = "[",
+          mods = "SUPER",
+          action = act.ActivatePaneDirection 'Prev',
+        },
+        {
+          key = "]",
+          mods = "SUPER",
+          action = act.ActivatePaneDirection 'Next',
+        },
+        {
+          key = "Enter",
+          mods = "SUPER",
+          action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+        },
+        {
+          key = 'k',
+          mods = 'SUPER',
+          action = act.Multiple {
+            act.ClearScrollback 'ScrollbackAndViewport',
+            act.SendKey { key = 'L', mods = 'CTRL' },
+          },
+        },
       }
 
       return config
@@ -52,8 +54,8 @@ rec {
   stylix.targets.wezterm.enable = true;
   stylix.fonts = {
     monospace = {
-      package = pkgs.nerdfonts;
-      name = "CaskaydiaCove Nerd Font";
+      package = pkgs.hello;
+      name = "FiraCode Nerd Font";
     };
     sizes = {
       applications = 12;

@@ -52,16 +52,17 @@ let
     fzf-vim
     fzfWrapper
     gitsigns-nvim
-    impatient-nvim
     incsearch-vim
     lualine-nvim
     nvim-autopairs
     nvim-base16
     nvim-highlight-colors
     nvim-surround
-    nvim-tree-lua
+    # nvim-tree-lua
+    oil-nvim
     nvim-web-devicons
     plenary-nvim
+    neogit
     rust-tools-nvim
     # tabby-nvim
     telescope-nvim

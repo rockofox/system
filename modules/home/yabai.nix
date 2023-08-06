@@ -30,11 +30,11 @@
 
       # general space settings
       /opt/homebrew/bin/yabai -m config layout                       bsp
-      /opt/homebrew/bin/yabai -m config top_padding                  24
-      /opt/homebrew/bin/yabai -m config bottom_padding               24
-      /opt/homebrew/bin/yabai -m config left_padding                 24
-      /opt/homebrew/bin/yabai -m config right_padding                24
-      /opt/homebrew/bin/yabai -m config window_gap                   24
+      /opt/homebrew/bin/yabai -m config top_padding                  18
+      /opt/homebrew/bin/yabai -m config bottom_padding               18
+      /opt/homebrew/bin/yabai -m config left_padding                 18
+      /opt/homebrew/bin/yabai -m config right_padding                18
+      /opt/homebrew/bin/yabai -m config window_gap                   18
 
       # system floating windows
       # /opt/homebrew/bin/yabai -m rule --add app="^Finder$" manage=off

@@ -59,6 +59,7 @@ in {
         vicmd_symbol = "[❮](bold green)";
       };
       gcloud.disabled = true;
+      battery.disabled = true;
       nodejs.symbol = " ";
       java.symbol = " ";
       rust.symbol = " ";

@@ -55,6 +55,7 @@ in {
     wget
     xh
     helix
+    hyperfine
 
     nixpkgs-fmt
 

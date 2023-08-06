@@ -24,6 +24,8 @@ nnoremap <C-y> <C-W>h
 nnoremap <C-n> <C-W>j
 nnoremap <C-i> <C-W>k
 nnoremap <C-o> <C-W>l
+nnoremap <leader>bd <cmd>bd<cr>
+set shellcmdflag=-ic
 
 if has('nvim')
   augroup vimrc_term
@@ -38,5 +40,3 @@ if has('nvim')
     autocmd TermOpen * tnoremap <buffer> <Esc> <C-\><C-n>
   augroup END
 endif
-
-lua require'impatient'
