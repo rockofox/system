@@ -21,7 +21,7 @@ rec {
 
       config.tab_bar_at_bottom = true;
       config.hide_tab_bar_if_only_one_tab = true;
-      config.tab_max_width = 20;
+      config.tab_max_width = 200;
       config.window_decorations = "RESIZE";
       config.keys = {
         {
@@ -38,6 +38,11 @@ rec {
           key = "Enter",
           mods = "SUPER",
           action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+        },
+        {
+          key = "Enter",
+          mods = "SUPER|SHIFT",
+          action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
         },
         {
           key = 'k',
@@ -101,6 +106,13 @@ rec {
         curl https://raw.githubusercontent.com/wasienv/wasienv/master/install.sh | sh
       fi
     '';
+    # npmEnv = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    #   if ! [ -d "${vars.homeDirectory}/.npm-global" ]
+    #   then
+    #     mkdir -p "${vars.homeDirectory}/.npm-global"
+    #     npm config set prefix "${vars.homeDirectory}/.npm-global"
+    #   fi
+    #   '';
   };
 
   home.packages = with pkgs; [ discord ];
@@ -265,6 +277,7 @@ rec {
       inherit font;
     })
     ./yabai.nix
+    ./tmux.nix
     ./zsh
   ];
 }

@@ -2,14 +2,9 @@
   description = "Rocko's system";
 
   inputs = {
-    # Package sets
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
-    # Environment/system management
-    darwin = {
-      url = "github:lnl7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    darwin.url = "github:LnL7/nix-darwin/master";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,18 +15,17 @@
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     # emacs-overlay pinned because https://github.com/nix-community/nix-doom-emacs/issues/409
     emacs-overlay.url = "github:nix-community/emacs-overlay/c16be6de78ea878aedd0292aa5d4a1ee0a5da501";
-    # dosh.url = "github:ners/dosh";
     stylix.url = "github:rockofox/stylix";
   };
 
-  outputs = { darwin, home-manager, nix-colors, nix-doom-emacs, nix-monitored
-    , stylix, ... }@inputs:
+  outputs = { self, darwin, home-manager, nix-colors, nix-doom-emacs, nix-monitored
+    , stylix, neovim-nightly-overlay, ... }@inputs:
     let vars = import ./modules/vars.nix;
     in {
       darwinConfigurations = {
         "darwin" = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = { inherit inputs; };
+          specialArgs = inputs;
           modules = [
             ./modules/darwin.nix
             home-manager.darwinModules.home-manager
@@ -39,22 +33,6 @@
               nixpkgs.overlays = [
                 (self: super:
                   {
-                    nix-monitored = nix-monitored.packages.${super.system}.nix-monitored;
-                    # dosh = dosh.packages.${super.system}.dosh;
-                    nixos-rebuild =
-                      super.nixos-rebuild.override { nix = nix-monitored; };
-                    # nix-direnv =
-                      # super.nix-direnv.override { nix = nix-monitored; };
-                    darwin-rebuild =
-                      super.darwin-rebuild.override { nix = nix-monitored; };
-                    # helix = super.helix.overrideAttrs (prev: {
-                    #   src = self.fetchFromGitHub {
-                    #     owner = "AlexanderDickie";
-                    #     repo = "helix";
-                    #     rev = "360b69bf5d8ca7f7f6dca92d657e309a96e843e8";
-                    #     sha256 = "sha256-7g5T2rQgD8LTmeWNcpEHFHLPE6L1jmlzXdXHEGWzuC0";
-                    #   };
-                    # });
                     discocss = super.discocss.overrideAttrs (prev: {
                       src = self.fetchFromGitHub {
                         owner = "rockofox";
@@ -64,7 +42,8 @@
                       };
                     });
                   })
-                (import inputs.emacs-overlay)
+                  (import inputs.emacs-overlay)
+                  # (import inputs.neovim-nightly-overlay)
               ];
               nixpkgs.config.allowUnfree = true;
               home-manager.useGlobalPkgs = true;

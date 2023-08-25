@@ -1,5 +1,10 @@
 require'lspconfig'.html.setup{
-		on_attach = require'on-attach',
+	on_attach = require'on-attach',
+	cmd = { "html-languageserver", "--stdio" },
+}
+require'lspconfig'.cssls.setup{
+	on_attach = require'on-attach',
+	cmd = { "css-languageserver", "--stdio" },
 }
 require'lspconfig'.angularls.setup{
 		on_attach = require'on-attach',

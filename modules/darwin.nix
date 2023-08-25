@@ -63,15 +63,14 @@ in {
   ];
   homebrew = {
     enable = true;
-    onActivation = { autoUpdate = false; };
+    onActivation.autoUpdate = true;
+    onActivation.upgrade = true;
     brews = [
       {
         name = "yabai";
-        restart_service = "changed";
       }
       {
         name = "skhd";
-        restart_service = "changed";
       }
       "cava"
       "sketchybar"
@@ -79,9 +78,6 @@ in {
     casks = [ "anaconda" "ilspy" "vimr" "background-music" ];
     taps = [
       "homebrew/bundle"
-      "homebrew/cask"
-      "homebrew/cask-drivers"
-      "homebrew/core"
       "homebrew/services"
       "koekeishiya/formulae"
       "osx-cross/arm"
@@ -125,19 +121,21 @@ in {
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
+  services.activate-system.enable = true;
+  programs.nix-index.enable = true;
 
-  nix.gc.automatic = true;
-  nix.gc.interval = {
-    Hour = 3;
-    Minute = 15;
+  nix.gc = {
+    automatic = true;
+    interval = { Weekday = 0; Hour = 0; Minute = 0; };
+    options = "--delete-older-than 30d";
   };
-  nix.gc.options = "--delete-older-than 1d";
+
 
   nix.extraOptions = ''
     extra-platforms = aarch64-darwin x86_64-darwin
-    auto-optimise-store = true
     experimental-features = nix-command flakes
   '';
+  nix.settings.auto-optimise-store = true;
 
   nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -152,9 +150,6 @@ in {
   ];
 
   nix.package = pkgs.nix;
-
-  # FIXME: See flake.nix
-  # nix.package = pkgs.nix-monitored;
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina

@@ -17,7 +17,6 @@ augroup kitty_mp
     au VimEnter * :silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0
 augroup END
 
-map <C-M> V/###dGV/##d
 onoremap <expr> *  v:count ? '*'  : '<esc>*g``'.v:operator.'gn'
 
 nnoremap <C-y> <C-W>h
