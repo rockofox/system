@@ -44,6 +44,8 @@
       unbind C-b
       set -g prefix `
       bind-key ` send-prefix
+
+      set -g default-terminal "screen-256color"
     '';
   };
 }

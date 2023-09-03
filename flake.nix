@@ -24,7 +24,7 @@
     in {
       darwinConfigurations = {
         "darwin" = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
+          system = "x86_64-darwin";
           specialArgs = inputs;
           modules = [
             ./modules/darwin.nix

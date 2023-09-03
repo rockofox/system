@@ -8,8 +8,8 @@ command W w
 vnoremap < <gv
 vnoremap > >gv
 
-map <F2> :mksession! ~/vim_session <cr> " Quick write session with F2
-map <F3> :source ~/vim_session <cr>     " And load session with F3
+map <leader>ss :mksession! ~/vim_session <cr> " Quick write session
+map <leader>sl :source ~/vim_session <cr>     " And load session
 
 augroup kitty_mp
     autocmd!

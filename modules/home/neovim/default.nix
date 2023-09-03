@@ -129,10 +129,10 @@ in {
       lua << EOF
         ${builtins.readFile ./init.lua}
       EOF
-      silent! colorscheme default
-      silent! colorscheme nix-${config.colorScheme.slug}
-      silent! colorscheme base16-${config.colorScheme.slug}
-      silent! colorscheme ${config.colorScheme.slug}
+      " silent! colorscheme default
+      " silent! colorscheme nix-${config.colorScheme.slug}
+      " silent! colorscheme base16-${config.colorScheme.slug}
+      " silent! colorscheme ${config.colorScheme.slug}
       '';
       extraLuaConfig = lib.mkBefore ''
         -- bytecompile lua modules

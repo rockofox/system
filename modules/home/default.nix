@@ -3,7 +3,7 @@ let
   vars = import ../vars.nix;
   override = "none";
   font = "BlexMono Nerd Font";
-  colorscheme = "ayu-dark";
+  colorscheme = "horizon-dark";
 in
 rec {
   colorScheme = nix-colors.colorschemes.${colorscheme};

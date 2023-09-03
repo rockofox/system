@@ -63,11 +63,13 @@ in {
   ];
   homebrew = {
     enable = true;
+    # onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
     brews = [
       {
-        name = "yabai";
+        name = "rockofox/formulae/yabai";
+        args = ["HEAD"];
       }
       {
         name = "skhd";
@@ -79,7 +81,8 @@ in {
     taps = [
       "homebrew/bundle"
       "homebrew/services"
-      "koekeishiya/formulae"
+      # "koekeishiya/formulae"
+      "rockofox/formulae"
       "osx-cross/arm"
       "osx-cross/avr"
       "dimentium/autoraise"

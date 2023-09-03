@@ -35,32 +35,26 @@
                               icon.padding_right=6
 
       ############## PRIMARY DISPLAY SPACES ##############
-      sketchybar -m --add space productivity left \
-                    --set productivity associated_space=1 \
-                               associated_display=1 \
-                               icon=1 \
-                               click_script="yabai -m space --focus 1" \
-                               background.color=0x7f${colorScheme.colors.base00} \
-                               background.drawing=off \
-                    --subscribe productivity mouse.entered mouse.exited \
-                                                                       \
-                    --add space browser left \
-                    --set browser associated_display=1 \
-                               associated_space=2 \
-                               icon=2 \
-                               click_script="yabai -m space --focus 2" \
-                               background.color=0x7f${colorScheme.colors.base00} \
-                               background.drawing=off \
-                    --subscribe browser mouse.entered mouse.exited \
-                                                                       \
-                    --add space messaging left \
-                    --set messaging associated_display=1 \
-                               associated_space=3 \
-                               icon=3 \
-                               click_script="yabai -m space --focus 3" \
-                               background.color=0x7f${colorScheme.colors.base00} \
-                               background.drawing=off \
-                    --subscribe messaging mouse.entered mouse.exited
+      SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
+
+      spaces=()
+      for i in "''${!SPACE_ICONS[@]}"
+      do
+        sid=$(($i+1))
+        spaces+=(space.$sid)
+        sketchybar --add space space.$sid left                                 \
+                   --set space.$sid associated_space=$sid                      \
+                                    icon=''${SPACE_ICONS[i]}                     \
+                                    background.corner_radius=0                 \
+                                    background.height=20                       \
+                                    background.color=0x7f${colorScheme.colors.base0E} \
+                                    background.drawing=off                     \
+                                    label.drawing=off                          \
+                                    script="~/.config/sketchybar/plugins/space.sh"              \
+                                    click_script="yabai -m space --focus $sid"
+      done
+
+
 
       ############## ITEM DEFAULTS ###############
       sketchybar -m --default label.padding_left=0 \
@@ -88,6 +82,22 @@
       sketchybar -m --update
 
       echo "sketchybar configuration loaded..."
+    '';
+  };
+  home.file.sketchybarClock = {
+    executable = true;
+    target = ".config/sketchybar/plugins/clock.sh";
+    text = ''
+      #!/bin/bash
+      sketchybar --set $NAME label="$(date +"%H:%M")"
+      '';
+  };
+  home.file.sketchybarSpace = {
+    executable = true;
+    target = ".config/sketchybar/plugins/space.sh";
+    text = ''
+     #!/bin/bash
+     sketchybar --set $NAME background.drawing=$SELECTED
     '';
   };
 }
