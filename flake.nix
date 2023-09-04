@@ -16,15 +16,27 @@
     # emacs-overlay pinned because https://github.com/nix-community/nix-doom-emacs/issues/409
     emacs-overlay.url = "github:nix-community/emacs-overlay/c16be6de78ea878aedd0292aa5d4a1ee0a5da501";
     stylix.url = "github:rockofox/stylix";
+    sensitive = {
+      url = "git+file:./sensitive";
+    };
   };
 
-  outputs = { self, darwin, home-manager, nix-colors, nix-doom-emacs, nix-monitored
-    , stylix, neovim-nightly-overlay, ... }@inputs:
-    let vars = import ./modules/vars.nix;
-    in {
+  outputs =
+    { self
+    , darwin
+    , home-manager
+    , nix-colors
+    , nix-doom-emacs
+    , nix-monitored
+    , stylix
+    , neovim-nightly-overlay
+    , sensitive
+    , ...
+    }@inputs:
+    {
       darwinConfigurations = {
         "darwin" = darwin.lib.darwinSystem {
-          system = "x86_64-darwin";
+          system = sensitive.lib.arch;
           specialArgs = inputs;
           modules = [
             ./modules/darwin.nix
@@ -33,25 +45,26 @@
               nixpkgs.overlays = [
                 (self: super:
                   {
-                    discocss = super.discocss.overrideAttrs (prev: {
+                    discocss = super.discocss.overrideAttrs (prev: rec {
+                      version = "0.3.1";
                       src = self.fetchFromGitHub {
-                        owner = "rockofox";
+                        owner = "bddvlpr";
                         repo = "discocss";
-                        rev = "2ce50e3d79d7c45d704647414b7248dcb9846a01";
-                        sha256 = "sha256-dovk50Q0qAQ59ZrIDazvUluJyaKsUiS3MPqrUwaIaYQ=";
+                        rev = "v${version}";
+                        hash = "sha256-BFTxgUy2H/T92XikCsUMQ4arPbxf/7a7JPRewGqvqZQ=";
                       };
                     });
                   })
-                  (import inputs.emacs-overlay)
-                  # (import inputs.neovim-nightly-overlay)
+                (import inputs.emacs-overlay)
+                # (import inputs.neovim-nightly-overlay)
               ];
               nixpkgs.config.allowUnfree = true;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${vars.username} = {
+              home-manager.users.${sensitive.lib.username} = {
                 imports = [ stylix.homeManagerModules.stylix ./modules/home ];
               };
-              home-manager.extraSpecialArgs = { inherit nix-colors; inherit nix-doom-emacs; };
+              home-manager.extraSpecialArgs = { inherit nix-colors; inherit nix-doom-emacs; inherit sensitive; };
             }
           ];
         };

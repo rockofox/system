@@ -1,6 +1,5 @@
-{ pkgs, lib, nix-colors, nix-doom-emacs, ... }:
+{ pkgs, lib, nix-colors, nix-doom-emacs, sensitive, ... }:
 let
-  vars = import ../vars.nix;
   override = "none";
   font = "BlexMono Nerd Font";
   colorscheme = "horizon-dark";
@@ -55,7 +54,7 @@ rec {
       }
 
       return config
-      '';
+    '';
   };
   stylix.targets.wezterm.enable = true;
   stylix.fonts = {
@@ -71,8 +70,8 @@ rec {
 
 
   # paths it should manage.
-  home.username = vars.username;
-  home.homeDirectory = vars.homeDirectory;
+  home.username = sensitive.lib.username;
+  home.homeDirectory = sensitive.lib.homeDirectory;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -101,21 +100,14 @@ rec {
           osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true' || true
         '');
     wasienv = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      if ! [ -d "${vars.homeDirectory}/.wasienv" ]
+      if ! [ -d "${sensitive.lib.homeDirectory}/.wasienv" ]
       then
         curl https://raw.githubusercontent.com/wasienv/wasienv/master/install.sh | sh
       fi
     '';
-    # npmEnv = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    #   if ! [ -d "${vars.homeDirectory}/.npm-global" ]
-    #   then
-    #     mkdir -p "${vars.homeDirectory}/.npm-global"
-    #     npm config set prefix "${vars.homeDirectory}/.npm-global"
-    #   fi
-    #   '';
   };
 
-  home.packages = with pkgs; [ discord ];
+  home.packages = with pkgs; [ ];
 
   manual.manpages.enable = false;
   # Let Home Manager install and manage itself.
@@ -163,6 +155,7 @@ rec {
   '';
   programs.discocss = {
     enable = true;
+    discordPackage = pkgs.discord.override { withVencord = true; };
     discordAlias = false;
     css = lib.mkDefault (lib.mkBefore ''
       /* ${colorScheme.slug} */
@@ -193,7 +186,7 @@ rec {
           builtins.fetchGit {
             url = "https://github.com/rockofox/firefox-minima";
             ref = "main";
-            rev = "1477b2a28091aad4ebba330c539110c311eb8084";
+            rev = "932a99851b5f2db8b58aa456e5d897e278c69574";
           }
         }/userChrome.css";
       '';
@@ -261,6 +254,7 @@ rec {
       inherit colorScheme;
       inherit font;
       inherit lib;
+      inherit sensitive;
     })
     # (import ./emacs {
     #   inherit colorScheme;

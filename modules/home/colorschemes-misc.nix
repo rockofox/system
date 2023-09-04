@@ -1,8 +1,5 @@
-{ pkgs, colorScheme, font, ... }:
-let
-  vars = import ../vars.nix;
-in
-rec {
+{ pkgs, colorScheme, font, sensitive, ... }:
+{
   config.programs.firefox.profiles.default.userChrome = ''
     :root {
         --toolbar-bgcolor: #${colorScheme.colors.base01};
@@ -17,7 +14,7 @@ rec {
   '';
 
   config.home.file.obsidian = {
-    target = "${vars.obsidianVault}/.obsidian/snippets/base16.css";
+    target = "${sensitive.lib.obsidianVault}/.obsidian/snippets/base16.css";
     text = ''
         .theme-dark {
           --background-primary: #${colorScheme.colors.base00};
@@ -62,7 +59,20 @@ rec {
           --purple: #c678dd;
           --blue: #61afef;
           --yellow: #e5c07b;
+          --code-background: #${colorScheme.colors.base00};
+          --code-normal: #${colorScheme.colors.base05};
+          --code-comment: #${colorScheme.colors.base03};
+          --code-function: #${colorScheme.colors.base0D};
+          --code-important: #${colorScheme.colors.base06};
+          --code-keyword: #${colorScheme.colors.base0E};
+          --code-operator: #${colorScheme.colors.base05};
+          --code-property: #${colorScheme.colors.base0C};
+          --code-punctuation: #${colorScheme.colors.base05};
+          --code-string: #${colorScheme.colors.base0B};
+          --code-tag: #${colorScheme.colors.base0A};
+          --code-value: #${colorScheme.colors.base09};
       }
+
     '';
   };
   # config.colorScheme.rose-pine-moon = {

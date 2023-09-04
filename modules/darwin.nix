@@ -1,6 +1,5 @@
-{ config, lib, pkgs, inputs, ... }:
-let vars = import ./vars.nix;
-in {
+{ config, lib, pkgs, inputs, sensitive, ... }:
+{
 
   nix.useDaemon = true;
   # List packages installed in system profile. To search by name, run:
@@ -63,13 +62,13 @@ in {
   ];
   homebrew = {
     enable = true;
-    # onActivation.cleanup = "zap";
+    onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
     brews = [
       {
         name = "rockofox/formulae/yabai";
-        args = ["HEAD"];
+        args = [ "HEAD" ];
       }
       {
         name = "skhd";
@@ -114,9 +113,9 @@ in {
     };
   };
 
-  users.users.${vars.username} = {
-    name = vars.username;
-    home = vars.homeDirectory;
+  users.users.${sensitive.lib.username} = {
+    name = sensitive.lib.username;
+    home = sensitive.lib.homeDirectory;
   };
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix

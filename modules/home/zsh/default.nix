@@ -1,6 +1,5 @@
-{ config, pkgs, ... }:
-let vars = import ../../vars.nix;
-in {
+{ config, pkgs, sensitive, ... }:
+{
   home.packages = with pkgs; [ fzf ];
 
   programs.zsh = {
@@ -12,7 +11,7 @@ in {
       ll = "exa --tree --icons --long -L1";
       exa = "exa --tree --icons";
       rebuild =
-        "cd ${vars.systemFlakePath} && git add -NA . && git add -Nf modules/vars.nix && darwin-rebuild switch --flake .#darwin && cd -";
+        "cd ${sensitive.lib.systemFlakePath} && git add -NA . && darwin-rebuild switch --flake .#darwin && cd -";
       ngit = "vim -c \"Neogit\"";
     };
     autocd = true;
