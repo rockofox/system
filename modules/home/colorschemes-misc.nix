@@ -13,7 +13,224 @@
 
   '';
 
-  config.home.file.obsidian = {
+  config.home.file.obsidian-base16ng = {
+    target = "${sensitive.lib.obsidianVault}/.obsidian/snippets/base16ng.css";
+    text = ''
+        
+:root {
+  --base00: #${colorScheme.colors.base00};
+  --base01: #${colorScheme.colors.base01};
+  --base02: #${colorScheme.colors.base02};
+  --base03: #${colorScheme.colors.base03};
+  --base04: #${colorScheme.colors.base04};
+  --base05: #${colorScheme.colors.base05};
+  --base06: #${colorScheme.colors.base06};
+  --base07: #${colorScheme.colors.base07};
+  --base08: #${colorScheme.colors.base08};
+  --base09: #${colorScheme.colors.base09};
+  --base0A: #${colorScheme.colors.base0A};
+  --base0B: #${colorScheme.colors.base0B};
+  --base0C: #${colorScheme.colors.base0C};
+  --base0D: #${colorScheme.colors.base0D};
+  --base0E: #${colorScheme.colors.base0E};
+  --base0F: #${colorScheme.colors.base0F};
+}
+
+/*************************
+ * Font selection
+*************************/
+
+.workspace {
+  font-family: var(--font-family-editor);
+}
+
+.markdown-preview-view {
+  font-family: var(--font-family-preview) !important;
+}
+
+/*************************
+ * workspace
+*************************/
+
+.workspace {
+  color: var(--base06) !important;
+  background-color: var(--base00) !important;
+}
+
+.workspace-tabs {
+  color: var(--base06) !important;
+  background-color: var(--base00) !important;
+}
+
+.workspace-tab-header {
+  color: var(--base06) !important;
+  background-color: var(--base00) !important;
+}
+
+.workspace-tab-header-inner {
+  color: var(--base02) !important;
+}
+
+.workspace-leaf {
+  color: var(--base06) !important;
+  background-color: var(--base00) !important;
+}
+
+/*************************
+ * View header
+*************************/
+
+.view-header {
+  background-color: var(--base00) !important;
+  color: var(--base06) !important;
+  border-bottom: 1px solid var(--base01);
+}
+
+.view-header-title {
+  color: var(--base06) !important;
+}
+
+.view-header-title-container:after {
+  background: none !important;
+}
+
+.view-content {
+  background-color: var(--base00) !important;
+  color: var(--base06) !important;
+}
+
+.view-action {
+  color: var(--base06) !important;
+}
+
+/*************************
+ * Nav folder
+*************************/
+
+.nav-folder-title, .nav-file-title {
+  background-color: var(--base00) !important;
+  color: var(--base06) !important;
+}
+
+.nav-action-button {
+  color: var(--base06) !important;
+}
+
+/*************************
+ * Markdown headers
+*************************/
+
+.cm-header-1, .markdown-preview-view h1 {
+  color: var(--base0A);
+}
+
+.cm-header-2, .markdown-preview-view h2 {
+  color: var(--base0B);
+}
+
+.cm-header-3, .markdown-preview-view h3 {
+  color: var(--base0C);
+}
+
+.cm-header-4, .markdown-preview-view h4 {
+  color: var(--base0D);
+}
+
+.cm-header-5, .markdown-preview-view h5 {
+  color: var(--base0E);
+}
+
+.cm-header-6, .markdown-preview-view h6 {
+  color: var(--base0E);
+}
+
+/*************************
+ * Markdown strong and emphasis
+*************************/
+
+.cm-em, .markdown-preview-view em {
+  color: var(--base0D);
+}
+
+.cm-strong, .markdown-preview-view strong {
+  color: var(--base09);
+}
+
+/*************************
+ * Markdown links
+*************************/
+
+.cm-link, .markdown-preview-view a {
+  color: var(--base0C) !important;
+}
+
+.cm-formatting-link,.cm-url {
+  color: var(--base03) !important;
+}
+
+/*************************
+ * Quotes
+*************************/
+
+.cm-quote, .markdown-preview-view blockquote {
+  color: var(--base0D) !important;
+}
+
+/*************************
+ * Code blocks
+*************************/
+
+.HyperMD-codeblock, .markdown-preview-view pre {
+  color: var(--base07) !important;
+  background-color: var(--base01) !important;
+}
+
+.cm-inline-code, .markdown-preview-view code {
+  color: var(--base07) !important;
+  background-color: var(--base01) !important;
+}
+
+/*************************
+ * Cursor
+*************************/
+
+.CodeMirror-cursors {
+  color: var(--base0B);
+  z-index: 5 !important /* fixes a bug where cursor is hidden in code blocks */
+}
+    '';
+  };
+  config.home.file.obsidian-highland = {
+      target = "${sensitive.lib.obsidianVault}/.obsidian/snippets/highland.css";
+      text = ''
+/*- source+live preview mode font -*/
+.markdown-source-view.mod-cm6 .cm-scroller {
+    font-family: 'Courier Prime Sans';
+    font-size: 22px;
+}
+
+/*- reading mode font -*/
+.markdown-preview-view {
+    font-family: 'Bookerly';
+    font-size: 22px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.cm-scroller {
+    font-family: 'Bookerly';
+    font-size: 22px;
+}
+
+/*- Remove spaces and add indents between paragraphs in reading mode -*/
+.markdown-preview-view p {
+    margin-top: 0em;
+    margin-bottom: 0em;
+    text-indent: 1em;
+}
+      '';
+  };
+  config.home.file.obsidian-base16 = {
     target = "${sensitive.lib.obsidianVault}/.obsidian/snippets/base16.css";
     text = ''
         .theme-dark {
@@ -71,7 +288,78 @@
           --code-string: #${colorScheme.colors.base0B};
           --code-tag: #${colorScheme.colors.base0A};
           --code-value: #${colorScheme.colors.base09};
+          --status-bar-border-width: 0;
       }
+
+.mod-header {
+  display: none;
+}
+.obsidian-banner-wrapper:has(img:not([src])) {
+  display: none;
+}
+
+/* Dashboard */
+/* Updated 2023-08-07 */
+
+.dashboard {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    padding-top: 20px !important;
+}
+
+.dashboard .markdown-preview-section {
+    max-width: 100%;
+}
+
+/* Title at top of the document */
+.dashboard .markdown-preview-section .title {
+    top: 60px;
+    position: absolute;
+    font-size: 26pt !important;
+    font-weight: bolder;
+    letter-spacing: 8px;
+}
+
+.dashboard h1 {
+    border-bottom-style: dotted !important;
+    border-width: 1px !important;
+    padding-bottom: 3px !important;
+}
+
+
+/* Get rid of the parent bullet */
+.dashboard div.markdown-preview-section > div > ul > li > div.list-bullet {
+    display: none !important;
+}
+
+/* Remove the indentation guide lines */
+.dashboard.markdown-rendered.show-indentation-guide li > ul::before,
+.dashboard.markdown-rendered.show-indentation-guide li > ol::before {
+  display: none;
+}
+
+div.markdown-preview-section > div > ul.has-list-bullet > li {
+    padding-left: 0p !important;
+}
+
+.dashboard div > ul {
+    list-style: none;
+    display: flex;
+    column-gap: 50px;
+    flex-flow: row wrap;
+}
+
+.dashboard div > ul > li {
+    min-width: 250px;
+    width: 15%;
+}
+
+/* Dataview support */
+.dashboard ul.dataview {
+    row-gap: 0px !important;
+    list-style-type: disc !important;
+}
+
 
     '';
   };

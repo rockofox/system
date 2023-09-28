@@ -1,8 +1,8 @@
 { pkgs, lib, nix-colors, nix-doom-emacs, sensitive, ... }:
 let
   override = "none";
-  font = "BlexMono Nerd Font";
-  colorscheme = "horizon-dark";
+  font = "CaskaydiaCove NF Mono";
+  colorscheme = "framer";
 in
 rec {
   colorScheme = nix-colors.colorschemes.${colorscheme};
@@ -189,10 +189,42 @@ rec {
             rev = "932a99851b5f2db8b58aa456e5d897e278c69574";
           }
         }/userChrome.css";
+        /* TODO: Base16 */
+        :root {
+          --toolbar-bgcolor: #${colorScheme.colors.base00} !important;
+          --toolbar-color: #${colorScheme.colors.base05} !important;
+          --toolbar-field-background-color: #${colorScheme.colors.base01} !important;
+          --toolbar-field-color: #${colorScheme.colors.base05} !important;
+          --input-bgcolor: #${colorScheme.colors.base01} !important;
+          --input-color: #${colorScheme.colors.base05} !important;
+        }
       '';
       userContent = ''
         /* Hide scrollbar in FF Quantum */
         *{scrollbar-width:none !important}
+
+        @-moz-document url(about:home), url(about:newtab) {
+          body {
+            --newtab-background-color: ${colorScheme.colors.base00};
+            --newtab-element-hover-color: ${colorScheme.colors.base01};
+            --newtab-icon-primary-color: ${colorScheme.colors.base04};
+            --newtab-search-border-color: ${colorScheme.colors.base01};
+            --newtab-search-dropdown-color: ${colorScheme.colors.base00};
+            --newtab-search-dropdown-header-color: ${colorScheme.colors.base00};
+            --newtab-search-icon-color: ${colorScheme.colors.base04};
+            --newtab-section-header-text-color: ${colorScheme.colors.base05};
+            --newtab-snippets-background-color: ${colorScheme.colors.base01};
+            --newtab-text-primary-color: ${colorScheme.colors.base05};
+            --newtab-textbox-background-color: ${colorScheme.colors.base01};
+            --newtab-textbox-border: ${colorScheme.colors.base01};
+            --newtab-topsites-background-color: ${colorScheme.colors.base04};
+            --newtab-topsites-label-color: ${colorScheme.colors.base05};
+            --darkreader-neutral-background: #${colorScheme.colors.base00} !important;
+            --darkreader-neutral-text: #${colorScheme.colors.base05} !important;
+            --darkreader-selection-background: #${colorScheme.colors.base01} !important;
+            --darkreader-selection-text: #${colorScheme.colors.base05} !important;
+          }
+        }
       '';
       settings = {
         # enable chrome/* customizations
@@ -269,6 +301,7 @@ rec {
     (import ./sketchybar.nix {
       inherit colorScheme;
       inherit font;
+      inherit pkgs;
     })
     ./yabai.nix
     ./tmux.nix

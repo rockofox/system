@@ -8,9 +8,11 @@ command W w
 vnoremap < <gv
 vnoremap > >gv
 
-map <leader>ss :mksession! ~/vim_session <cr> " Quick write session
-map <leader>sl :source ~/vim_session <cr>     " And load session
+" map <leader>Ss :mksession! ~/vim_session <cr> " Quick write session
+" map <leader>Sl :source ~/vim_session <cr>     " And load session
 
+map <F2> :mksession! ~/vim_session <cr> " Quick write session
+map <F3> :source ~/vim_session <cr>     " And load session
 augroup kitty_mp
     autocmd!
     au VimLeave * :silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=4

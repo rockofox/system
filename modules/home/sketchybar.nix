@@ -1,4 +1,4 @@
-{ colorScheme, font, ... }:
+{ colorScheme, font, pkgs, ... }:
 {
   home.file.sketchybar = {
     executable = true;
@@ -48,7 +48,7 @@
                                     background.corner_radius=0                 \
                                     background.height=20                       \
                                     background.color=0x7f${colorScheme.colors.base0E} \
-                                    background.drawing=off                     \
+                                    background.drawing=on                     \
                                     label.drawing=off                          \
                                     script="~/.config/sketchybar/plugins/space.sh"              \
                                     click_script="yabai -m space --focus $sid"
@@ -96,8 +96,17 @@
     executable = true;
     target = ".config/sketchybar/plugins/space.sh";
     text = ''
-     #!/bin/bash
-     sketchybar --set $NAME background.drawing=$SELECTED
+    #!/usr/bin/env sh
+    WIN=$(/opt/homebrew/bin/yabai -m query --spaces --space $SID | ${pkgs.jq}/bin/jq '.windows[0]')
+    HAS_WINDOWS_OR_IS_SELECTED="true"
+    if [ "$WIN" = "null" ] && [ "$SELECTED" = "false" ];then
+      HAS_WINDOWS_OR_IS_SELECTED="false"
+    fi
+    if [ "$SELECTED" = "true" ];then
+      sketchybar --set $NAME background.color=0xff${colorScheme.colors.base02} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
+    else
+      sketchybar --set $NAME background.color=0xff${colorScheme.colors.base00} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
+    fi
     '';
   };
 }

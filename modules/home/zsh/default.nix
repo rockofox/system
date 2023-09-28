@@ -7,9 +7,9 @@
     enableCompletion = true;
     # enableSyntaxHighlighting = true;
     shellAliases = {
-      ls = "exa --icons -L1";
-      ll = "exa --tree --icons --long -L1";
-      exa = "exa --tree --icons";
+      ls = "eza --icons -L1";
+      ll = "eza --tree --icons --long -L1";
+      eza = "eza --tree --icons";
       rebuild =
         "cd ${sensitive.lib.systemFlakePath} && git add -NA . && darwin-rebuild switch --flake .#darwin && cd -";
       ngit = "vim -c \"Neogit\"";

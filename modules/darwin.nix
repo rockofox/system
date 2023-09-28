@@ -13,7 +13,7 @@
     curl
     dotnet-sdk
     entr
-    exa
+    eza
     expect
     fd
     ffmpeg
@@ -32,8 +32,8 @@
     nixfmt
     nnn
     nodePackages.prettier
-    nodePackages.yo
-    nodePackages.generator-code
+    # nodePackages.yo
+    # nodePackages.generator-code
     pandoc
     pkg-config
     postgresql
@@ -62,7 +62,7 @@
   ];
   homebrew = {
     enable = true;
-    onActivation.cleanup = "zap";
+    # onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
     brews = [
@@ -75,6 +75,15 @@
       }
       "cava"
       "sketchybar"
+      # "qlcolorcode"
+      # "qlstephen"
+      # "qlmarkdown"
+      # "quicklook-json"
+      # "qlimagesize"
+      # "suspicious-package"
+      # "apparency"
+      # "quicklookase"
+      # "qlvideo"
     ];
     casks = [ "anaconda" "ilspy" "vimr" "background-music" ];
     taps = [
@@ -151,7 +160,9 @@
     "https://nix-community.cachix.org"
   ];
 
-  nix.package = pkgs.nix;
+  # nix.package = pkgs.nix;
+
+  nix.monitored.enable = true;
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina

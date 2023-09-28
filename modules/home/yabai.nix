@@ -167,10 +167,10 @@
       ctrl + shift - e : open ~
       alt - t : /opt/homebrew/bin/yabai -m space --layout $(/opt/homebrew/bin/yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
 
-      alt - y : /opt/homebrew/bin/yabai -m window --focus west || /opt/homebrew/bin/yabai -m display --focus west
-      alt - n : /opt/homebrew/bin/yabai -m window --focus south || /opt/homebrew/bin/yabai -m display --focus south
-      alt - i : /opt/homebrew/bin/yabai -m window --focus north || /opt/homebrew/bin/yabai -m display --focus north
-      alt - o : /opt/homebrew/bin/yabai -m window --focus east || /opt/homebrew/bin/yabai -m display --focus east
+      lalt - y : /opt/homebrew/bin/yabai -m window --focus west || /opt/homebrew/bin/yabai -m display --focus west
+      lalt - n : /opt/homebrew/bin/yabai -m window --focus south || /opt/homebrew/bin/yabai -m display --focus south
+      lalt - i : /opt/homebrew/bin/yabai -m window --focus north || /opt/homebrew/bin/yabai -m display --focus north
+      lalt - o : /opt/homebrew/bin/yabai -m window --focus east || /opt/homebrew/bin/yabai -m display --focus east
       alt + shift - y : /opt/homebrew/bin/yabai -m window --swap west || $(/opt/homebrew/bin/yabai -m window --display west; /opt/homebrew/bin/yabai -m display --focus west)
       alt + shift - n : /opt/homebrew/bin/yabai -m window --swap south || $(/opt/homebrew/bin/yabai -m window --display south; /opt/homebrew/bin/yabai -m display --focus south)
       alt + shift - i : /opt/homebrew/bin/yabai -m window --swap north || $(/opt/homebrew/bin/yabai -m window --display north; /opt/homebrew/bin/yabai -m display --focus north)
@@ -181,6 +181,41 @@
       alt + cmd - o : ~/.config/skhd/stack east
 
       alt + ctrl - e : /Applications/Neovide.app/Contents/MacOS/neovide --frame none --multigrid
+
+      # ctrl - 1 : /opt/homebrew/bin/yabai -m space --focus 1 || /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 1"
+      # ctrl - 2 : /opt/homebrew/bin/yabai -m space --focus 2 || /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 2"
+      # ctrl - 3 : /opt/homebrew/bin/yabai -m space --focus 3 || /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 3"
+      # ctrl - 4 : /opt/homebrew/bin/yabai -m space --focus 4 || /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 4"
+      # ctrl - 5 : /opt/homebrew/bin/yabai -m space --focus 4 || /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 5"
+      # ctrl - 6 : /opt/homebrew/bin/yabai -m space --focus 6 || /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 6"
+      # ctrl - 7 : /opt/homebrew/bin/yabai -m space --focus 7 || /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 7"
+      # ctrl - 8 : /opt/homebrew/bin/yabai -m space --focus 8 || /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 8"
+      # ctrl - 9 : /opt/homebrew/bin/yabai -m space --focus 9 || /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 9"
+      # ctrl - 0 : /opt/homebrew/bin/yabai -m space --focus 10 || /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 0"
+
+      # Sonoma bandaid
+      ctrl - 1 : /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 1"
+      ctrl - 2 : /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 2"
+      ctrl - 3 : /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 3"
+      ctrl - 4 : /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 4"
+      ctrl - 5 : /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 5"
+      ctrl - 6 : /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 6"
+      ctrl - 7 : /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 7"
+      ctrl - 8 : /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 8"
+      ctrl - 9 : /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 9"
+      ctrl - 0 : /opt/homebrew/bin/skhd -k "ctrl + alt + cmd - 0"
+
+
+      ctrl + shift - 1 : /opt/homebrew/bin/yabai -m window --space 1
+      ctrl + shift - 2 : /opt/homebrew/bin/yabai -m window --space 2
+      ctrl + shift - 3 : /opt/homebrew/bin/yabai -m window --space 3
+      ctrl + shift - 4 : /opt/homebrew/bin/yabai -m window --space 4
+      ctrl + shift - 5 : /opt/homebrew/bin/yabai -m window --space 5
+      ctrl + shift - 6 : /opt/homebrew/bin/yabai -m window --space 6
+      ctrl + shift - 7 : /opt/homebrew/bin/yabai -m window --space 7
+      ctrl + shift - 8 : /opt/homebrew/bin/yabai -m window --space 8
+      ctrl + shift - 9 : /opt/homebrew/bin/yabai -m window --space 9
+      ctrl + shift - 0 : /opt/homebrew/bin/yabai -m window --space 10
     '';
   };
 }
