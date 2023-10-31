@@ -145,6 +145,7 @@
   nix.extraOptions = ''
     extra-platforms = aarch64-darwin x86_64-darwin
     experimental-features = nix-command flakes
+    access-tokens = github.com=${sensitive.lib.gh-acess-token}
   '';
   nix.settings.auto-optimise-store = true;
 
