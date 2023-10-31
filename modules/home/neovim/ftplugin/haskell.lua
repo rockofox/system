@@ -1,32 +1,32 @@
--- require'lspconfig'.hls.setup{
--- 	on_attach = require'on-attach',
--- 	settings = {
--- 		haskell = {
--- 			formattingProvider = 'fourmolu'
--- 		},
--- 	},
--- }
-local ht = require('haskell-tools')
-local def_opts = { noremap = true, silent = true, }
-ht.start_or_attach {
-  hls = {
-    on_attach = function(client, bufnr)
-      require'on-attach'(client, bufnr)
-      local opts = vim.tbl_extend('keep', def_opts, { buffer = bufnr, })
-      -- haskell-language-server relies heavily on codeLenses,
-      -- so auto-refresh (see advanced configuration) is enabled by default
-      vim.keymap.set('n', '<space>cl', vim.lsp.codelens.run, opts)
-      vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
-      vim.keymap.set('n', '<space>ea', ht.lsp.buf_eval_all, opts)
-    end,
-  },
-  settings = {
-    haskell = {
-      formattingProvider = 'fourmolu'
-    },
-  },
+require'lspconfig'.hls.setup{
+	on_attach = require'on-attach',
+	settings = {
+		haskell = {
+			formattingProvider = 'fourmolu'
+		},
+	},
 }
-
+--
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- local ht = require('haskell-tools')
+-- local opts = { noremap = true, silent = true, buffer = bufnr }
+-- vim.g.haskell_tools = {
+--     hls = {
+--         on_attach = function(client, bufnr)
+--             -- haskell-language-server relies heavily on codeLenses,
+--             -- so auto-refresh (see advanced configuration) is enabled by default
+--             vim.keymap.set('n', '<Leader>cl', vim.lsp.codelens.run, opts)
+--             -- vim.keymap.set('n', '<Leader>hs', ht.hoogle.hoogle_signature, opts)
+--             -- default_on_attach(client, bufnr)  -- if defined, see nvim-lspconfig
+--         end,
+--         settings = {
+--             haskell = {
+--                 formattingProvider = 'fourmolu'
+--             },
+--         },
+--     },
+-- }
+--
 -- Suggested keymaps that do not depend on haskell-language-server:
 -- local bufnr = vim.api.nvim_get_current_buf()
 -- set buffer = bufnr in ftplugin/haskell.lua
@@ -36,10 +36,36 @@ ht.start_or_attach {
 -- vim.keymap.set('n', '<leader>rr', ht.repl.toggle, opts)
 -- Toggle a GHCi repl for the current buffer
 -- vim.keymap.set('n', '<leader>rf', function()
-  -- ht.repl.toggle(vim.api.nvim_buf_get_name(0))
+-- ht.repl.toggle(vim.api.nvim_buf_get_name(0))
 -- end, def_opts)
 -- vim.keymap.set('n', '<leader>rq', ht.repl.quit, opts)
 
 -- Detect nvim-dap launch configurations
 -- (requires nvim-dap and haskell-debug-adapter)
 -- ht.dap.discover_configurations(bufnr)
+
+
+-- ~/.config/nvim/after/ftplugin/haskell.lua
+--
+--
+-- local ht = require('haskell-tools')
+-- local def_opts = { noremap = true, silent = true, }
+-- ht.start_or_attach {
+--   hls = {
+--     on_attach = function(client, bufnr)
+--       require'on-attach'(client, bufnr)
+--       local opts = vim.tbl_extend('keep', def_opts, { buffer = bufnr, })
+--       -- haskell-language-server relies heavily on codeLenses,
+--       -- so auto-refresh (see advanced configuration) is enabled by default
+--       vim.keymap.set('n', '<space>cl', vim.lsp.codelens.run, opts)
+--       vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
+--       vim.keymap.set('n', '<space>ea', ht.lsp.buf_eval_all, opts)
+--     end,
+--     settings = {
+--         haskell = {
+--             formattingProvider = 'fourmolu'
+--         },
+--     },
+--   },
+--
+-- }

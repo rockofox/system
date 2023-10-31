@@ -28,6 +28,7 @@ nnoremap <C-o> <C-W>l
 nnoremap <S-Enter> o<Esc>
 
 set shellcmdflag=-ic
+set shortmess+=W
 
 if has('nvim')
   augroup vimrc_term

@@ -8,13 +8,13 @@ let
     lib.pipe ps [ (builtins.map loadPlugin) (builtins.concatStringsSep "\n") ];
   nix-colors-lib = nix-colors.lib-contrib { inherit pkgs; };
   # extra-plugins = import ./plugins.nix { inherit pkgs lib; };
-  haskell-tools-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
-    name = "haskell-tools-nvim";
+  muren-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    name = "muren-nvim";
     src = pkgs.fetchFromGitHub {
-      owner = "mrcjkb";
-      repo = "haskell-tools.nvim";
-      rev = "2c3cbdf386ecb03210b56962db96e601705c5118";
-      hash = "sha256-OCF5OOJztvaSYMR81OdBnrVPUsHAwhQh1jpiXf4XcNM=";
+      repo = "muren.nvim";
+      owner = "AckslD";
+      rev = "818c09097dba1322b2ca099e35f7471feccfef93";
+      hash = "sha256-KDXytsyvUQVZoKdr6ieoUE3e0v5NT2gf3M1d15aYVFs=";
     };
   };
   plugins = with pkgs.vimPlugins; [
@@ -22,12 +22,15 @@ let
     # extra-plugins.copilot-cmp
     copilot-lua
     copilot-cmp
+
     # cmp-tabnine
 
     nvim-treesitter.withAllGrammars
     nvim-ts-rainbow2
     nvim-treesitter-textobjects
     nvim-treesitter-refactor
+    muren-nvim
+    rainbow-delimiters-nvim
 
     # kotlin-vim
 
@@ -48,9 +51,9 @@ let
     lsp_extensions-nvim
     lsp_signature-nvim
     lspkind-nvim
+    lsp_lines-nvim
     nvim-lspconfig
     luasnip
-    nvim-lspconfig
     vim-nix
     haskell-tools-nvim
 
