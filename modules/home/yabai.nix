@@ -84,6 +84,8 @@
       /opt/homebrew/bin/yabai -m signal --add event=dock_did_restart action="sudo /opt/homebrew/bin/yabai --load-sa"
       sudo /opt/homebrew/bin/yabai --load-sa
 
+      launchctl unload -F /System/Library/LaunchAgents/com.apple.WindowManager.plist > /dev/null 2>&1 &
+
       echo "yabai configuration loaded.."
     '';
   };

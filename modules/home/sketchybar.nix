@@ -10,7 +10,7 @@
       sketchybar -m --bar height=25 \
                           blur_radius=0 \
                           position=top \
-                          padding_left=5 \
+                          padding_left=0 \
                           padding_right=5 \
                           margin=0 \
                           corner_radius=0 \
@@ -31,8 +31,8 @@
       ############## SPACE DEFAULTS ##############
       sketchybar -m --default label.padding_left=0 \
                               label.padding_right=0 \
-                              icon.padding_left=6 \
-                              icon.padding_right=6
+                              icon.padding_left=5 \
+                              icon.padding_right=5
 
       ############## PRIMARY DISPLAY SPACES ##############
       SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
@@ -46,8 +46,8 @@
                    --set space.$sid associated_space=$sid                      \
                                     icon=''${SPACE_ICONS[i]}                     \
                                     background.corner_radius=0                 \
-                                    background.height=20                       \
-                                    background.color=0x7f${colorScheme.colors.base0E} \
+                                    background.height=25                       \
+                                    background.color=0xff${colorScheme.colors.base0A} \
                                     background.drawing=on                     \
                                     label.drawing=off                          \
                                     script="~/.config/sketchybar/plugins/space.sh"              \
@@ -58,9 +58,9 @@
 
       ############## ITEM DEFAULTS ###############
       sketchybar -m --default label.padding_left=0 \
-                              icon.padding_right=3 \
-                              icon.padding_left=6 \
-                              label.padding_right=3
+                              icon.padding_right=0 \
+                              icon.padding_left=0 \
+                              label.padding_right=0
 
       ############## RIGHT ITEMS ##############
 
@@ -103,7 +103,7 @@
       HAS_WINDOWS_OR_IS_SELECTED="false"
     fi
     if [ "$SELECTED" = "true" ];then
-      sketchybar --set $NAME background.color=0xff${colorScheme.colors.base02} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
+      sketchybar --set $NAME background.color=0xff${colorScheme.colors.base08} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
     else
       sketchybar --set $NAME background.color=0xff${colorScheme.colors.base00} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
     fi
