@@ -2,9 +2,11 @@
   description = "Rocko's system";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    darwin.url = "github:LnL7/nix-darwin/master";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    darwin = {
+      url = "github:LnL7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,7 +46,7 @@
           modules = [
             ./modules/darwin.nix
             home-manager.darwinModules.home-manager
-            nix-monitored.darwinModules.default
+            # nix-monitored.darwinModules.default
             {
               nixpkgs.overlays = [
                 (self: super:
@@ -66,7 +68,7 @@
                     });
                   })
                 (import inputs.emacs-overlay)
-                # (import inputs.neovim-nightly-overlay)
+                # (inputs.neovim-nightly-overlay.overlay)
               ];
               nixpkgs.config.allowUnfree = true;
               home-manager.useGlobalPkgs = true;

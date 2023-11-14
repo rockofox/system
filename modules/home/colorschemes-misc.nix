@@ -1,5 +1,4 @@
-{ pkgs, colorScheme, font, sensitive, ... }:
-{
+{ pkgs, colorScheme, font, sensitive, ... }: {
   config.programs.firefox.profiles.default.userChrome = ''
     :root {
         --toolbar-bgcolor: #${colorScheme.colors.base01};
@@ -16,351 +15,354 @@
   config.home.file.obsidian-base16ng = {
     target = "${sensitive.lib.obsidianVault}/.obsidian/snippets/base16ng.css";
     text = ''
-        
-:root {
-  --base00: #${colorScheme.colors.base00};
-  --base01: #${colorScheme.colors.base01};
-  --base02: #${colorScheme.colors.base02};
-  --base03: #${colorScheme.colors.base03};
-  --base04: #${colorScheme.colors.base04};
-  --base05: #${colorScheme.colors.base05};
-  --base06: #${colorScheme.colors.base06};
-  --base07: #${colorScheme.colors.base07};
-  --base08: #${colorScheme.colors.base08};
-  --base09: #${colorScheme.colors.base09};
-  --base0A: #${colorScheme.colors.base0A};
-  --base0B: #${colorScheme.colors.base0B};
-  --base0C: #${colorScheme.colors.base0C};
-  --base0D: #${colorScheme.colors.base0D};
-  --base0E: #${colorScheme.colors.base0E};
-  --base0F: #${colorScheme.colors.base0F};
-}
 
-/*************************
- * Font selection
-*************************/
+      :root {
+        --base00: #${colorScheme.colors.base00};
+        --base01: #${colorScheme.colors.base01};
+        --base02: #${colorScheme.colors.base02};
+        --base03: #${colorScheme.colors.base03};
+        --base04: #${colorScheme.colors.base04};
+        --base05: #${colorScheme.colors.base05};
+        --base06: #${colorScheme.colors.base06};
+        --base07: #${colorScheme.colors.base07};
+        --base08: #${colorScheme.colors.base08};
+        --base09: #${colorScheme.colors.base09};
+        --base0A: #${colorScheme.colors.base0A};
+        --base0B: #${colorScheme.colors.base0B};
+        --base0C: #${colorScheme.colors.base0C};
+        --base0D: #${colorScheme.colors.base0D};
+        --base0E: #${colorScheme.colors.base0E};
+        --base0F: #${colorScheme.colors.base0F};
+      }
 
-.workspace {
-  font-family: var(--font-family-editor);
-}
+      /*************************
+      * Font selection
+      *************************/
 
-.markdown-preview-view {
-  font-family: var(--font-family-preview) !important;
-}
+      .workspace {
+        font-family: var(--font-family-editor);
+      }
 
-/*************************
- * workspace
-*************************/
+      .markdown-preview-view {
+        font-family: var(--font-family-preview) !important;
+      }
 
-.workspace {
-  color: var(--base06) !important;
-  background-color: var(--base00) !important;
-}
+      /*************************
+      * workspace
+      *************************/
 
-.workspace-tabs {
-  color: var(--base06) !important;
-  background-color: var(--base00) !important;
-}
+      .workspace {
+        color: var(--base06) !important;
+        background-color: var(--base00) !important;
+      }
 
-.workspace-tab-header {
-  color: var(--base06) !important;
-  background-color: var(--base00) !important;
-}
+      .workspace-tabs {
+        color: var(--base06) !important;
+        background-color: var(--base00) !important;
+      }
 
-.workspace-tab-header-inner {
-  color: var(--base02) !important;
-}
+      .workspace-tab-header {
+        color: var(--base06) !important;
+        background-color: var(--base00) !important;
+      }
 
-.workspace-leaf {
-  color: var(--base06) !important;
-  background-color: var(--base00) !important;
-}
+      .workspace-tab-header-inner {
+        color: var(--base02) !important;
+      }
 
-/*************************
- * View header
-*************************/
+      .workspace-leaf {
+        color: var(--base06) !important;
+        background-color: var(--base00) !important;
+      }
 
-.view-header {
-  background-color: var(--base00) !important;
-  color: var(--base06) !important;
-  border-bottom: 1px solid var(--base01);
-}
+      /*************************
+      * View header
+      *************************/
 
-.view-header-title {
-  color: var(--base06) !important;
-}
+      .view-header {
+        background-color: var(--base00) !important;
+        color: var(--base06) !important;
+        border-bottom: 1px solid var(--base01);
+      }
 
-.view-header-title-container:after {
-  background: none !important;
-}
+      .view-header-title {
+        color: var(--base06) !important;
+      }
 
-.view-content {
-  background-color: var(--base00) !important;
-  color: var(--base06) !important;
-}
+      .view-header-title-container:after {
+        background: none !important;
+      }
 
-.view-action {
-  color: var(--base06) !important;
-}
+      .view-content {
+        background-color: var(--base00) !important;
+        color: var(--base06) !important;
+      }
 
-/*************************
- * Nav folder
-*************************/
+      .view-action {
+        color: var(--base06) !important;
+      }
 
-.nav-folder-title, .nav-file-title {
-  background-color: var(--base00) !important;
-  color: var(--base06) !important;
-}
+      /*************************
+      * Nav folder
+      *************************/
 
-.nav-action-button {
-  color: var(--base06) !important;
-}
+      .nav-folder-title, .nav-file-title {
+        background-color: var(--base00) !important;
+        color: var(--base06) !important;
+      }
 
-/*************************
- * Markdown headers
-*************************/
+      .nav-action-button {
+        color: var(--base06) !important;
+      }
 
-.cm-header-1, .markdown-preview-view h1 {
-  color: var(--base0A);
-}
+      /*************************
+      * Markdown headers
+      *************************/
 
-.cm-header-2, .markdown-preview-view h2 {
-  color: var(--base0B);
-}
+      .cm-header-1, .markdown-preview-view h1 {
+        color: var(--base0A);
+      }
 
-.cm-header-3, .markdown-preview-view h3 {
-  color: var(--base0C);
-}
+      .cm-header-2, .markdown-preview-view h2 {
+        color: var(--base0B);
+      }
 
-.cm-header-4, .markdown-preview-view h4 {
-  color: var(--base0D);
-}
+      .cm-header-3, .markdown-preview-view h3 {
+        color: var(--base0C);
+      }
 
-.cm-header-5, .markdown-preview-view h5 {
-  color: var(--base0E);
-}
+      .cm-header-4, .markdown-preview-view h4 {
+        color: var(--base0D);
+      }
 
-.cm-header-6, .markdown-preview-view h6 {
-  color: var(--base0E);
-}
+      .cm-header-5, .markdown-preview-view h5 {
+        color: var(--base0E);
+      }
 
-/*************************
- * Markdown strong and emphasis
-*************************/
+      .cm-header-6, .markdown-preview-view h6 {
+        color: var(--base0E);
+      }
 
-.cm-em, .markdown-preview-view em {
-  color: var(--base0D);
-}
+      /*************************
+      * Markdown strong and emphasis
+      *************************/
 
-.cm-strong, .markdown-preview-view strong {
-  color: var(--base09);
-}
+      .cm-em, .markdown-preview-view em {
+        color: var(--base0D);
+      }
 
-/*************************
- * Markdown links
-*************************/
+      .cm-strong, .markdown-preview-view strong {
+        color: var(--base09);
+      }
 
-.cm-link, .markdown-preview-view a {
-  color: var(--base0C) !important;
-}
+      /*************************
+      * Markdown links
+      *************************/
 
-.cm-formatting-link,.cm-url {
-  color: var(--base03) !important;
-}
+      .cm-link, .markdown-preview-view a {
+        color: var(--base0C) !important;
+      }
 
-/*************************
- * Quotes
-*************************/
+      .cm-formatting-link,.cm-url {
+        color: var(--base03) !important;
+      }
 
-.cm-quote, .markdown-preview-view blockquote {
-  color: var(--base0D) !important;
-}
+      /*************************
+      * Quotes
+      *************************/
 
-/*************************
- * Code blocks
-*************************/
+      .cm-quote, .markdown-preview-view blockquote {
+        color: var(--base0D) !important;
+      }
 
-.HyperMD-codeblock, .markdown-preview-view pre {
-  color: var(--base07) !important;
-  background-color: var(--base01) !important;
-}
+      /*************************
+      * Code blocks
+      *************************/
 
-.cm-inline-code, .markdown-preview-view code {
-  color: var(--base07) !important;
-  background-color: var(--base01) !important;
-}
+      .HyperMD-codeblock, .markdown-preview-view pre {
+        color: var(--base07) !important;
+        background-color: var(--base01) !important;
+      }
 
-/*************************
- * Cursor
-*************************/
+      .cm-inline-code, .markdown-preview-view code {
+        color: var(--base07) !important;
+        background-color: var(--base01) !important;
+      }
 
-.CodeMirror-cursors {
-  color: var(--base0B);
-  z-index: 5 !important /* fixes a bug where cursor is hidden in code blocks */
-}
+      /*************************
+      * Cursor
+      *************************/
+
+      .CodeMirror-cursors {
+        color: var(--base0B);
+        z-index: 5 !important /* fixes a bug where cursor is hidden in code blocks */
+      }
     '';
   };
   config.home.file.obsidian-highland = {
-      target = "${sensitive.lib.obsidianVault}/.obsidian/snippets/highland.css";
-      text = ''
-/*- source+live preview mode font -*/
-.markdown-source-view.mod-cm6 .cm-scroller {
-    font-family: 'Courier Prime Sans';
-    font-size: 22px;
-}
+    target = "${sensitive.lib.obsidianVault}/.obsidian/snippets/highland.css";
+    text = ''
+      /*- source+live preview mode font -*/
+      .markdown-source-view.mod-cm6 .cm-scroller {
+        font-family: 'Courier Prime Sans';
+        font-size: 22px;
+      }
 
-/*- reading mode font -*/
-.markdown-preview-view {
-    font-family: 'Bookerly';
-    font-size: 22px;
-    text-align: justify;
-    text-justify: inter-word;
-}
+      /*- reading mode font -*/
+      .markdown-preview-view {
+        font-family: 'Bookerly';
+        font-size: 22px;
+        text-align: justify;
+        text-justify: inter-word;
+      }
 
-.cm-scroller {
-    font-family: 'Bookerly';
-    font-size: 22px;
-}
+      .cm-scroller {
+        font-family: 'Bookerly';
+        font-size: 22px;
+      }
 
-/*- Remove spaces and add indents between paragraphs in reading mode -*/
-.markdown-preview-view p {
-    margin-top: 0em;
-    margin-bottom: 0em;
-    text-indent: 1em;
-}
-      '';
+      /*- Remove spaces and add indents between paragraphs in reading mode -*/
+      .markdown-preview-view p {
+        margin-top: 0em;
+        margin-bottom: 0em;
+        text-indent: 1em;
+      }
+    '';
   };
   config.home.file.obsidian-base16 = {
     target = "${sensitive.lib.obsidianVault}/.obsidian/snippets/base16.css";
     text = ''
-        .theme-dark {
-          --background-primary: #${colorScheme.colors.base00};
-          --background-primary-alt: #${colorScheme.colors.base01};
-          --background-secondary: #${colorScheme.colors.base01};
-          --background-secondary-alt: #${colorScheme.colors.base01};
-          --background-accent: #000;
-          --background-modifier-border: #424958;
-          --background-modifier-form-field: rgba(0, 0, 0, 0.3);
-          --background-modifier-form-field-highlighted: rgba(0, 0, 0, 0.22);
-          --background-modifier-box-shadow: rgba(0, 0, 0, 0.3);
-          --background-modifier-success: #539126;
-          --background-modifier-error: #3d0000;
-          --background-modifier-error-rgb: 61, 0, 0;
-          --background-modifier-error-hover: #470000;
-          --background-modifier-cover: rgba(0, 0, 0, 0.6);
-          --text-accent: #${colorScheme.colors.base08};
-          --text-accent-hover: #${colorScheme.colors.base09};
-          --text-normal: #${colorScheme.colors.base05};
-          --text-muted: #${colorScheme.colors.base04};
-          --text-faint: #${colorScheme.colors.base04};
-          --text-error: #e16d76;
-          --text-error-hover: #c9626a;
-          --text-highlight-bg: rgba(255, 255, 0, 0.4);
-          --text-selection: rgba(0, 122, 255, 0.2);
-          --text-on-accent: #dcddde;
-          --interactive-normal: #20242b;
-          --interactive-hover: #353b47;
-          --interactive-accent: #4c78cc;
-          --interactive-accent-rgb: 76, 120, 204;
-          --interactive-accent-hover: #5082df;
-          --scrollbar-active-thumb-bg: rgba(255, 255, 255, 0.2);
-          --scrollbar-bg: rgba(255, 255, 255, 0.05);
-          --scrollbar-thumb-bg: rgba(255, 255, 255, 0.1);
-          --panel-border-color: #18191e;
-          --gray-1: #5C6370;
-          --gray-2: #abb2bf;
-          --red: #e06c75;
-          --orange: #d19a66;
-          --green: #98c379;
-          --aqua: #56b6c2;
-          --purple: #c678dd;
-          --blue: #61afef;
-          --yellow: #e5c07b;
-          --code-background: #${colorScheme.colors.base00};
-          --code-normal: #${colorScheme.colors.base05};
-          --code-comment: #${colorScheme.colors.base03};
-          --code-function: #${colorScheme.colors.base0D};
-          --code-important: #${colorScheme.colors.base06};
-          --code-keyword: #${colorScheme.colors.base0E};
-          --code-operator: #${colorScheme.colors.base05};
-          --code-property: #${colorScheme.colors.base0C};
-          --code-punctuation: #${colorScheme.colors.base05};
-          --code-string: #${colorScheme.colors.base0B};
-          --code-tag: #${colorScheme.colors.base0A};
-          --code-value: #${colorScheme.colors.base09};
-          --status-bar-border-width: 0;
+      .theme-dark {
+        --background-primary: #${colorScheme.colors.base00};
+        --background-primary-alt: #${colorScheme.colors.base01};
+        --background-secondary: #${colorScheme.colors.base01};
+        --background-secondary-alt: #${colorScheme.colors.base01};
+        --background-accent: #000;
+        --background-modifier-border: #424958;
+        --background-modifier-form-field: rgba(0, 0, 0, 0.3);
+        --background-modifier-form-field-highlighted: rgba(0, 0, 0, 0.22);
+        --background-modifier-box-shadow: rgba(0, 0, 0, 0.3);
+        --background-modifier-success: #539126;
+        --background-modifier-error: #3d0000;
+        --background-modifier-error-rgb: 61, 0, 0;
+        --background-modifier-error-hover: #470000;
+        --background-modifier-cover: rgba(0, 0, 0, 0.6);
+        --text-accent: #${colorScheme.colors.base08};
+        --text-accent-hover: #${colorScheme.colors.base09};
+        --text-normal: #${colorScheme.colors.base05};
+        --text-muted: #${colorScheme.colors.base04};
+        --text-faint: #${colorScheme.colors.base04};
+        --text-error: #e16d76;
+        --text-error-hover: #c9626a;
+        --text-highlight-bg: rgba(255, 255, 0, 0.4);
+        --text-selection: rgba(0, 122, 255, 0.2);
+        --text-on-accent: #dcddde;
+        --interactive-normal: #20242b;
+        --interactive-hover: #353b47;
+        --interactive-accent: #4c78cc;
+        --interactive-accent-rgb: 76, 120, 204;
+        --interactive-accent-hover: #5082df;
+        --scrollbar-active-thumb-bg: rgba(255, 255, 255, 0.2);
+        --scrollbar-bg: rgba(255, 255, 255, 0.05);
+        --scrollbar-thumb-bg: rgba(255, 255, 255, 0.1);
+        --panel-border-color: #18191e;
+        --gray-1: #5C6370;
+        --gray-2: #abb2bf;
+        --red: #e06c75;
+        --orange: #d19a66;
+        --green: #98c379;
+        --aqua: #56b6c2;
+        --purple: #c678dd;
+        --blue: #61afef;
+        --yellow: #e5c07b;
+        --code-background: #${colorScheme.colors.base00};
+        --code-normal: #${colorScheme.colors.base05};
+        --code-comment: #${colorScheme.colors.base03};
+        --code-function: #${colorScheme.colors.base0D};
+        --code-important: #${colorScheme.colors.base06};
+        --code-keyword: #${colorScheme.colors.base0E};
+        --code-operator: #${colorScheme.colors.base05};
+        --code-property: #${colorScheme.colors.base0C};
+        --code-punctuation: #${colorScheme.colors.base05};
+        --code-string: #${colorScheme.colors.base0B};
+        --code-tag: #${colorScheme.colors.base0A};
+        --code-value: #${colorScheme.colors.base09};
+        --status-bar-border-width: 0;
       }
 
-.mod-header {
-  display: none;
-}
-.obsidian-banner-wrapper:has(img:not([src])) {
-  display: none;
-}
+      .mod-header {
+        display: none;
+      }
+      .obsidian-banner-wrapper:has(img:not([src])) {
+        display: none;
+      }
+    '';
+  };
 
-/* Dashboard */
-/* Updated 2023-08-07 */
+  config.home.file.obisidan-dashboard = {
+    target = "${sensitive.lib.obsidianVault}/.obsidian/snippets/dashboard.css";
+    text = ''
+      /* Dashboard */
+      /* Updated 2023-08-07 */
 
-.dashboard {
-    padding-left: 25px !important;
-    padding-right: 25px !important;
-    padding-top: 20px !important;
-}
+      .dashboard {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        padding-top: 20px !important;
+      }
 
-.dashboard .markdown-preview-section {
-    max-width: 100%;
-}
+      .dashboard .markdown-preview-section {
+        max-width: 100%;
+      }
 
-/* Title at top of the document */
-.dashboard .markdown-preview-section .title {
-    top: 60px;
-    position: absolute;
-    font-size: 26pt !important;
-    font-weight: bolder;
-    letter-spacing: 8px;
-}
+      /* Title at top of the document */
+      .dashboard .markdown-preview-section .title {
+        top: 60px;
+        position: absolute;
+        font-size: 26pt !important;
+        font-weight: bolder;
+        letter-spacing: 8px;
+      }
 
-.dashboard h1 {
-    border-bottom-style: dotted !important;
-    border-width: 1px !important;
-    padding-bottom: 3px !important;
-}
-
-
-/* Get rid of the parent bullet */
-.dashboard div.markdown-preview-section > div > ul > li > div.list-bullet {
-    display: none !important;
-}
-
-/* Remove the indentation guide lines */
-.dashboard.markdown-rendered.show-indentation-guide li > ul::before,
-.dashboard.markdown-rendered.show-indentation-guide li > ol::before {
-  display: none;
-}
-
-div.markdown-preview-section > div > ul.has-list-bullet > li {
-    padding-left: 0p !important;
-}
-
-.dashboard div > ul {
-    list-style: none;
-    display: flex;
-    column-gap: 50px;
-    flex-flow: row wrap;
-}
-
-.dashboard div > ul > li {
-    min-width: 250px;
-    width: 15%;
-}
-
-/* Dataview support */
-.dashboard ul.dataview {
-    row-gap: 0px !important;
-    list-style-type: disc !important;
-}
+      .dashboard h1 {
+        border-bottom-style: dotted !important;
+        border-width: 1px !important;
+        padding-bottom: 3px !important;
+      }
 
 
+      /* Get rid of the parent bullet */
+      .dashboard div.markdown-preview-section > div > ul > li > div.list-bullet {
+        display: none !important;
+      }
+
+      /* Remove the indentation guide lines */
+      .dashboard.markdown-rendered.show-indentation-guide li > ul::before,
+      .dashboard.markdown-rendered.show-indentation-guide li > ol::before {
+        display: none;
+      }
+
+      div.markdown-preview-section > div > ul.has-list-bullet > li {
+        padding-left: 0p !important;
+      }
+
+      .dashboard div > ul {
+        list-style: none;
+        display: flex;
+        column-gap: 50px;
+        flex-flow: row wrap;
+      }
+
+      .dashboard div > ul > li {
+        min-width: 250px;
+        width: 15%;
+      }
+
+      /* Dataview support */
+      .dashboard ul.dataview {
+        row-gap: 0px !important;
+        list-style-type: disc !important;
+      }
     '';
   };
   # config.colorScheme.rose-pine-moon = {

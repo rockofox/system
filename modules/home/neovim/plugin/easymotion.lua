@@ -6,3 +6,5 @@ vim.cmd([[
   nmap s <Plug>(easymotion-s2)
   nmap t <Plug>(easymotion-t2)
 ]])
+
+vim.g.EasyMotion_verbose = 0

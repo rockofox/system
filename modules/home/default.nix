@@ -1,8 +1,8 @@
 { pkgs, lib, nix-colors, nix-doom-emacs, sensitive, ... }:
 let
   override = "none";
-  font = "CaskaydiaCove NF Mono";
-  colorscheme = "framer";
+  font = "Monaspace Neon";
+  colorscheme = "rose-pine";
 in
 rec {
   colorScheme = nix-colors.colorschemes.${colorscheme};
@@ -10,7 +10,8 @@ rec {
   stylix.autoEnable = false;
   stylix.targets.vscode.enable = true;
   stylix.targets.kitty.enable = true;
-  stylix.targets.vim.enable = true;
+  stylix.targets.vim.enable = false;
+  stylix.targets.helix.enable = true;
   programs.wezterm = {
     enable = true;
     extraConfig = ''
@@ -22,6 +23,7 @@ rec {
       config.hide_tab_bar_if_only_one_tab = true;
       config.tab_max_width = 200;
       config.window_decorations = "RESIZE";
+      config.harfbuzz_features = { 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'calt', 'dlig' }
       config.keys = {
         {
           key = "[",
@@ -273,6 +275,14 @@ rec {
         "extensions.pocket.enabled" = false;
         "browser.tabs.firefox-view" = false;
         "svg.context-properties.content.enabled" = true;
+      };
+    };
+  };
+  programs.helix = {
+    enable = true;
+    settings = {
+      editor = {
+        true-color = true;
       };
     };
   };

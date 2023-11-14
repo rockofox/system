@@ -17,9 +17,14 @@
       /opt/homebrew/bin/yabai -m config window_border                on
       /opt/homebrew/bin/yabai -m config window_border_width          4
       # /opt/homebrew/bin/yabai -m config window_border_radius         10
-      /opt/homebrew/bin/yabai -m config active_window_border_color   0xff${config.colorScheme.colors.base09}
-      /opt/homebrew/bin/yabai -m config normal_window_border_color   0xff${config.colorScheme.colors.base00}
-      /opt/homebrew/bin/yabai -m config insert_feedback_color        0xff${config.colorScheme.colors.base05}
+      # /opt/homebrew/bin/yabai -m config active_window_border_color   0xff${config.colorScheme.colors.base09}
+      # /opt/homebrew/bin/yabai -m config normal_window_border_color   0xff${config.colorScheme.colors.base00}
+      # /opt/homebrew/bin/yabai -m config insert_feedback_color        0xff${config.colorScheme.colors.base05}
+
+      borders active_color=0xff${config.colorScheme.colors.base09} inactive_color=0xff${config.colorScheme.colors.base00} width=5.0 style=s 2>/dev/null 1>&2 &
+
+
+
       /opt/homebrew/bin/yabai -m config split_ratio                  0.50
       /opt/homebrew/bin/yabai -m config auto_balance                 off
       /opt/homebrew/bin/yabai -m config mouse_modifier               ctrl
@@ -82,7 +87,7 @@
       # /opt/homebrew/bin/yabai -m signal --add event=window_created action='/opt/homebrew/bin/yabai -m query --windows --window $YABAI_WINDOW_ID | ${pkgs.jq} -er ".\"can-resize\" or .\"is-floating\"" || yabai -m window $YABAI_WINDOW_ID --toggle float'
 
       /opt/homebrew/bin/yabai -m signal --add event=dock_did_restart action="sudo /opt/homebrew/bin/yabai --load-sa"
-      sudo /opt/homebrew/bin/yabai --load-sa
+      # sudo /opt/homebrew/bin/yabai --load-sa
 
       launchctl unload -F /System/Library/LaunchAgents/com.apple.WindowManager.plist > /dev/null 2>&1 &
 

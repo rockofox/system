@@ -43,3 +43,5 @@ if has('nvim')
     autocmd TermOpen * tnoremap <buffer> <Esc> <C-\><C-n>
   augroup END
 endif
+
+let g:cursorhold_updatetime = 100

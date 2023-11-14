@@ -1,11 +1,11 @@
-require'lspconfig'.hls.setup{
-	on_attach = require'on-attach',
-	settings = {
-		haskell = {
-			formattingProvider = 'fourmolu'
-		},
-	},
-}
+-- require'lspconfig'.hls.setup{
+-- 	on_attach = require'on-attach',
+-- 	settings = {
+-- 		haskell = {
+-- 			formattingProvider = 'fourmolu'
+-- 		},
+-- 	},
+-- }
 --
 -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- local ht = require('haskell-tools')

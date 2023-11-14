@@ -5,6 +5,8 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    # nodePackages.generator-code
+    # nodePackages.yo
     bat
     bottom
     cargo
@@ -13,27 +15,30 @@
     curl
     dotnet-sdk
     entr
-    eza
     expect
+    eza
     fd
     ffmpeg
     fortune
     fx
     fzf
     gh
+    gh-markdown-preview
     ghc
     gitui
     gperftools
     gradle
     htop
+    hyperfine
     jq
     moreutils
+    mosh
     neofetch
     nixfmt
+    nixpkgs-fmt
     nnn
     nodePackages.prettier
-    # nodePackages.yo
-    # nodePackages.generator-code
+    onefetch
     pandoc
     pkg-config
     postgresql
@@ -51,14 +56,7 @@
     wasmtime
     wget
     xh
-    helix
-    hyperfine
-
-    nixpkgs-fmt
-
-    # dosh
-    mosh
-    # dosh
+    yt-dlp
   ];
   homebrew = {
     enable = true;
@@ -67,11 +65,15 @@
     onActivation.upgrade = true;
     brews = [
       {
-        name = "rockofox/formulae/yabai";
+        name = "FelixKratz/formulae/fyabai";
         args = [ "HEAD" ];
       }
       {
         name = "skhd";
+      }
+      {
+        name = "FelixKratz/formulae/borders";
+        args = [ "HEAD" ];
       }
       "cava"
       "sketchybar"
@@ -90,7 +92,7 @@
       "homebrew/bundle"
       "homebrew/services"
       # "koekeishiya/formulae"
-      "rockofox/formulae"
+      # "rockofox/formulae"
       "osx-cross/arm"
       "osx-cross/avr"
       "dimentium/autoraise"
@@ -163,7 +165,7 @@
 
   # nix.package = pkgs.nix;
 
-  nix.monitored.enable = true;
+  # nix.monitored.enable = true;
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
