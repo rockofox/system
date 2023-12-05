@@ -2,7 +2,7 @@
 let
   nix-colors-lib = nix-colors.lib-contrib { inherit pkgs; };
   # extra-plugins = import ./plugins.nix { inherit pkgs lib; };
-  muren-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+  muren-nvim = pkgs.vimUtils.buildVimPlugin {
     name = "muren-nvim";
     src = pkgs.fetchFromGitHub {
       repo = "muren.nvim";

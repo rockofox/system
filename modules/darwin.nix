@@ -102,6 +102,8 @@
   };
   # fonts.fonts = with pkgs; [ nerdfonts julia-mono lato jetbrains-mono ];
   # fonts.fontDir.enable = true;
+  fonts.fonts = [];
+  fonts.fontDir.enable = false;
 
   system = {
     defaults = {

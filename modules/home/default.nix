@@ -23,7 +23,7 @@ rec {
       config.hide_tab_bar_if_only_one_tab = true;
       config.tab_max_width = 200;
       config.window_decorations = "RESIZE";
-      config.harfbuzz_features = { 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'calt', 'dlig' }
+      config.harfbuzz_features = { 'ss01', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'calt', 'dlig' }
       config.keys = {
         {
           key = "[",
@@ -305,7 +305,7 @@ rec {
     #   inherit lib;
     # })
     ./git.nix
-    ./kakoune.nix
+    # ./kakoune.nix
     ./neovim
     ./obsidian.nix
     (import ./sketchybar.nix {
