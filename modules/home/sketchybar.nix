@@ -14,7 +14,7 @@
                           padding_right=5 \
                           margin=0 \
                           corner_radius=0 \
-                          color=0x7f${colorScheme.colors.base00} \
+                          color=0x7f${colorScheme.palette.base00} \
                           border_width=0 \
                           border_color=0xff2E3440
 
@@ -47,7 +47,7 @@
                                     icon=''${SPACE_ICONS[i]}                     \
                                     background.corner_radius=0                 \
                                     background.height=25                       \
-                                    background.color=0xff${colorScheme.colors.base0A} \
+                                    background.color=0xff${colorScheme.palette.base0A} \
                                     background.drawing=on                     \
                                     label.drawing=off                          \
                                     script="~/.config/sketchybar/plugins/space.sh"              \
@@ -67,7 +67,7 @@
       sketchybar -m --add item clock right \
                     --set clock update_freq=1 \
                                 script="~/.config/sketchybar/plugins/clock.sh" \
-                                background.color=0x00${colorScheme.colors.base00} \
+                                background.color=0x00${colorScheme.palette.base00} \
                                 background.height=20 \
                                 border_width=12 \
                                 border_color=0xff2E3440
@@ -103,9 +103,9 @@
       HAS_WINDOWS_OR_IS_SELECTED="false"
     fi
     if [ "$SELECTED" = "true" ];then
-      sketchybar --set $NAME background.color=0xff${colorScheme.colors.base08} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
+      sketchybar --set $NAME background.color=0xff${colorScheme.palette.base08} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
     else
-      sketchybar --set $NAME background.color=0xff${colorScheme.colors.base00} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
+      sketchybar --set $NAME background.color=0xff${colorScheme.palette.base00} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
     fi
     '';
   };

@@ -1,8 +1,8 @@
 { pkgs, lib, nix-colors, nix-doom-emacs, sensitive, ... }:
 let
   override = "none";
-  font = "Monaspace Neon";
-  colorscheme = "rose-pine";
+  font = "Monaspace Neon Var";
+  colorscheme = "gruber";
 in
 rec {
   colorScheme = nix-colors.colorschemes.${colorscheme};
@@ -53,6 +53,13 @@ rec {
             act.SendKey { key = 'L', mods = 'CTRL' },
           },
         },
+      }
+
+      config.window_padding = {
+        left = 0,
+        right = 0,
+        top = 0,
+        bottom = 0,
       }
 
       return config
@@ -125,8 +132,8 @@ rec {
   programs.kitty.darwinLaunchOptions = [ "--single-instance" "--directory=~" ];
   programs.kitty.settings = {
     # background_opacity = "0.85";
-    foreground = "#${colorScheme.colors.base05}";
-    background = "#${colorScheme.colors.base00}";
+    foreground = "#${colorScheme.palette.base05}";
+    background = "#${colorScheme.palette.base00}";
     copy_on_select = true;
     cursor_blink_interval = 0;
     editor = "vim";
@@ -144,46 +151,252 @@ rec {
     confirm_os_window_close 0
     enable_audio_bell no
     macos_option_as_alt yes
-    hide_window_decorations titlebar-only
+    hide_window_decorations yes
     allow_remote_control yes
     listen_on unix:/tmp/mykitty
     enabled_layouts fat:bias=75
+    text_composition_strategy legacy
+    font_features    MonaspaceArgonVar-Bold         +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-BoldItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-ExtraBold  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-ExtraBoldItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-ExtraLightItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-Italic       +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-Light        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-LightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-Medium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-MediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideExtraBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideExtraBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideExtraLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideExtraLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideMedium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideMediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideRegular      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideSemiBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-SemiWideSemiBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideExtraBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideExtraBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideExtraLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideExtraLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideMedium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideMediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideRegular      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideSemiBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceArgonVar-WideSemiBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+
+    font_features    MonaspaceKyrptonVar-Bold         +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-BoldItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKyrptonVar-ExtraBold  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-ExtraBoldItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-ExtraLightItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-Italic       +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-Light        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-LightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-Medium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-MediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideExtraBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideExtraBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideExtraLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideExtraLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideMedium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideMediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideRegular      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideSemiBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-SemiWideSemiBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideExtraBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideExtraBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideExtraLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideExtraLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideMedium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideMediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideRegular      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideSemiBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceKryptonVar-WideSemiBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+
+    font_features    MonaspaceNeonVar-Bold         +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-BoldItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-ExtraBold  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-ExtraBoldItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-ExtraLightItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-Italic       +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-Light        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-LightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-Medium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-MediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideExtraBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideExtraBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideExtraLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideExtraLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideMedium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideMediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideRegular      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideSemiBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-SemiWideSemiBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideExtraBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideExtraBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideExtraLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideExtraLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideMedium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideMediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideRegular      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideSemiBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceNeonVar-WideSemiBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+
+    font_features    MonaspaceRadonVar-Bold         +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-BoldItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-ExtraBold  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-ExtraBoldItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-ExtraLightItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-Italic       +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-Light        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-LightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-Medium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-MediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideExtraBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideExtraBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideExtraLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideExtraLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideMedium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideMediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideRegular      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideSemiBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-SemiWideSemiBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideExtraBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideExtraBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideExtraLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideExtraLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideMedium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideMediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideRegular      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideSemiBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceRadonVar-WideSemiBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+
+    font_features    MonaspaceXenonVar-Bold         +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-BoldItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-ExtraBold  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-ExtraBoldItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-ExtraLightItalic  +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-Italic       +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-Light        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-LightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-Medium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-MediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideExtraBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideExtraBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideExtraLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideExtraLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideMedium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideMediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideRegular      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideSemiBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-SemiWideSemiBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideExtraBold        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideExtraBoldItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideExtraLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideExtraLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideLight        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideLightItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideMedium        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideMediumItalic        +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideRegular      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideSemiBold      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+    font_features    MonaspaceXenonVar-WideSemiBoldItalic      +ss01 +ss03 +ss04 +ss05 +ss06 +ss07 +calt
+
 
     modify_font                     strikethrough_position 120%
     modify_font                     strikethrough_thickness 250%
     modify_font                     underline_position 125%
     modify_font                     underline_thickness 3px
-    modify_font                     cell_height 105%
-  '';
-  programs.discocss = {
-    enable = true;
-    discordPackage = pkgs.discord.override { withVencord = true; };
-    discordAlias = false;
-    css = lib.mkDefault (lib.mkBefore ''
+    # modify_font                     cell_height 105%
+    '';
+    programs.discocss = {
+      enable = true;
+      discordPackage = pkgs.discord.override { withVencord = true; };
+      discordAlias = false;
+      css = lib.mkDefault (lib.mkBefore ''
       /* ${colorScheme.slug} */
       .theme-dark, .theme-light {
-        --background-primary:       #${colorScheme.colors.base00};
-        --background-secondary:     #${colorScheme.colors.base01};
-        --background-primary-alt:   #${colorScheme.colors.base02};
-        --background-secondary-alt: #${colorScheme.colors.base02};
-        --background-tertiary:      #${colorScheme.colors.base03};
-        }
-        div[class^=nowPlayingColumn] {
-          display: none !important;
-        }
-    '');
-  };
-
-  programs.firefox = {
-    enable = true;
-    package = pkgs.hello;
-    profiles.clean = {
-      isDefault = false;
-      id = 1;
+        --background-primary:       #${colorScheme.palette.base00};
+        --background-secondary:     #${colorScheme.palette.base01};
+        --background-primary-alt:   #${colorScheme.palette.base02};
+        --background-secondary-alt: #${colorScheme.palette.base02};
+        --background-tertiary:      #${colorScheme.palette.base03};
+      }
+      div[class^=nowPlayingColumn] {
+        display: none !important;
+      }
+      '');
     };
-    profiles.default = {
-      isDefault = true;
-      userChrome = ''
+
+    programs.firefox = {
+      enable = true;
+      package = pkgs.hello;
+      profiles.clean = {
+        isDefault = false;
+        id = 1;
+      };
+      profiles.default = {
+        isDefault = true;
+        userChrome = ''
         @import "${
           builtins.fetchGit {
             url = "https://github.com/rockofox/firefox-minima";
@@ -193,42 +406,42 @@ rec {
         }/userChrome.css";
         /* TODO: Base16 */
         :root {
-          --toolbar-bgcolor: #${colorScheme.colors.base00} !important;
-          --toolbar-color: #${colorScheme.colors.base05} !important;
-          --toolbar-field-background-color: #${colorScheme.colors.base01} !important;
-          --toolbar-field-color: #${colorScheme.colors.base05} !important;
-          --input-bgcolor: #${colorScheme.colors.base01} !important;
-          --input-color: #${colorScheme.colors.base05} !important;
+          --toolbar-bgcolor: #${colorScheme.palette.base00} !important;
+          --toolbar-color: #${colorScheme.palette.base05} !important;
+          --toolbar-field-background-color: #${colorScheme.palette.base01} !important;
+          --toolbar-field-color: #${colorScheme.palette.base05} !important;
+          --input-bgcolor: #${colorScheme.palette.base01} !important;
+          --input-color: #${colorScheme.palette.base05} !important;
         }
-      '';
-      userContent = ''
+        '';
+        userContent = ''
         /* Hide scrollbar in FF Quantum */
         *{scrollbar-width:none !important}
 
         @-moz-document url(about:home), url(about:newtab) {
           body {
-            --newtab-background-color: ${colorScheme.colors.base00};
-            --newtab-element-hover-color: ${colorScheme.colors.base01};
-            --newtab-icon-primary-color: ${colorScheme.colors.base04};
-            --newtab-search-border-color: ${colorScheme.colors.base01};
-            --newtab-search-dropdown-color: ${colorScheme.colors.base00};
-            --newtab-search-dropdown-header-color: ${colorScheme.colors.base00};
-            --newtab-search-icon-color: ${colorScheme.colors.base04};
-            --newtab-section-header-text-color: ${colorScheme.colors.base05};
-            --newtab-snippets-background-color: ${colorScheme.colors.base01};
-            --newtab-text-primary-color: ${colorScheme.colors.base05};
-            --newtab-textbox-background-color: ${colorScheme.colors.base01};
-            --newtab-textbox-border: ${colorScheme.colors.base01};
-            --newtab-topsites-background-color: ${colorScheme.colors.base04};
-            --newtab-topsites-label-color: ${colorScheme.colors.base05};
-            --darkreader-neutral-background: #${colorScheme.colors.base00} !important;
-            --darkreader-neutral-text: #${colorScheme.colors.base05} !important;
-            --darkreader-selection-background: #${colorScheme.colors.base01} !important;
-            --darkreader-selection-text: #${colorScheme.colors.base05} !important;
+            --newtab-background-color: ${colorScheme.palette.base00};
+            --newtab-element-hover-color: ${colorScheme.palette.base01};
+            --newtab-icon-primary-color: ${colorScheme.palette.base04};
+            --newtab-search-border-color: ${colorScheme.palette.base01};
+            --newtab-search-dropdown-color: ${colorScheme.palette.base00};
+            --newtab-search-dropdown-header-color: ${colorScheme.palette.base00};
+            --newtab-search-icon-color: ${colorScheme.palette.base04};
+            --newtab-section-header-text-color: ${colorScheme.palette.base05};
+            --newtab-snippets-background-color: ${colorScheme.palette.base01};
+            --newtab-text-primary-color: ${colorScheme.palette.base05};
+            --newtab-textbox-background-color: ${colorScheme.palette.base01};
+            --newtab-textbox-border: ${colorScheme.palette.base01};
+            --newtab-topsites-background-color: ${colorScheme.palette.base04};
+            --newtab-topsites-label-color: ${colorScheme.palette.base05};
+            --darkreader-neutral-background: #${colorScheme.palette.base00} !important;
+            --darkreader-neutral-text: #${colorScheme.palette.base05} !important;
+            --darkreader-selection-background: #${colorScheme.palette.base01} !important;
+            --darkreader-selection-text: #${colorScheme.palette.base05} !important;
           }
         }
-      '';
-      settings = {
+        '';
+        settings = {
         # enable chrome/* customizations
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 

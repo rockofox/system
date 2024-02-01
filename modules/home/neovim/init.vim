@@ -3,6 +3,7 @@ filetype on
 filetype plugin on
 filetype indent on
 command W w
+command Wd w !diff % -
 
 " Keep selection after indent
 vnoremap < <gv

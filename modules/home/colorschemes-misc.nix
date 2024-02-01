@@ -1,13 +1,13 @@
 { pkgs, colorScheme, font, sensitive, ... }: {
   config.programs.firefox.profiles.default.userChrome = ''
     :root {
-        --toolbar-bgcolor: #${colorScheme.colors.base01};
-        color: #${colorScheme.colors.base05};
+        --toolbar-bgcolor: #${colorScheme.palette.base01};
+        color: #${colorScheme.palette.base05};
     }
 
     menubar, toolbar, nav-bar, #TabsToolbar > *{
-        background-color: #${colorScheme.colors.base00};
-        color: #${colorScheme.colors.base05};
+        background-color: #${colorScheme.palette.base00};
+        color: #${colorScheme.palette.base05};
     }
 
   '';
@@ -17,22 +17,22 @@
     text = ''
 
       :root {
-        --base00: #${colorScheme.colors.base00};
-        --base01: #${colorScheme.colors.base01};
-        --base02: #${colorScheme.colors.base02};
-        --base03: #${colorScheme.colors.base03};
-        --base04: #${colorScheme.colors.base04};
-        --base05: #${colorScheme.colors.base05};
-        --base06: #${colorScheme.colors.base06};
-        --base07: #${colorScheme.colors.base07};
-        --base08: #${colorScheme.colors.base08};
-        --base09: #${colorScheme.colors.base09};
-        --base0A: #${colorScheme.colors.base0A};
-        --base0B: #${colorScheme.colors.base0B};
-        --base0C: #${colorScheme.colors.base0C};
-        --base0D: #${colorScheme.colors.base0D};
-        --base0E: #${colorScheme.colors.base0E};
-        --base0F: #${colorScheme.colors.base0F};
+        --base00: #${colorScheme.palette.base00};
+        --base01: #${colorScheme.palette.base01};
+        --base02: #${colorScheme.palette.base02};
+        --base03: #${colorScheme.palette.base03};
+        --base04: #${colorScheme.palette.base04};
+        --base05: #${colorScheme.palette.base05};
+        --base06: #${colorScheme.palette.base06};
+        --base07: #${colorScheme.palette.base07};
+        --base08: #${colorScheme.palette.base08};
+        --base09: #${colorScheme.palette.base09};
+        --base0A: #${colorScheme.palette.base0A};
+        --base0B: #${colorScheme.palette.base0B};
+        --base0C: #${colorScheme.palette.base0C};
+        --base0D: #${colorScheme.palette.base0D};
+        --base0E: #${colorScheme.palette.base0E};
+        --base0F: #${colorScheme.palette.base0F};
       }
 
       /*************************
@@ -233,10 +233,10 @@
     target = "${sensitive.lib.obsidianVault}/.obsidian/snippets/base16.css";
     text = ''
       .theme-dark {
-        --background-primary: #${colorScheme.colors.base00};
-        --background-primary-alt: #${colorScheme.colors.base01};
-        --background-secondary: #${colorScheme.colors.base01};
-        --background-secondary-alt: #${colorScheme.colors.base01};
+        --background-primary: #${colorScheme.palette.base00};
+        --background-primary-alt: #${colorScheme.palette.base01};
+        --background-secondary: #${colorScheme.palette.base01};
+        --background-secondary-alt: #${colorScheme.palette.base01};
         --background-accent: #000;
         --background-modifier-border: #424958;
         --background-modifier-form-field: rgba(0, 0, 0, 0.3);
@@ -247,11 +247,11 @@
         --background-modifier-error-rgb: 61, 0, 0;
         --background-modifier-error-hover: #470000;
         --background-modifier-cover: rgba(0, 0, 0, 0.6);
-        --text-accent: #${colorScheme.colors.base08};
-        --text-accent-hover: #${colorScheme.colors.base09};
-        --text-normal: #${colorScheme.colors.base05};
-        --text-muted: #${colorScheme.colors.base04};
-        --text-faint: #${colorScheme.colors.base04};
+        --text-accent: #${colorScheme.palette.base08};
+        --text-accent-hover: #${colorScheme.palette.base09};
+        --text-normal: #${colorScheme.palette.base05};
+        --text-muted: #${colorScheme.palette.base04};
+        --text-faint: #${colorScheme.palette.base04};
         --text-error: #e16d76;
         --text-error-hover: #c9626a;
         --text-highlight-bg: rgba(255, 255, 0, 0.4);
@@ -275,18 +275,18 @@
         --purple: #c678dd;
         --blue: #61afef;
         --yellow: #e5c07b;
-        --code-background: #${colorScheme.colors.base00};
-        --code-normal: #${colorScheme.colors.base05};
-        --code-comment: #${colorScheme.colors.base03};
-        --code-function: #${colorScheme.colors.base0D};
-        --code-important: #${colorScheme.colors.base06};
-        --code-keyword: #${colorScheme.colors.base0E};
-        --code-operator: #${colorScheme.colors.base05};
-        --code-property: #${colorScheme.colors.base0C};
-        --code-punctuation: #${colorScheme.colors.base05};
-        --code-string: #${colorScheme.colors.base0B};
-        --code-tag: #${colorScheme.colors.base0A};
-        --code-value: #${colorScheme.colors.base09};
+        --code-background: #${colorScheme.palette.base00};
+        --code-normal: #${colorScheme.palette.base05};
+        --code-comment: #${colorScheme.palette.base03};
+        --code-function: #${colorScheme.palette.base0D};
+        --code-important: #${colorScheme.palette.base06};
+        --code-keyword: #${colorScheme.palette.base0E};
+        --code-operator: #${colorScheme.palette.base05};
+        --code-property: #${colorScheme.palette.base0C};
+        --code-punctuation: #${colorScheme.palette.base05};
+        --code-string: #${colorScheme.palette.base0B};
+        --code-tag: #${colorScheme.palette.base0A};
+        --code-value: #${colorScheme.palette.base09};
         --status-bar-border-width: 0;
       }
 

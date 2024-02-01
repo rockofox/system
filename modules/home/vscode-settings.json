@@ -396,5 +396,6 @@
         "editorGhostText.foreground": "#68696f",
         "tab.activeBorder": "#a6e3a1",
         "tab.border": "#262336"
-    }
+    },
+    "workbench.activityBar.location": "top"
 }

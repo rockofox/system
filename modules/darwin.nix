@@ -54,6 +54,7 @@
     tree
     unixtools.watch
     wasmtime
+    wakatime
     wget
     xh
     yt-dlp
@@ -71,10 +72,10 @@
       {
         name = "skhd";
       }
-      {
-        name = "FelixKratz/formulae/borders";
-        args = [ "HEAD" ];
-      }
+      # {
+      #   name = "FelixKratz/formulae/borders";
+      #   args = [ "HEAD" ];
+      # }
       "cava"
       "sketchybar"
       # "qlcolorcode"
@@ -141,8 +142,8 @@
 
   nix.gc = {
     automatic = true;
-    interval = { Weekday = 0; Hour = 0; Minute = 0; };
-    options = "--delete-older-than 30d";
+    interval.Day = 7; #Hours, minutes
+    options = "--delete-older-than 7d";
   };
 
 
@@ -160,7 +161,7 @@
   ];
   nix.settings.substituters = [
     #    "https://cache.iog.io"
-    "https://cache.zw3rk.com"
+    # "https://cache.zw3rk.com"
     "https://cache.nixos.org"
     "https://nix-community.cachix.org"
   ];

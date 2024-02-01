@@ -6,5 +6,10 @@ require("telescope").setup{
         ["<esc>"] = actions.close
       },
     },
+  },
+  pickers = {
+    colorscheme = {
+      enable_preview = true
+    }
   }
 }

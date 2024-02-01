@@ -17,13 +17,12 @@
       /opt/homebrew/bin/yabai -m config window_border                on
       /opt/homebrew/bin/yabai -m config window_border_width          4
       # /opt/homebrew/bin/yabai -m config window_border_radius         10
-      # /opt/homebrew/bin/yabai -m config active_window_border_color   0xff${config.colorScheme.colors.base09}
-      # /opt/homebrew/bin/yabai -m config normal_window_border_color   0xff${config.colorScheme.colors.base00}
-      # /opt/homebrew/bin/yabai -m config insert_feedback_color        0xff${config.colorScheme.colors.base05}
+      # /opt/homebrew/bin/yabai -m config active_window_border_color   0xff${config.colorScheme.palette.base09}
+      # /opt/homebrew/bin/yabai -m config normal_window_border_color   0xff${config.colorScheme.palette.base00}
+      # /opt/homebrew/bin/yabai -m config insert_feedback_color        0xff${config.colorScheme.palette.base05}
 
-      borders active_color=0xff${config.colorScheme.colors.base09} inactive_color=0xff${config.colorScheme.colors.base00} width=5.0 style=s 2>/dev/null 1>&2 &
-
-
+      # borders "active_color=gradient(top_right=0xff${config.colorScheme.palette.base08},bottom_left=0xff${config.colorScheme.palette.base0A})" inactive_color=0xff${config.colorScheme.palette.base00} width=5.0 style=s order=above 2>/dev/null 1>&2 &
+      borders active_color=0xff4c3c5e inactive_color=0xff${config.colorScheme.palette.base00} width=8.0 style=s order=above 2>/dev/null 1>&2 &
 
       /opt/homebrew/bin/yabai -m config split_ratio                  0.50
       /opt/homebrew/bin/yabai -m config auto_balance                 off
@@ -35,7 +34,7 @@
 
       # general space settings
       /opt/homebrew/bin/yabai -m config layout                       bsp
-      /opt/homebrew/bin/yabai -m config top_padding                  18
+      /opt/homebrew/bin/yabai -m config top_padding                  0
       /opt/homebrew/bin/yabai -m config bottom_padding               18
       /opt/homebrew/bin/yabai -m config left_padding                 18
       /opt/homebrew/bin/yabai -m config right_padding                18
@@ -169,7 +168,9 @@
       # toggle window split type
       alt - e : /opt/homebrew/bin/yabai -m window --toggle split
 
-      ctrl - return : wezterm
+      alt - t :  /opt/homebrew/bin/yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
+
+      ctrl - return : ${pkgs.kitty}/bin/kitty -1
       ctrl - q : open http://
       ctrl + shift - e : open ~
       alt - t : /opt/homebrew/bin/yabai -m space --layout $(/opt/homebrew/bin/yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')

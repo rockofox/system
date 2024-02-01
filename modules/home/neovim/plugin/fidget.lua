@@ -1,5 +1,6 @@
-require'fidget'.setup {
-	text = {
-		spinner = "dots",
-	},
-}
+-- It's buggy right now for some reason
+-- require'fidget'.setup {
+-- 	text = {
+-- 		spinner = "dots",
+-- 	},
+-- }

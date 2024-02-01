@@ -26,13 +26,13 @@
       source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
       source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
       export ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=#${
-        builtins.substring 0 3 config.colorScheme.colors.base08
+        builtins.substring 0 3 config.colorScheme.palette.base08
       }
       export ZSH_HIGHLIGHT_STYLES[precommand]=fg=#${
-        builtins.substring 0 3 config.colorScheme.colors.base08
+        builtins.substring 0 3 config.colorScheme.palette.base08
       }
       export ZSH_HIGHLIGHT_STYLES[arg0]=fg=#${
-        builtins.substring 0 3 config.colorScheme.colors.base08
+        builtins.substring 0 3 config.colorScheme.palette.base08
       }
       zvm_after_init_commands+=('source ${pkgs.fzf}/share/fzf/completion.zsh')
       zvm_after_init_commands+=('source ${pkgs.fzf}/share/fzf/key-bindings.zsh')

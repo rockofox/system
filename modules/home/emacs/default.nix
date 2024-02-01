@@ -57,22 +57,22 @@ in rec
           src = pkgs.writeText "base16-current-theme.el" ''
             (require 'base16-theme)
             (defvar base16-current-colors
-              '(:base00 "#${colorScheme.colors.base00}"
-                :base01 "#${colorScheme.colors.base01}"
-                :base02 "#${colorScheme.colors.base02}"
-                :base03 "#${colorScheme.colors.base03}"
-                :base04 "#${colorScheme.colors.base04}"
-                :base05 "#${colorScheme.colors.base05}"
-                :base06 "#${colorScheme.colors.base06}"
-                :base07 "#${colorScheme.colors.base07}"
-                :base08 "#${colorScheme.colors.base08}"
-                :base09 "#${colorScheme.colors.base09}"
-                :base0A "#${colorScheme.colors.base0A}"
-                :base0B "#${colorScheme.colors.base0B}"
-                :base0C "#${colorScheme.colors.base0C}"
-                :base0D "#${colorScheme.colors.base0D}"
-                :base0E "#${colorScheme.colors.base0E}"
-                :base0F "#${colorScheme.colors.base0F}")
+              '(:base00 "#${colorScheme.palette.base00}"
+                :base01 "#${colorScheme.palette.base01}"
+                :base02 "#${colorScheme.palette.base02}"
+                :base03 "#${colorScheme.palette.base03}"
+                :base04 "#${colorScheme.palette.base04}"
+                :base05 "#${colorScheme.palette.base05}"
+                :base06 "#${colorScheme.palette.base06}"
+                :base07 "#${colorScheme.palette.base07}"
+                :base08 "#${colorScheme.palette.base08}"
+                :base09 "#${colorScheme.palette.base09}"
+                :base0A "#${colorScheme.palette.base0A}"
+                :base0B "#${colorScheme.palette.base0B}"
+                :base0C "#${colorScheme.palette.base0C}"
+                :base0D "#${colorScheme.palette.base0D}"
+                :base0E "#${colorScheme.palette.base0E}"
+                :base0F "#${colorScheme.palette.base0F}")
             "All colors for ${colorScheme.slug} are defined here.")
             ;; Define the theme
             (deftheme base16-current)

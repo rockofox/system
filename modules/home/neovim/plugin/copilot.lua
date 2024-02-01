@@ -40,7 +40,7 @@ if hasCopilot then
             ["."] = false,
         },
     })
-    require("copilot_cmp").setup({
-        method = "getCompletionsCycling",
-    })
+    -- require("copilot_cmp").setup({
+    --     method = "getCompletionsCycling",
+    -- })
 end

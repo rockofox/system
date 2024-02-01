@@ -36,15 +36,17 @@ in {
     withPython3 = true;
     plugins = with pkgs.vimPlugins;
       [
+        neovim-ayu
+        vim-wakatime
+
         # extra-plugins.copilot-lua
         # extra-plugins.copilot-cmp
         copilot-lua
-        copilot-cmp
+        # copilot-cmp
 
         # cmp-tabnine
 
         nvim-treesitter.withAllGrammars
-        nvim-ts-rainbow2
         nvim-treesitter-textobjects
         nvim-treesitter-refactor
         muren-nvim
@@ -79,6 +81,7 @@ in {
         # other useful things :^)
         # barbar-nvim
         bufferline-nvim
+        vim-haskellConcealPlus
         comment-nvim
         direnv-vim
         vim-easymotion
