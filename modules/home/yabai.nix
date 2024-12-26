@@ -8,21 +8,17 @@
       /opt/homebrew/bin/yabai -m config focus_follows_mouse          autoraise
       /opt/homebrew/bin/yabai -m config window_origin_display        default
       /opt/homebrew/bin/yabai -m config window_placement             second_child
-      /opt/homebrew/bin/yabai -m config window_topmost               off
       /opt/homebrew/bin/yabai -m config window_shadow                off
       /opt/homebrew/bin/yabai -m config window_opacity               off
       /opt/homebrew/bin/yabai -m config window_opacity_duration      0.0
       /opt/homebrew/bin/yabai -m config active_window_opacity        1.0
       /opt/homebrew/bin/yabai -m config normal_window_opacity        0.90
-      /opt/homebrew/bin/yabai -m config window_border                on
-      /opt/homebrew/bin/yabai -m config window_border_width          4
       # /opt/homebrew/bin/yabai -m config window_border_radius         10
       # /opt/homebrew/bin/yabai -m config active_window_border_color   0xff${config.colorScheme.palette.base09}
       # /opt/homebrew/bin/yabai -m config normal_window_border_color   0xff${config.colorScheme.palette.base00}
       # /opt/homebrew/bin/yabai -m config insert_feedback_color        0xff${config.colorScheme.palette.base05}
 
       # borders "active_color=gradient(top_right=0xff${config.colorScheme.palette.base08},bottom_left=0xff${config.colorScheme.palette.base0A})" inactive_color=0xff${config.colorScheme.palette.base00} width=5.0 style=s order=above 2>/dev/null 1>&2 &
-      borders active_color=0xff4c3c5e inactive_color=0xff${config.colorScheme.palette.base00} width=8.0 style=s order=above 2>/dev/null 1>&2 &
 
       /opt/homebrew/bin/yabai -m config split_ratio                  0.50
       /opt/homebrew/bin/yabai -m config auto_balance                 off
@@ -65,6 +61,7 @@
       /opt/homebrew/bin/yabai -m rule --add app="^Spaceman$" manage=off
       /opt/homebrew/bin/yabai -m rule --add app="^Steam$" manage=off
       /opt/homebrew/bin/yabai -m rule --add app="Photoshop" manage=off
+      /opt/homebrew/bin/yabai -m rule --add app="^Ghidra$" manage=off
 
       /opt/homebrew/bin/yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
       /opt/homebrew/bin/yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
@@ -77,10 +74,8 @@
       /opt/homebrew/bin/yabai -m rule --add label="Software Update" title="Software Update" manage=off
       /opt/homebrew/bin/yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 
-      #/opt/homebrew/bin/yabai -m config --space 2 layout float
-      #/opt/homebrew/bin/yabai -m config --space 2  focus_follows_mouse off
-
-      /opt/homebrew/bin/yabai -m config window_border_blur off
+      # /opt/homebrew/bin/yabai -m config --space 2 layout float
+      # /opt/homebrew/bin/yabai -m config --space 2  focus_follows_mouse off
 
       # Broken for some reason
       # /opt/homebrew/bin/yabai -m signal --add event=window_created action='/opt/homebrew/bin/yabai -m query --windows --window $YABAI_WINDOW_ID | ${pkgs.jq} -er ".\"can-resize\" or .\"is-floating\"" || yabai -m window $YABAI_WINDOW_ID --toggle float'
@@ -88,7 +83,7 @@
       /opt/homebrew/bin/yabai -m signal --add event=dock_did_restart action="sudo /opt/homebrew/bin/yabai --load-sa"
       # sudo /opt/homebrew/bin/yabai --load-sa
 
-      launchctl unload -F /System/Library/LaunchAgents/com.apple.WindowManager.plist > /dev/null 2>&1 &
+      borders active_color=0xff${config.colorScheme.palette.base08} inactive_color=0xff${config.colorScheme.palette.base00} width=2.0 2>/dev/null 1>&2 &
 
       echo "yabai configuration loaded.."
     '';
@@ -170,7 +165,8 @@
 
       alt - t :  /opt/homebrew/bin/yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
 
-      ctrl - return : ${pkgs.kitty}/bin/kitty -1
+      # ctrl - return : ${pkgs.kitty}/bin/kitty -1 ~
+      ctrl - return : ${pkgs.wezterm}/bin/wezterm
       ctrl - q : open http://
       ctrl + shift - e : open ~
       alt - t : /opt/homebrew/bin/yabai -m space --layout $(/opt/homebrew/bin/yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
@@ -224,6 +220,8 @@
       ctrl + shift - 8 : /opt/homebrew/bin/yabai -m window --space 8
       ctrl + shift - 9 : /opt/homebrew/bin/yabai -m window --space 9
       ctrl + shift - 0 : /opt/homebrew/bin/yabai -m window --space 10
+
+      ctrl - t : /opt/homebrew/bin/yabai -m window --toggle float
     '';
   };
 }

@@ -19,10 +19,10 @@ in {
     tabnine
     nil
     kotlin-language-server
+    pyright
     nodePackages.typescript-language-server
-    nodePackages.vscode-html-languageserver-bin
-    nodePackages.vscode-css-languageserver-bin
-    haskell-language-server
+    nodePackages.vscode-langservers-extracted
+    # haskell-language-server
     haskellPackages.hoogle
   ];
   programs.neovim = {
@@ -36,6 +36,7 @@ in {
     withPython3 = true;
     plugins = with pkgs.vimPlugins;
       [
+        catppuccin-nvim
         neovim-ayu
         vim-wakatime
 
@@ -52,6 +53,8 @@ in {
         muren-nvim
         rainbow-delimiters-nvim
         markdown-preview-nvim
+
+        elixir-tools-nvim
 
         # kotlin-vim
 
@@ -93,7 +96,7 @@ in {
         incsearch-vim
         lualine-nvim
         nvim-autopairs
-        nvim-base16
+        base16-nvim
         nvim-highlight-colors
         nvim-surround
         # nvim-tree-lua
@@ -111,6 +114,7 @@ in {
         which-key-nvim
         rose-pine
         nvim-scrollbar
+        nvim-hlslens
         neotest
         neotest-haskell
         FixCursorHold-nvim

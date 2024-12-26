@@ -2,7 +2,7 @@ syntax on
 filetype on
 filetype plugin on
 filetype indent on
-command W w
+" command W w
 command Wd w !diff % -
 
 " Keep selection after indent
@@ -27,6 +27,8 @@ nnoremap <C-n> <C-W>j
 nnoremap <C-i> <C-W>k
 nnoremap <C-o> <C-W>l
 nnoremap <S-Enter> o<Esc>
+nnoremap \ <C-o>
+nnoremap \| <C-i>
 
 set shellcmdflag=-ic
 set shortmess+=W
@@ -46,3 +48,4 @@ if has('nvim')
 endif
 
 let g:cursorhold_updatetime = 100
+au BufNewFile,BufRead *.ejs set filetype=html

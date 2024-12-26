@@ -47,7 +47,7 @@
                                     icon=''${SPACE_ICONS[i]}                     \
                                     background.corner_radius=0                 \
                                     background.height=25                       \
-                                    background.color=0xff${colorScheme.palette.base0A} \
+                                    background.color=0x7f${colorScheme.palette.base0A} \
                                     background.drawing=on                     \
                                     label.drawing=off                          \
                                     script="~/.config/sketchybar/plugins/space.sh"              \
@@ -72,11 +72,17 @@
                                 border_width=12 \
                                 border_color=0xff2E3440
 
+      # Add event
       sketchybar -m --add event song_update com.apple.iTunes.playerInfo
-      sketchybar -m --add item music_info left \
-                    --set music_info script="~/.config/sketchybar/plugins/music.sh" \
-                                     click_script="~/.config/sketchybar/plugins/music_click.sh" \
-                    --subscribe music_info song_update
+
+      # Add Music Item
+      sketchybar -m --add item music right                         \
+          --set music script="~/.config/sketchybar/plugins/music.sh"  \
+          click_script="~/.config/sketchybar/plugins/music_click.sh"  \
+          label.padding_right=20                                   \
+          drawing=off                                              \
+          --subscribe music song_update
+
 
       ############## FINALIZING THE SETUP ##############
       sketchybar -m --update
@@ -90,23 +96,82 @@
     text = ''
       #!/bin/bash
       sketchybar --set $NAME label="$(date +"%H:%M")"
-      '';
+    '';
   };
   home.file.sketchybarSpace = {
     executable = true;
     target = ".config/sketchybar/plugins/space.sh";
     text = ''
-    #!/usr/bin/env sh
-    WIN=$(/opt/homebrew/bin/yabai -m query --spaces --space $SID | ${pkgs.jq}/bin/jq '.windows[0]')
-    HAS_WINDOWS_OR_IS_SELECTED="true"
-    if [ "$WIN" = "null" ] && [ "$SELECTED" = "false" ];then
-      HAS_WINDOWS_OR_IS_SELECTED="false"
-    fi
-    if [ "$SELECTED" = "true" ];then
-      sketchybar --set $NAME background.color=0xff${colorScheme.palette.base08} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
-    else
-      sketchybar --set $NAME background.color=0xff${colorScheme.palette.base00} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
-    fi
+      #!/usr/bin/env sh
+      WIN=$(/opt/homebrew/bin/yabai -m query --spaces --space $SID | ${pkgs.jq}/bin/jq '.windows[0]')
+      HAS_WINDOWS_OR_IS_SELECTED="true"
+      if [ "$WIN" = "null" ] && [ "$SELECTED" = "false" ];then
+        HAS_WINDOWS_OR_IS_SELECTED="false"
+      fi
+      if [ "$SELECTED" = "true" ];then
+        sketchybar --set $NAME background.color=0x7f${colorScheme.palette.base08} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
+      else
+        sketchybar --set $NAME background.color=0x7f${colorScheme.palette.base00} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
+      fi
+    '';
+  };
+  home.file.sketchybarMusic = {
+    executable = true;
+    target = ".config/sketchybar/plugins/music.sh";
+    text = ''
+      #!/usr/bin/env bash
+
+      # FIXME: Running an osascript on an application target opens that app
+      # This sleep is needed to try and ensure that theres enough time to
+      # quit the app before the next osascript command is called. I assume 
+      # com.apple.iTunes.playerInfo fires off an event when the player quits
+      # so it imediately runs before the process is killed
+      sleep 1
+
+      APP_STATE=$(pgrep -x Music)
+      if [[ ! $APP_STATE ]]; then 
+          sketchybar -m --set music drawing=off
+          exit 0
+      fi
+
+      PLAYER_STATE=$(osascript -e "tell application \"Music\" to set playerState to (get player state) as text")
+      if [[ $PLAYER_STATE == "stopped" ]]; then
+          sketchybar --set music drawing=off
+          exit 0
+      fi
+
+      title=$(osascript -e 'tell application "Music" to get name of current track')
+      artist=$(osascript -e 'tell application "Music" to get artist of current track')
+      # ALBUM=$(osascript -e 'tell application "Music" to get album of current track')
+      loved=$(osascript -l JavaScript -e "Application('Music').currentTrack().loved()")
+      if [[ $loved ]]; then
+          icon="􀊸"
+      fi
+
+      if [[ $PLAYER_STATE == "paused" ]]; then
+          icon="􀊘"
+      fi
+
+      if [[ $PLAYER_STATE == "playing" ]]; then
+          icon="􀊖"
+      fi
+
+      if [[ ''${#title} -gt 25 ]]; then
+      TITLE=$(printf "$(echo $title | cut -c 1-25)…")
+      fi
+
+      if [[ ''${#artist} -gt 25 ]]; then
+      ARTIST=$(printf "$(echo $artist | cut -c 1-25)…")
+      fi
+
+      # if [[ ''${#ALBUM} -gt 25 ]]; then
+      #   ALBUM=$(printf "$(echo $ALBUM | cut -c 1-12)…")
+      # fi
+
+      sketchybar -m --set music         \
+          --set music label="''${title} – ''${artist}"    \
+          --set music drawing=on
+
     '';
   };
 }

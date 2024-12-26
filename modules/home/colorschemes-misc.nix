@@ -36,7 +36,7 @@
       }
 
       /*************************
-      * Font selection
+       * Font selection
       *************************/
 
       .workspace {
@@ -48,7 +48,7 @@
       }
 
       /*************************
-      * workspace
+       * workspace
       *************************/
 
       .workspace {
@@ -76,7 +76,7 @@
       }
 
       /*************************
-      * View header
+       * View header
       *************************/
 
       .view-header {
@@ -103,7 +103,7 @@
       }
 
       /*************************
-      * Nav folder
+       * Nav folder
       *************************/
 
       .nav-folder-title, .nav-file-title {
@@ -116,7 +116,7 @@
       }
 
       /*************************
-      * Markdown headers
+       * Markdown headers
       *************************/
 
       .cm-header-1, .markdown-preview-view h1 {
@@ -144,7 +144,7 @@
       }
 
       /*************************
-      * Markdown strong and emphasis
+       * Markdown strong and emphasis
       *************************/
 
       .cm-em, .markdown-preview-view em {
@@ -156,7 +156,7 @@
       }
 
       /*************************
-      * Markdown links
+       * Markdown links
       *************************/
 
       .cm-link, .markdown-preview-view a {
@@ -168,7 +168,7 @@
       }
 
       /*************************
-      * Quotes
+       * Quotes
       *************************/
 
       .cm-quote, .markdown-preview-view blockquote {
@@ -176,7 +176,7 @@
       }
 
       /*************************
-      * Code blocks
+       * Code blocks
       *************************/
 
       .HyperMD-codeblock, .markdown-preview-view pre {
@@ -190,7 +190,7 @@
       }
 
       /*************************
-      * Cursor
+       * Cursor
       *************************/
 
       .CodeMirror-cursors {
@@ -238,7 +238,7 @@
         --background-secondary: #${colorScheme.palette.base01};
         --background-secondary-alt: #${colorScheme.palette.base01};
         --background-accent: #000;
-        --background-modifier-border: #424958;
+        --background-modifier-border: #${colorScheme.palette.base00};
         --background-modifier-form-field: rgba(0, 0, 0, 0.3);
         --background-modifier-form-field-highlighted: rgba(0, 0, 0, 0.22);
         --background-modifier-box-shadow: rgba(0, 0, 0, 0.3);
@@ -288,6 +288,10 @@
         --code-tag: #${colorScheme.palette.base0A};
         --code-value: #${colorScheme.palette.base09};
         --status-bar-border-width: 0;
+        --ribbon-background: #${colorScheme.palette.base00};
+        --titlebar-background: #${colorScheme.palette.base00};
+        --tab-container-background: #${colorScheme.palette.base00};
+        --bg1: #${colorScheme.palette.base00};
       }
 
       .mod-header {

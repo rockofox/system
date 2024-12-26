@@ -3,7 +3,7 @@
 {
   programs.tmux = {
     enable = true;
-    extraConfig = with config.colorScheme.colors; ''
+    extraConfig = with config.colorScheme.palette; ''
       # COLOUR (base16)
 
       # default statusbar colors

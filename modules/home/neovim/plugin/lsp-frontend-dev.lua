@@ -9,6 +9,6 @@ require'lspconfig'.cssls.setup{
 require'lspconfig'.angularls.setup{
 		on_attach = require'on-attach',
 }
-require'lspconfig'.tsserver.setup{
+require'lspconfig'.ts_ls.setup{
 		on_attach = require'on-attach',
 }

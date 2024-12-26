@@ -1,16 +1,24 @@
-{ pkgs, lib, nix-colors, nix-doom-emacs, sensitive, ... }:
+{ config, pkgs, lib, nix-colors, nix-doom-emacs, sensitive, ... }:
 let
-  override = "none";
-  font = "Monaspace Neon Var";
-  colorscheme = "gruber";
+  override = "dark";
+  # font = "MonaspiceNe Nerd Font Mono";
+  font = "JetBrainsMono Nerd Font";
+  colorscheme = "gruvbox-material-dark-hard";
 in
 rec {
-  colorScheme = nix-colors.colorschemes.${colorscheme};
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${colorscheme}.yaml";
+  # stylix.image = /${sensitive.lib.homeDirectory}/Downloads/Aid2Esai.jpg;
+  stylix.polarity = "dark";
   stylix.autoEnable = false;
+  colorScheme = {
+    palette = config.lib.stylix.colors;
+    slug = colorscheme;
+  };
+  stylix.enable = true;
   stylix.targets.vscode.enable = true;
   stylix.targets.kitty.enable = true;
-  stylix.targets.vim.enable = false;
+  stylix.targets.wezterm.enable = true;
+  stylix.targets.vim.enable = true;
   stylix.targets.helix.enable = true;
   programs.wezterm = {
     enable = true;
@@ -23,7 +31,9 @@ rec {
       config.hide_tab_bar_if_only_one_tab = true;
       config.tab_max_width = 200;
       config.window_decorations = "RESIZE";
-      config.harfbuzz_features = { 'ss01', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'calt', 'dlig' }
+      config.front_end = "WebGpu"
+      -- config.harfbuzz_features = { 'ss01', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'calt' }
+      -- config.freetype_load_flags = 'NO_HINTING'
       config.keys = {
         {
           key = "[",
@@ -55,17 +65,16 @@ rec {
         },
       }
 
-      config.window_padding = {
-        left = 0,
-        right = 0,
-        top = 0,
-        bottom = 0,
-      }
+      -- config.window_padding = {
+      --   left = 0,
+      --   right = 0,
+      --   top = 0,
+      --   bottom = 0,
+      -- }
 
       return config
     '';
   };
-  stylix.targets.wezterm.enable = true;
   stylix.fonts = {
     monospace = {
       package = pkgs.hello;
@@ -114,6 +123,9 @@ rec {
         curl https://raw.githubusercontent.com/wasienv/wasienv/master/install.sh | sh
       fi
     '';
+    # setWallpaper = lib.mkIf (config.stylix.image != null) { lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    #   osascript -e 'tell application "System Events" to set picture of every desktop to "${stylix.image}"' || true
+    # '' };
   };
 
   home.packages = with pkgs; [ ];
@@ -387,110 +399,128 @@ rec {
       '');
     };
 
-    programs.firefox = {
-      enable = true;
-      package = pkgs.hello;
-      profiles.clean = {
-        isDefault = false;
-        id = 1;
-      };
-      profiles.default = {
-        isDefault = true;
-        userChrome = ''
-        @import "${
-          builtins.fetchGit {
-            url = "https://github.com/rockofox/firefox-minima";
-            ref = "main";
-            rev = "932a99851b5f2db8b58aa456e5d897e278c69574";
-          }
-        }/userChrome.css";
-        /* TODO: Base16 */
-        :root {
-          --toolbar-bgcolor: #${colorScheme.palette.base00} !important;
-          --toolbar-color: #${colorScheme.palette.base05} !important;
-          --toolbar-field-background-color: #${colorScheme.palette.base01} !important;
-          --toolbar-field-color: #${colorScheme.palette.base05} !important;
-          --input-bgcolor: #${colorScheme.palette.base01} !important;
-          --input-color: #${colorScheme.palette.base05} !important;
-        }
-        '';
-        userContent = ''
-        /* Hide scrollbar in FF Quantum */
-        *{scrollbar-width:none !important}
-
-        @-moz-document url(about:home), url(about:newtab) {
-          body {
-            --newtab-background-color: ${colorScheme.palette.base00};
-            --newtab-element-hover-color: ${colorScheme.palette.base01};
-            --newtab-icon-primary-color: ${colorScheme.palette.base04};
-            --newtab-search-border-color: ${colorScheme.palette.base01};
-            --newtab-search-dropdown-color: ${colorScheme.palette.base00};
-            --newtab-search-dropdown-header-color: ${colorScheme.palette.base00};
-            --newtab-search-icon-color: ${colorScheme.palette.base04};
-            --newtab-section-header-text-color: ${colorScheme.palette.base05};
-            --newtab-snippets-background-color: ${colorScheme.palette.base01};
-            --newtab-text-primary-color: ${colorScheme.palette.base05};
-            --newtab-textbox-background-color: ${colorScheme.palette.base01};
-            --newtab-textbox-border: ${colorScheme.palette.base01};
-            --newtab-topsites-background-color: ${colorScheme.palette.base04};
-            --newtab-topsites-label-color: ${colorScheme.palette.base05};
-            --darkreader-neutral-background: #${colorScheme.palette.base00} !important;
-            --darkreader-neutral-text: #${colorScheme.palette.base05} !important;
-            --darkreader-selection-background: #${colorScheme.palette.base01} !important;
-            --darkreader-selection-text: #${colorScheme.palette.base05} !important;
-          }
-        }
-        '';
-        settings = {
-        # enable chrome/* customizations
-        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-
-        # disable toolkit telemetry stuff
-        # https://firefox-source-docs.mozilla.org/toolkit/components/telemetry/internals/preferences.html
-        "toolkit.telemetry.unified" = false;
-        "datareporting.policy.dataSubmissionEnabled" = false;
-
-        # reload last session on startup, but still warn on quit
-        "browser.startup.page" = 3;
-        "browser.warnOnQuit" = true;
-        "browser.sessionstore.warnOnQuit" = true;
-
-        # no home or new tab page
-        "browser.startup.homepage" = "about:blank";
-        "browser.newtabpage.enabled" = false;
-
-        "browser.toolbars.bookmarks.visibility" = "never";
-
-        # disable first-run onboarding
-        "browser.aboutwelcome.enabled" = false;
-
-        # enable "browser toolbox" for inspecting browser chrome
-        "devtools.chrome.enabled" = true;
-        "devtools.debugger.remote-enabled" = true;
-
-        "devtools.inspector.showUserAgentStyles" = true;
-
-        "devtools.theme" = "dark";
-
-        # disable all the autofill prompts
-        "extensions.formautofill.addresses.enabled" = false;
-        "extensions.formautofill.creditCards.enabled" = false;
-        "signon.rememberSignons" = false;
-
-        "general.smoothscroll" = false;
-
-        # disable spellcheck for form inputs
-        "layout.spellcheckDefault" = 0;
-
-        # when you open a link image or media in a new tab switch to it immediately
-        "browser.tabs.loadInBackground" = false;
-
-        "extensions.pocket.enabled" = false;
-        "browser.tabs.firefox-view" = false;
-        "svg.context-properties.content.enabled" = true;
-      };
+    home.file.vencord-css = {
+      executable = false;
+      target = "Library/Application Support/Vencord/themes/base16.css";
+      text = ''
+      /* ${colorScheme.slug} */
+      .theme-dark, .theme-light {
+        --background-primary:       #${colorScheme.palette.base00};
+        --background-secondary:     #${colorScheme.palette.base01};
+        --background-primary-alt:   #${colorScheme.palette.base02};
+        --background-secondary-alt: #${colorScheme.palette.base02};
+        --background-tertiary:      #${colorScheme.palette.base03};
+      }
+      div[class^=nowPlayingColumn] {
+        display: none !important;
+      }
+      '';
     };
-  };
+
+  # programs.firefox = {
+  #   enable = true;
+  #   package = pkgs.hello;
+  #   profiles.clean = {
+  #     isDefault = false;
+  #     id = 1;
+  #   };
+  #     profiles.default = {
+  #       isDefault = true;
+  #       userChrome = ''
+  #       @import "${
+  #         builtins.fetchGit {
+  #           url = "https://github.com/rockofox/firefox-minima";
+  #           ref = "main";
+  #           rev = "c5580fd04e9b198320f79d441c78a641517d7af5";
+  #         }
+  #       }/userChrome.css";
+  #       /* TODO: Base16 */
+  #       :root {
+  #         --toolbar-bgcolor: #${colorScheme.palette.base00} !important;
+  #         --toolbar-color: #${colorScheme.palette.base05} !important;
+  #         --toolbar-field-background-color: #${colorScheme.palette.base01} !important;
+  #         --toolbar-field-color: #${colorScheme.palette.base05} !important;
+  #         --input-bgcolor: #${colorScheme.palette.base01} !important;
+  #         --input-color: #${colorScheme.palette.base05} !important;
+  #       }
+  #       '';
+  #       userContent = ''
+  #       /* Hide scrollbar in FF Quantum */
+  #       *{scrollbar-width:none !important}
+  #
+  #       @-moz-document url(about:home), url(about:newtab) {
+  #         body {
+  #           --newtab-background-color: ${colorScheme.palette.base00};
+  #           --newtab-element-hover-color: ${colorScheme.palette.base01};
+  #           --newtab-icon-primary-color: ${colorScheme.palette.base04};
+  #           --newtab-search-border-color: ${colorScheme.palette.base01};
+  #           --newtab-search-dropdown-color: ${colorScheme.palette.base00};
+  #           --newtab-search-dropdown-header-color: ${colorScheme.palette.base00};
+  #           --newtab-search-icon-color: ${colorScheme.palette.base04};
+  #           --newtab-section-header-text-color: ${colorScheme.palette.base05};
+  #           --newtab-snippets-background-color: ${colorScheme.palette.base01};
+  #           --newtab-text-primary-color: ${colorScheme.palette.base05};
+  #           --newtab-textbox-background-color: ${colorScheme.palette.base01};
+  #           --newtab-textbox-border: ${colorScheme.palette.base01};
+  #           --newtab-topsites-background-color: ${colorScheme.palette.base04};
+  #           --newtab-topsites-label-color: ${colorScheme.palette.base05};
+  #           --darkreader-neutral-background: #${colorScheme.palette.base00} !important;
+  #           --darkreader-neutral-text: #${colorScheme.palette.base05} !important;
+  #           --darkreader-selection-background: #${colorScheme.palette.base01} !important;
+  #           --darkreader-selection-text: #${colorScheme.palette.base05} !important;
+  #         }
+  #       }
+  #       '';
+  #       settings = {
+  #       # enable chrome/* customizations
+  #       "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+  #
+  #       # disable toolkit telemetry stuff
+  #       # https://firefox-source-docs.mozilla.org/toolkit/components/telemetry/internals/preferences.html
+  #       "toolkit.telemetry.unified" = false;
+  #       "datareporting.policy.dataSubmissionEnabled" = false;
+  #
+  #       # reload last session on startup, but still warn on quit
+  #       "browser.startup.page" = 3;
+  #       "browser.warnOnQuit" = true;
+  #       "browser.sessionstore.warnOnQuit" = true;
+  #
+  #       # no home or new tab page
+  #       "browser.startup.homepage" = "about:blank";
+  #       "browser.newtabpage.enabled" = false;
+  #
+  #       "browser.toolbars.bookmarks.visibility" = "never";
+  #
+  #       # disable first-run onboarding
+  #       "browser.aboutwelcome.enabled" = false;
+  #
+  #       # enable "browser toolbox" for inspecting browser chrome
+  #       "devtools.chrome.enabled" = true;
+  #       "devtools.debugger.remote-enabled" = true;
+  #
+  #       "devtools.inspector.showUserAgentStyles" = true;
+  #
+  #       "devtools.theme" = "dark";
+  #
+  #       # disable all the autofill prompts
+  #       "extensions.formautofill.addresses.enabled" = false;
+  #       "extensions.formautofill.creditCards.enabled" = false;
+  #       "signon.rememberSignons" = false;
+  #
+  #       "general.smoothscroll" = false;
+  #
+  #       # disable spellcheck for form inputs
+  #       "layout.spellcheckDefault" = 0;
+  #
+  #       # when you open a link image or media in a new tab switch to it immediately
+  #       "browser.tabs.loadInBackground" = false;
+  #
+  #       "extensions.pocket.enabled" = false;
+  #       "browser.tabs.firefox-view" = false;
+  #       "svg.context-properties.content.enabled" = true;
+  #     };
+  #   };
+  # };
   programs.helix = {
     enable = true;
     settings = {

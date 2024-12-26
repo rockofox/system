@@ -10,6 +10,11 @@ if hasBufferline then
             indicator = {
                 style = "underline",
             },
+            hover = {
+                enabled = true,
+                delay = 200,
+                reveal = {'close'}
+            },
             offsets = {
                 {
                     filetype = "NvimTree",

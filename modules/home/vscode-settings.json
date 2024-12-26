@@ -383,7 +383,6 @@
         "base16-zenburn-light"
     ],
     "editor.wordWrap": "off",
-    "terminal.integrated.fontSize": 16,
     "editor.fontLigatures": true,
     "nix.serverPath": "nil",
     "[nix]": {

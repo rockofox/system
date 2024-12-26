@@ -5,36 +5,45 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    # ghc
+    # mpv
     # nodePackages.generator-code
     # nodePackages.yo
     bat
     bottom
+    cabal-install
+    cachix
     cargo
     cmake
     cowsay
     curl
     dotnet-sdk
+    elixir
+    elixir-ls
     entr
     expect
     eza
     fd
     ffmpeg
     fortune
+    frida-tools
     fx
     fzf
     gh
     gh-markdown-preview
-    ghc
     gitui
+    google-cloud-sdk
     gperftools
     gradle
+    haskellPackages.zlib
     htop
     hyperfine
+    insert-dylib
     jq
     moreutils
     mosh
     neofetch
-    nixfmt
+    nixfmt-classic
     nixpkgs-fmt
     nnn
     nodePackages.prettier
@@ -42,6 +51,7 @@
     pandoc
     pkg-config
     postgresql
+    qbe
     ripgrep
     rust-analyzer
     rustc
@@ -53,8 +63,8 @@
     tmux
     tree
     unixtools.watch
-    wasmtime
     wakatime
+    wasmtime
     wget
     xh
     yt-dlp
@@ -65,10 +75,10 @@
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
     brews = [
-      {
-        name = "FelixKratz/formulae/fyabai";
-        args = [ "HEAD" ];
-      }
+      # {
+      #   name = "FelixKratz/formulae/fyabai";
+      #   args = [ "HEAD" ];
+      # }
       {
         name = "skhd";
       }
@@ -103,8 +113,8 @@
   };
   # fonts.fonts = with pkgs; [ nerdfonts julia-mono lato jetbrains-mono ];
   # fonts.fontDir.enable = true;
-  fonts.fonts = [];
-  fonts.fontDir.enable = false;
+  # fonts.fonts = [];
+  # fonts.fontDir.enable = false;
 
   system = {
     defaults = {
@@ -137,7 +147,6 @@
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  services.activate-system.enable = true;
   programs.nix-index.enable = true;
 
   nix.gc = {
@@ -152,18 +161,19 @@
     experimental-features = nix-command flakes
     access-tokens = github.com=${sensitive.lib.gh-acess-token}
   '';
-  nix.settings.auto-optimise-store = true;
 
   nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     "loony-tools:pr9m4BkM/5/eSTZlkQyRt57Jz7OMBxNSUiMC4FkcNfk="
+    "ghc-nix.cachix.org-1:wI8l3tirheIpjRnr2OZh6YXXNdK2fVQeOI4SVz/X8nA="
   ];
   nix.settings.substituters = [
     #    "https://cache.iog.io"
     # "https://cache.zw3rk.com"
     "https://cache.nixos.org"
     "https://nix-community.cachix.org"
+    "https://ghc-nix.cachix.org"
   ];
 
   # nix.package = pkgs.nix;

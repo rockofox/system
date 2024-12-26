@@ -21,8 +21,6 @@
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
       source "${pkgs.fzf}/share/fzf/completion.zsh"
       source "${pkgs.fzf}/share/fzf/key-bindings.zsh"
-      source "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh"
-      source "${pkgs.zsh-fzf-tab}/share/fzf-tab/lib/zsh-ls-colors/ls-colors.zsh"
       source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
       source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
       export ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=#${
@@ -72,7 +70,7 @@
         deleted = "﫧";
         modified = " ";
         stashed = " ";
-        staged = "ﱐ ";
+        staged = " ";
         renamed = " ";
         untracked = " ";
         diverged = " ";

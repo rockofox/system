@@ -11,6 +11,7 @@ maybe_source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
 export NIX_PATH=darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$HOME/.nix-defexpr/channels''${NIX_PATH:+:}$NIX_PATH;
 export PATH=/run/current-system/sw/bin:$PATH
 export PATH=$HOME/.spicetify:$PATH
+export PATH=$HOME/.ghcup/bin:$PATH
 export EDITOR=nvim
 export VISUAL=$EDITOR
 export FZF_DEFAULT_COMMAND='ag -g ""'
@@ -32,4 +33,6 @@ then
     eval "$(github-copilot-cli alias -- "$0")"
 fi
 
-source ~/.wasienv/wasienv.sh
+# source ~/.wasienv/wasienv.sh
+# source ~/.ghc-wasm/env
+source "$HOME/.sdkman/bin/sdkman-init.sh"
