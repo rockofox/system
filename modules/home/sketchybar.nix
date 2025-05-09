@@ -16,16 +16,17 @@
                           corner_radius=0 \
                           color=0x7f${colorScheme.palette.base00} \
                           border_width=0 \
-                          border_color=0xff2E3440
+                          border_color=0xff2E3440 \
+                          display=main
 
       ############## GLOBAL DEFAULTS ##############
       sketchybar -m --default updates=when_shown \
                               drawing=on \
                               cache_scripts=on \
-                              icon.font="${font}:Regular:14.0" \
+                              icon.font="${font}:Bold:14.0" \
                               icon.color=0xffECEFF4 \
                               icon.highlight_color=0xffA3BE8C \
-                              label.font="${font}:Regular:14.0" \
+                              label.font="${font}:Bold:14.0" \
                               label.color=0xffECEFF4
 
       ############## SPACE DEFAULTS ##############
@@ -47,7 +48,7 @@
                                     icon=''${SPACE_ICONS[i]}                     \
                                     background.corner_radius=0                 \
                                     background.height=25                       \
-                                    background.color=0x7f${colorScheme.palette.base0A} \
+                                    background.color=0x7f${colorScheme.palette.base02} \
                                     background.drawing=on                     \
                                     label.drawing=off                          \
                                     script="~/.config/sketchybar/plugins/space.sh"              \
@@ -58,7 +59,7 @@
 
       ############## ITEM DEFAULTS ###############
       sketchybar -m --default label.padding_left=0 \
-                              icon.padding_right=0 \
+                              icon.padding_right=8 \
                               icon.padding_left=0 \
                               label.padding_right=0
 
@@ -81,7 +82,9 @@
           click_script="~/.config/sketchybar/plugins/music_click.sh"  \
           label.padding_right=20                                   \
           drawing=off                                              \
-          --subscribe music song_update
+          --subscribe music media_change
+          # label.max_chars=20 \
+          # scroll_texts=on \
 
 
       ############## FINALIZING THE SETUP ##############
@@ -109,7 +112,7 @@
         HAS_WINDOWS_OR_IS_SELECTED="false"
       fi
       if [ "$SELECTED" = "true" ];then
-        sketchybar --set $NAME background.color=0x7f${colorScheme.palette.base08} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
+        sketchybar --set $NAME background.color=0xff${colorScheme.palette.base02} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
       else
         sketchybar --set $NAME background.color=0x7f${colorScheme.palette.base00} icon.drawing=$HAS_WINDOWS_OR_IS_SELECTED
       fi
@@ -169,9 +172,30 @@
       # fi
 
       sketchybar -m --set music         \
+          --set music icon="$icon" \
           --set music label="''${title} – ''${artist}"    \
           --set music drawing=on
+          # --set music label.max_chars=20
+          # --set music scroll_texts=on
 
+    '';
+  };
+  home.file.musicClick = {
+    executable = true;
+    target = ".config/sketchybar/plugins/music_click.sh";
+    text = ''
+        #!/usr/bin/env bash
+
+        # run an osascript command to get the player_state
+        PLAYER_STATE=$(osascript -e "tell application \"Music\" to set playerState to (get player state) as text")
+
+        # Check the PLAYER_STATE
+        # If playing
+        if [[ $PLAYER_STATE == "paused" ]]; then
+          osascript -e 'tell application "Music" to play'
+              else
+          osascript -e 'tell application "Music" to pause'
+        fi
     '';
   };
 }

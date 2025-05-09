@@ -30,7 +30,7 @@
 
       # general space settings
       /opt/homebrew/bin/yabai -m config layout                       bsp
-      /opt/homebrew/bin/yabai -m config top_padding                  0
+      /opt/homebrew/bin/yabai -m config top_padding                  18
       /opt/homebrew/bin/yabai -m config bottom_padding               18
       /opt/homebrew/bin/yabai -m config left_padding                 18
       /opt/homebrew/bin/yabai -m config right_padding                18
@@ -83,7 +83,9 @@
       /opt/homebrew/bin/yabai -m signal --add event=dock_did_restart action="sudo /opt/homebrew/bin/yabai --load-sa"
       # sudo /opt/homebrew/bin/yabai --load-sa
 
-      borders active_color=0xff${config.colorScheme.palette.base08} inactive_color=0xff${config.colorScheme.palette.base00} width=2.0 2>/dev/null 1>&2 &
+      borders active_color=0xff${config.colorScheme.palette.base08} inactive_color=0xff${config.colorScheme.palette.base00} width=3.0 style=s 2>/dev/null 1>&2 &
+
+      sketchybar 2>/dev/null 1>&2 &
 
       echo "yabai configuration loaded.."
     '';
@@ -165,7 +167,6 @@
 
       alt - t :  /opt/homebrew/bin/yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
 
-      # ctrl - return : ${pkgs.kitty}/bin/kitty -1 ~
       ctrl - return : ${pkgs.wezterm}/bin/wezterm
       ctrl - q : open http://
       ctrl + shift - e : open ~

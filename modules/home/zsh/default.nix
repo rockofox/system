@@ -10,12 +10,10 @@
       ls = "eza --icons -L1";
       ll = "eza --tree --icons --long -L1";
       eza = "eza --tree --icons";
-      rebuild =
-        "cd ${sensitive.lib.systemFlakePath} && git add -NA . && darwin-rebuild switch --flake .#darwin && cd -";
       ngit = "vim -c \"Neogit\"";
     };
     autocd = true;
-    initExtra = ''
+    initContent = ''
       source "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
       source "${pkgs.nix-zsh-completions}/share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh"
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh

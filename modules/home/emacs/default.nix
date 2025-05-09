@@ -15,7 +15,7 @@ in rec
   home.sessionVariables = {
     EMACS_PATH_COPILOT = "${copilot-el}";
   };
-  programs.zsh.initExtra = "export EMACS_PATH_COPILOT=${copilot-el}";
+  programs.zsh.initContent = "export EMACS_PATH_COPILOT=${copilot-el}";
   programs.doom-emacs = rec {
     enable = true;
     doomPrivateDir = ./doom.d; # Directory containing your config.el, init.el and packages.el files

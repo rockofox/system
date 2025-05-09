@@ -2,15 +2,6 @@
 let
   nix-colors-lib = nix-colors.lib-contrib { inherit pkgs; };
   # extra-plugins = import ./plugins.nix { inherit pkgs lib; };
-  muren-nvim = pkgs.vimUtils.buildVimPlugin {
-    name = "muren-nvim";
-    src = pkgs.fetchFromGitHub {
-      repo = "muren.nvim";
-      owner = "AckslD";
-      rev = "818c09097dba1322b2ca099e35f7471feccfef93";
-      hash = "sha256-KDXytsyvUQVZoKdr6ieoUE3e0v5NT2gf3M1d15aYVFs=";
-    };
-  };
 in {
   home.packages = with pkgs; [
     # Copilot doesn't work with Node.js 18 yet
@@ -50,7 +41,6 @@ in {
         nvim-treesitter.withAllGrammars
         nvim-treesitter-textobjects
         nvim-treesitter-refactor
-        muren-nvim
         rainbow-delimiters-nvim
         markdown-preview-nvim
 

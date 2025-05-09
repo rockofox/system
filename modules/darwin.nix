@@ -1,9 +1,30 @@
-{ config, lib, pkgs, inputs, sensitive, ... }:
+{ pkgs, sensitive, ... }:
 {
-
-  nix.useDaemon = true;
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
+  # portableServices.services.open-webui = {
+  #   description = "Open Web UI";
+  #   command = "/Users/rocko/GitClones/open-webui/venv/bin/open-webui";
+  #   arguments = [
+  #     "serve"
+  #   ];
+  #   user = "rocko";
+  #   workingDirectory = "/Users/rocko/GitClones/open-webui";
+  #   # logOutput = true;
+  #   # logError = true;
+  # };
+
+  # launchd.daemons.silly-hello.serviceConfig = {
+  #   description = "little web server that says hi on some port";
+  #   command = "${pkgs.python3}/bin/python -m http.server 8089";
+  #   environment = {
+  #     PYTHONUNBUFFERED = "1";
+  #   };
+  #   workingDirectory = "/Users/rocko/GitClones/agnostic-services-ng";
+  # };
+
+
+
   environment.systemPackages = with pkgs; [
     # ghc
     # mpv
@@ -26,7 +47,6 @@
     fd
     ffmpeg
     fortune
-    frida-tools
     fx
     fzf
     gh
@@ -46,6 +66,7 @@
     nixfmt-classic
     nixpkgs-fmt
     nnn
+    nodejs_24
     nodePackages.prettier
     onefetch
     pandoc
@@ -57,7 +78,6 @@
     rustc
     rustfmt
     silver-searcher
-    stack
     tealdeer
     tmate
     tmux
@@ -68,6 +88,13 @@
     wget
     xh
     yt-dlp
+    nil
+    (writeScriptBin "rebuild" ''
+      cd /Users/rocko/GitClones/system
+      git add -NA .
+      darwin-rebuild switch --flake .#darwin 
+      cd -
+    '')
   ];
   homebrew = {
     enable = true;
@@ -98,7 +125,7 @@
       # "quicklookase"
       # "qlvideo"
     ];
-    casks = [ "anaconda" "ilspy" "vimr" "background-music" ];
+    casks = [ "anaconda" "ilspy" "vimr" "background-music" "ghostty" ];
     taps = [
       "homebrew/bundle"
       "homebrew/services"
@@ -145,8 +172,6 @@
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
   programs.nix-index.enable = true;
 
   nix.gc = {
@@ -167,6 +192,7 @@
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     "loony-tools:pr9m4BkM/5/eSTZlkQyRt57Jz7OMBxNSUiMC4FkcNfk="
     "ghc-nix.cachix.org-1:wI8l3tirheIpjRnr2OZh6YXXNdK2fVQeOI4SVz/X8nA="
+    "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
   ];
   nix.settings.substituters = [
     #    "https://cache.iog.io"
@@ -174,21 +200,19 @@
     "https://cache.nixos.org"
     "https://nix-community.cachix.org"
     "https://ghc-nix.cachix.org"
+    "https://cache.iog.io"
   ];
-
-  # nix.package = pkgs.nix;
-
-  # nix.monitored.enable = true;
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
 
   # Add ability to used TouchID for sudo authentication
-  security.pam.enableSudoTouchIdAuth = true;
+  # security.pam.services.sudo_local.touchIdAuth = true;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
   # nix.build-users-group = "nixbld";
+  ids.gids.nixbld = 350;
 }

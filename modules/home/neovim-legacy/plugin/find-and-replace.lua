@@ -12,4 +12,4 @@
 --     desc = "Search on current file"
 -- })
 
-require('muren').setup()
+-- require('muren').setup()
