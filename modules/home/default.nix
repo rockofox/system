@@ -2,7 +2,7 @@
 let
   override = "dark";
   font = "JetBrainsMono Nerd Font";
-  colorscheme-dark = "catppuccin-mocha";
+  colorscheme-dark = "horizon-terminal-dark";
   colorscheme-light = "horizon-terminal-light";
   colorscheme-default = colorscheme-dark;
 in
@@ -15,14 +15,14 @@ rec {
     palette = config.lib.stylix.colors;
     slug = colorscheme-default;
   };
-  specialisation.day.configuration = {
-      stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${colorscheme-light}.yaml";
-      colorscheme.slug = colorscheme-light;
-  };
-  specialisation.night.configuration = {
-      stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${colorscheme-dark}.yaml";
-      colorscheme.slug = colorscheme-dark;
-  };
+  # specialisation.day.configuration = {
+  #     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${colorscheme-light}.yaml";
+  #     colorscheme.slug = colorscheme-light;
+  # };
+  # specialisation.night.configuration = {
+  #     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${colorscheme-dark}.yaml";
+  #     colorscheme.slug = colorscheme-dark;
+  # };
   stylix.enable = true;
   stylix.targets.vscode.enable = true;
   # stylix.targets.kitty.enable = true;
@@ -43,14 +43,15 @@ rec {
       config.front_end = "WebGpu"
       -- config.harfbuzz_features = { 'ss01', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'calt' }
       -- config.freetype_load_flags = 'NO_HINTING'
+
       config.keys = {
         {
-          key = "[",
+          key = "l",
           mods = "SUPER",
           action = act.ActivatePaneDirection 'Prev',
         },
         {
-          key = "]",
+          key = ";",
           mods = "SUPER",
           action = act.ActivatePaneDirection 'Next',
         },
@@ -73,7 +74,8 @@ rec {
           },
         },
       }
-
+      config.window_background_opacity = 0.75
+      config.macos_window_background_blur = 20
       -- config.window_padding = {
       --   left = 0,
       --   right = 0,

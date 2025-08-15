@@ -30,7 +30,7 @@
 
       # general space settings
       /opt/homebrew/bin/yabai -m config layout                       bsp
-      /opt/homebrew/bin/yabai -m config top_padding                  18
+      # /opt/homebrew/bin/yabai -m config top_padding                  18
       /opt/homebrew/bin/yabai -m config bottom_padding               18
       /opt/homebrew/bin/yabai -m config left_padding                 18
       /opt/homebrew/bin/yabai -m config right_padding                18
@@ -81,11 +81,11 @@
       # /opt/homebrew/bin/yabai -m signal --add event=window_created action='/opt/homebrew/bin/yabai -m query --windows --window $YABAI_WINDOW_ID | ${pkgs.jq} -er ".\"can-resize\" or .\"is-floating\"" || yabai -m window $YABAI_WINDOW_ID --toggle float'
 
       /opt/homebrew/bin/yabai -m signal --add event=dock_did_restart action="sudo /opt/homebrew/bin/yabai --load-sa"
-      # sudo /opt/homebrew/bin/yabai --load-sa
+      sudo /opt/homebrew/bin/yabai --load-sa
 
       borders active_color=0xff${config.colorScheme.palette.base08} inactive_color=0xff${config.colorScheme.palette.base00} width=3.0 style=s 2>/dev/null 1>&2 &
 
-      sketchybar 2>/dev/null 1>&2 &
+      # sketchybar 2>/dev/null 1>&2 &
 
       echo "yabai configuration loaded.."
     '';
@@ -127,6 +127,14 @@
 
       # create desktop, move window and follow focus - uses jq for parsing json (brew install jq)
 
+      # next / previous space
+      alt - v : /opt/homebrew/bin/yabai -m space --focus prev
+      alt - b : /opt/homebrew/bin/yabai -m space --focus next
+
+      # move window to next / previous space
+      shift + alt - v : /opt/homebrew/bin/yabai -m window --space prev; /opt/homebrew/bin/yabai -m space --focus prev
+      shift + alt - b : /opt/homebrew/bin/yabai -m window --space next; /opt/homebrew/bin/yabai -m space --focus next
+
       # fast focus desktop
       cmd + alt - x : /opt/homebrew/bin/yabai -m space --focus recent
       cmd + alt - 1 : /opt/homebrew/bin/yabai -m space --focus 1
@@ -156,7 +164,10 @@
       shift + cmd - w : /opt/homebrew/bin/yabai -m window --resize top:0:20
 
       # set insertion point in focused container
-      ctrl + alt - y : /opt/homebrew/bin/yabai -m window --insert west
+      ctrl + lalt - n : /opt/homebrew/bin/yabai -m window --insert west
+      ctrl + lalt - i : /opt/homebrew/bin/yabai -m window --insert south
+      ctrl + lalt - o : /opt/homebrew/bin/yabai -m window --insert north
+      ctrl + lalt - h : /opt/homebrew/bin/yabai -m window --insert east
 
       # toggle window zoom
       alt - d : /opt/homebrew/bin/yabai -m window --toggle zoom-parent
@@ -172,18 +183,18 @@
       ctrl + shift - e : open ~
       alt - t : /opt/homebrew/bin/yabai -m space --layout $(/opt/homebrew/bin/yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
 
-      lalt - y : /opt/homebrew/bin/yabai -m window --focus west || /opt/homebrew/bin/yabai -m display --focus west
-      lalt - n : /opt/homebrew/bin/yabai -m window --focus south || /opt/homebrew/bin/yabai -m display --focus south
-      lalt - i : /opt/homebrew/bin/yabai -m window --focus north || /opt/homebrew/bin/yabai -m display --focus north
-      lalt - o : /opt/homebrew/bin/yabai -m window --focus east || /opt/homebrew/bin/yabai -m display --focus east
-      alt + shift - y : /opt/homebrew/bin/yabai -m window --swap west || $(/opt/homebrew/bin/yabai -m window --display west; /opt/homebrew/bin/yabai -m display --focus west)
-      alt + shift - n : /opt/homebrew/bin/yabai -m window --swap south || $(/opt/homebrew/bin/yabai -m window --display south; /opt/homebrew/bin/yabai -m display --focus south)
-      alt + shift - i : /opt/homebrew/bin/yabai -m window --swap north || $(/opt/homebrew/bin/yabai -m window --display north; /opt/homebrew/bin/yabai -m display --focus north)
-      alt + shift - o : /opt/homebrew/bin/yabai -m window --swap east || $(/opt/homebrew/bin/yabai -m window --display east; /opt/homebrew/bin/yabai -m display --focus east)
-      alt + cmd - y : ~/.config/skhd/stack west 
-      alt + cmd - n : ~/.config/skhd/stack south
-      alt + cmd - i : ~/.config/skhd/stack north
-      alt + cmd - o : ~/.config/skhd/stack east
+      lalt - n : /opt/homebrew/bin/yabai -m window --focus west || /opt/homebrew/bin/yabai -m display --focus west
+      lalt - i : /opt/homebrew/bin/yabai -m window --focus south || /opt/homebrew/bin/yabai -m display --focus south
+      lalt - o : /opt/homebrew/bin/yabai -m window --focus north || /opt/homebrew/bin/yabai -m display --focus north
+      lalt - h : /opt/homebrew/bin/yabai -m window --focus east || /opt/homebrew/bin/yabai -m display --focus east
+      alt + shift - n : /opt/homebrew/bin/yabai -m window --swap west || $(/opt/homebrew/bin/yabai -m window --display west; /opt/homebrew/bin/yabai -m display --focus west)
+      alt + shift - i : /opt/homebrew/bin/yabai -m window --swap south || $(/opt/homebrew/bin/yabai -m window --display south; /opt/homebrew/bin/yabai -m display --focus south)
+      alt + shift - o : /opt/homebrew/bin/yabai -m window --swap north || $(/opt/homebrew/bin/yabai -m window --display north; /opt/homebrew/bin/yabai -m display --focus north)
+      alt + shift - h : /opt/homebrew/bin/yabai -m window --swap east || $(/opt/homebrew/bin/yabai -m window --display east; /opt/homebrew/bin/yabai -m display --focus east)
+      # alt + cmd - y : ~/.config/skhd/stack west 
+      # alt + cmd - n : ~/.config/skhd/stack south
+      # alt + cmd - i : ~/.config/skhd/stack north
+      # alt + cmd - o : ~/.config/skhd/stack east
 
       alt + ctrl - e : /Applications/Neovide.app/Contents/MacOS/neovide --frame none --multigrid
 

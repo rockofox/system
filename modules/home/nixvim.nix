@@ -113,6 +113,46 @@
         key = "<leader>fh";
       }
       {
+        action = "<cmd>Telescope lsp_references<CR>";
+        key = "<leader>fr";
+      }
+      {
+        action = "<cmd>Telescope lsp_incoming_calls<CR>";
+        key = "<leader>fi";
+      }
+      {
+        action = "<cmd>Telescope lsp_outgoing_calls<CR>";
+        key = "<leader>fo";
+      }
+      {
+        action = "<cmd>Telescope lsp_document_symbols<CR>";
+        key = "<leader>fs";
+      }
+      {
+        action = "<cmd>Telescope lsp_workspace_symbols<CR>";
+        key = "<leader>fw";
+      }
+      {
+        action = "<cmd>Telescope diagnostics<CR>";
+        key = "<leader>fd";
+      }
+      {
+        action = "<cmd>Telescope git_status<CR>";
+        key = "<leader>gs";
+      }
+      {
+        action = "<cmd>Telescope git_branches<CR>";
+        key = "<leader>gb";
+      }
+      {
+        action = "<cmd>Telescope git_commits<CR>";
+        key = "<leader>gc";
+      }
+      {
+        action = "<cmd>Obsidian<CR>";
+        key = "<leader>o";
+      }
+      {
         action = "<cmd>Neogit<CR>";
         key = "<leader>gg";
       }
@@ -134,16 +174,57 @@
       virtual_text = true;
     };
     plugins = {
-      # obsidian.enable = true;
+      vimtex.enable = true;
+      obsidian = {
+        enable = true;
+        settings = {
+          legacy_commands = false;
+          new_notes_location = "current_dir";
+          workspaces = [
+            {
+              name = "NuVault";
+              path = "~/Documents/NuVault";
+            }
+          ];
+          daily_notes = {
+            folder = "4 Daily";
+            template = "10 Templates/daily_template.md";
+          };
+        };
+      };
+      gitsigns.enable = true;
+      transparent = {
+        enable = true;
+      };
       helm.enable = true;
       render-markdown.enable = true;
-      copilot-lua = {
-        enable = true;
-        settings.suggestion.enabled = true;
-      };
+      # copilot-lua = {
+      #   enable = true;
+      #   settings.suggestion.enabled = true;
+      # };
       avante.enable = true;
       avante.settings = {
         provider = "copilot";
+        auto_suggestions_provider = "copilot";
+        hints.enabled = true;
+        windows = {
+          wrap = true;
+          width = 30;
+          sidebar_header = {
+            align = "center";
+            rounded = true;
+          };
+          behaviour.auto_approve_tool_permissions = [ "replace_in_file" ];
+        };
+        highlights.diff = {
+          current = "DiffText";
+          incoming = "DiffAdd";
+        };
+        diff = {
+          debug = false;
+          autojump = true;
+          list_opener = "copen";
+        };
       };
       wakatime.enable = true;
       conform-nvim = {
@@ -222,6 +303,8 @@
           cssls.enable = true; # CSS
           bashls.enable = true;
           jsonls.enable = true;
+          clangd.enable = true;
+          rust_analyzer.enable = true;
           lua_ls = {
             enable = true;
             settings.telemetry.enable = false;
@@ -339,7 +422,13 @@
       let g:cursorhold_updatetime = 100
       au BufNewFile,BufRead *.ejs set filetype=html
       set clipboard=unnamed
-    '';
+
+      silent! colorscheme default
+      silent! colorscheme nix-${config.colorScheme.slug}
+      silent! colorscheme base16-${config.colorScheme.slug}
+      silent! colorscheme ${config.colorScheme.slug}
+      set nowrap
+    ''; # TODO: set nowrap properly
     extraConfigLua = ''
       local ht = require('haskell-tools')
       local bufnr = vim.api.nvim_get_current_buf()

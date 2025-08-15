@@ -22,6 +22,7 @@
       pull.rebase = true;
       push.default = "current";
       push.autoSetupRemote = true;
+      commit.gpgsign = false; # TODO
     };
   };
 }

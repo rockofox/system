@@ -12,6 +12,7 @@ export NIX_PATH=darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$HOME/.nix
 export PATH=/run/current-system/sw/bin:$PATH
 export PATH=$HOME/.spicetify:$PATH
 export PATH=$HOME/.ghcup/bin:$PATH
+export PATH=$HOME/go/bin:$PATH
 export EDITOR=nvim
 export VISUAL=$EDITOR
 export FZF_DEFAULT_COMMAND='ag -g ""'

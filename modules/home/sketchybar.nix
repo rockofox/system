@@ -8,7 +8,6 @@
 
       ############## BAR ##############
       sketchybar -m --bar height=25 \
-                          blur_radius=0 \
                           position=top \
                           padding_left=0 \
                           padding_right=5 \
@@ -17,7 +16,9 @@
                           color=0x7f${colorScheme.palette.base00} \
                           border_width=0 \
                           border_color=0xff2E3440 \
-                          display=main
+                          display=main \
+                          blur_radius=4
+
 
       ############## GLOBAL DEFAULTS ##############
       sketchybar -m --default updates=when_shown \
@@ -27,7 +28,8 @@
                               icon.color=0xffECEFF4 \
                               icon.highlight_color=0xffA3BE8C \
                               label.font="${font}:Bold:14.0" \
-                              label.color=0xffECEFF4
+                              label.color=0xffECEFF4 \
+                              blur_radius=4
 
       ############## SPACE DEFAULTS ##############
       sketchybar -m --default label.padding_left=0 \

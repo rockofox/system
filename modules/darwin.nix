@@ -23,7 +23,7 @@
   #   workingDirectory = "/Users/rocko/GitClones/agnostic-services-ng";
   # };
 
-
+  system.primaryUser = "rocko";
 
   environment.systemPackages = with pkgs; [
     # ghc

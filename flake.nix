@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-24.11-darwin";
     darwin = {
-      url = "github:LnL7/nix-darwin/master";
+      url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -67,7 +67,7 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "bak";
               home-manager.users.${sensitive.lib.username} = {
-                imports = [ stylix.homeManagerModules.stylix nixvim.homeManagerModules.nixvim ./modules/home ];
+                imports = [ stylix.homeModules.stylix nixvim.homeManagerModules.nixvim ./modules/home ];
               };
               home-manager.extraSpecialArgs = {
                 inherit nix-colors;
