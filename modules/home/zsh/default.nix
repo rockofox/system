@@ -21,6 +21,7 @@
       source "${pkgs.fzf}/share/fzf/key-bindings.zsh"
       source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
       source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
+      source $HOME/.zsh/sensitive.sh
       export ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=#${
         builtins.substring 0 3 config.colorScheme.palette.base08
       }
@@ -32,7 +33,9 @@
       }
       zvm_after_init_commands+=('source ${pkgs.fzf}/share/fzf/completion.zsh')
       zvm_after_init_commands+=('source ${pkgs.fzf}/share/fzf/key-bindings.zsh')
+
       ${builtins.readFile ./init.sh}
+      exec fish
     '';
     history = {
       size = 10000;

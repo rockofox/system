@@ -198,15 +198,28 @@
       };
       helm.enable = true;
       render-markdown.enable = true;
-      # copilot-lua = {
-      #   enable = true;
-      #   settings.suggestion.enabled = true;
-      # };
+      copilot-lua = {
+        enable = false;
+        settings.suggestion.enabled = true;
+      };
       avante.enable = true;
       avante.settings = {
-        provider = "copilot";
-        auto_suggestions_provider = "copilot";
-        hints.enabled = true;
+        provider = "nanogpt-glm";
+        providers = {
+          nanogpt-r1 = {
+            __inherited_from = "openai";
+            endpoint = "https://nano-gpt.com/api/v1";
+            api_key_name = "NANOGPT_API_KEY";
+            model = "deepseek-ai/DeepSeek-R1-0528";
+          };
+          nanogpt-glm = {
+            __inherited_from = "openai";
+            endpoint = "https://nano-gpt.com/api/v1";
+            api_key_name = "NANOGPT_API_KEY";
+            model = "z-ai/glm-4.6:thinking";
+          };
+        };
+        # auto_suggestions_provider = "copilot";
         windows = {
           wrap = true;
           width = 30;
@@ -215,6 +228,9 @@
             rounded = true;
           };
           behaviour.auto_approve_tool_permissions = [ "replace_in_file" ];
+        };
+        mappings.suggestion = {
+          accept = "<M-l>"; next = "<M-]>"; prev = "<M-[>"; dismiss = "<C-]>";
         };
         highlights.diff = {
           current = "DiffText";
@@ -304,7 +320,11 @@
           bashls.enable = true;
           jsonls.enable = true;
           clangd.enable = true;
-          rust_analyzer.enable = true;
+          rust_analyzer = {
+            enable = true;
+            installCargo = true;
+            installRustc = true;
+          };
           lua_ls = {
             enable = true;
             settings.telemetry.enable = false;
@@ -357,10 +377,10 @@
       };
       lspkind = {
         enable = true;
-        symbolMap = {
-          # Copilot = "";
-        };
-        extraOptions = {
+        settings = {
+          symbol_map = {
+            # Copilot = "";
+          };
           maxwidth = 50;
           ellipsis_char = "...";
         };

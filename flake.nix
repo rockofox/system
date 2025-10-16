@@ -67,7 +67,7 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "bak";
               home-manager.users.${sensitive.lib.username} = {
-                imports = [ stylix.homeModules.stylix nixvim.homeManagerModules.nixvim ./modules/home ];
+                imports = [ stylix.homeModules.stylix nixvim.homeModules.nixvim ./modules/home ];
               };
               home-manager.extraSpecialArgs = {
                 inherit nix-colors;

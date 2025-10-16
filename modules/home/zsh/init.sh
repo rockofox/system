@@ -4,6 +4,7 @@ function maybe_source()
         source "$1"
     fi
 }
+function ppgrep() { pgrep "$@" | xargs ps -fp 2> /dev/null; }
 
 maybe_source /etc/static/zshrc
 maybe_source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
@@ -13,6 +14,7 @@ export PATH=/run/current-system/sw/bin:$PATH
 export PATH=$HOME/.spicetify:$PATH
 export PATH=$HOME/.ghcup/bin:$PATH
 export PATH=$HOME/go/bin:$PATH
+export PATH=$HOME/.npm-global/bin:$PATH
 export EDITOR=nvim
 export VISUAL=$EDITOR
 export FZF_DEFAULT_COMMAND='ag -g ""'

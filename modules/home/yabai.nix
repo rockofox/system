@@ -26,11 +26,11 @@
       /opt/homebrew/bin/yabai -m config mouse_action1                move
       /opt/homebrew/bin/yabai -m config mouse_action2                resize
       /opt/homebrew/bin/yabai -m config mouse_drop_action            swap
-      /opt/homebrew/bin/yabai -m config external_bar all:25:0
+      /opt/homebrew/bin/yabai -m config external_bar off:0:0
 
       # general space settings
       /opt/homebrew/bin/yabai -m config layout                       bsp
-      # /opt/homebrew/bin/yabai -m config top_padding                  18
+      /opt/homebrew/bin/yabai -m config top_padding                  18
       /opt/homebrew/bin/yabai -m config bottom_padding               18
       /opt/homebrew/bin/yabai -m config left_padding                 18
       /opt/homebrew/bin/yabai -m config right_padding                18
@@ -83,7 +83,7 @@
       /opt/homebrew/bin/yabai -m signal --add event=dock_did_restart action="sudo /opt/homebrew/bin/yabai --load-sa"
       sudo /opt/homebrew/bin/yabai --load-sa
 
-      borders active_color=0xff${config.colorScheme.palette.base08} inactive_color=0xff${config.colorScheme.palette.base00} width=3.0 style=s 2>/dev/null 1>&2 &
+      # borders active_color=0xff${config.colorScheme.palette.base08} inactive_color=0xff${config.colorScheme.palette.base00} width=3.0 style=s 2>/dev/null 1>&2 &
 
       # sketchybar 2>/dev/null 1>&2 &
 

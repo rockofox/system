@@ -38,7 +38,6 @@
     cmake
     cowsay
     curl
-    dotnet-sdk
     elixir
     elixir-ls
     entr
@@ -51,7 +50,6 @@
     fzf
     gh
     gh-markdown-preview
-    gitui
     google-cloud-sdk
     gperftools
     gradle
@@ -89,6 +87,7 @@
     xh
     yt-dlp
     nil
+    fish
     (writeScriptBin "rebuild" ''
       cd /Users/rocko/GitClones/system
       git add -NA .
