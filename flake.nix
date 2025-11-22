@@ -14,7 +14,6 @@
     };
     nix-colors.url = "github:misterio77/nix-colors";
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
-    # emacs-overlay pinned because https://github.com/nix-community/nix-doom-emacs/issues/409
     emacs-overlay.url =
       "github:nix-community/emacs-overlay/c16be6de78ea878aedd0292aa5d4a1ee0a5da501";
     stylix.url = "github:danth/stylix";
@@ -23,24 +22,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sensitive = { url = "path:/Users/rocko/GitClones/sensitive"; };
-    agnostic-services = { url = "path:/Users/rocko/GitClones/nix-agnostic-services-ng"; };
   };
 
   outputs = { self, darwin, home-manager, nix-colors, nix-doom-emacs
-    , stylix, sensitive, nixpkgs-stable, nixvim, nixpkgs, agnostic-services, ... }@inputs: {
+    , stylix, sensitive, nixpkgs-stable, nixvim, nixpkgs, ... }@inputs: {
       darwinConfigurations = {
         "darwin" = darwin.lib.darwinSystem {
           system = sensitive.lib.arch;
           specialArgs = inputs;
           
           modules = [
-            agnostic-services.darwinModules.default
             ./modules/darwin.nix
             home-manager.darwinModules.home-manager
             {
               nixpkgs.overlays = [
                 (self: super: {
-                  # 2024-12-31
                   subversionClient = nixpkgs-stable.legacyPackages.${sensitive.lib.arch}.subversionClient;
                   discocss = super.discocss.overrideAttrs (prev: rec {
                     version = "0.3.1";

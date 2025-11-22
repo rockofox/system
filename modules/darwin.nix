@@ -1,51 +1,26 @@
 { pkgs, sensitive, ... }:
 {
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  # portableServices.services.open-webui = {
-  #   description = "Open Web UI";
-  #   command = "/Users/rocko/GitClones/open-webui/venv/bin/open-webui";
-  #   arguments = [
-  #     "serve"
-  #   ];
-  #   user = "rocko";
-  #   workingDirectory = "/Users/rocko/GitClones/open-webui";
-  #   # logOutput = true;
-  #   # logError = true;
-  # };
-
-  # launchd.daemons.silly-hello.serviceConfig = {
-  #   description = "little web server that says hi on some port";
-  #   command = "${pkgs.python3}/bin/python -m http.server 8089";
-  #   environment = {
-  #     PYTHONUNBUFFERED = "1";
-  #   };
-  #   workingDirectory = "/Users/rocko/GitClones/agnostic-services-ng";
-  # };
-
+  imports = [
+    ./aerospace.nix
+  ];
   system.primaryUser = "rocko";
-
+  users.users.${sensitive.lib.username} = {
+    name = sensitive.lib.username;
+    home = sensitive.lib.homeDirectory;
+  };
   environment.systemPackages = with pkgs; [
-    # ghc
-    # mpv
-    # nodePackages.generator-code
-    # nodePackages.yo
     bat
     bottom
     cabal-install
     cachix
     cargo
     cmake
-    cowsay
-    curl
     elixir
     elixir-ls
     entr
     expect
-    eza
     fd
     ffmpeg
-    fortune
     fx
     fzf
     gh
@@ -54,16 +29,14 @@
     gperftools
     gradle
     haskellPackages.zlib
-    htop
     hyperfine
     insert-dylib
     jq
     moreutils
     mosh
-    neofetch
     nixfmt-classic
     nixpkgs-fmt
-    nnn
+    nil
     nodejs_24
     nodePackages.prettier
     onefetch
@@ -79,57 +52,48 @@
     tealdeer
     tmate
     tmux
-    tree
     unixtools.watch
-    wakatime
+    wakatime-cli
     wasmtime
     wget
     xh
     yt-dlp
-    nil
-    fish
+    cowsay
+    curl
+    eza
+    fortune
+    htop
+    neofetch
+    nnn
+    tree
     (writeScriptBin "rebuild" ''
       cd /Users/rocko/GitClones/system
       git add -NA .
-      darwin-rebuild switch --flake .#darwin 
+      darwin-rebuild switch --flake .#darwin $@
       cd -
     '')
   ];
   homebrew = {
     enable = true;
-    # onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
+
     brews = [
-      # {
-      #   name = "FelixKratz/formulae/fyabai";
-      #   args = [ "HEAD" ];
-      # }
-      {
-        name = "skhd";
-      }
-      # {
-      #   name = "FelixKratz/formulae/borders";
-      #   args = [ "HEAD" ];
-      # }
       "cava"
       "sketchybar"
-      # "qlcolorcode"
-      # "qlstephen"
-      # "qlmarkdown"
-      # "quicklook-json"
-      # "qlimagesize"
-      # "suspicious-package"
-      # "apparency"
-      # "quicklookase"
-      # "qlvideo"
     ];
-    casks = [ "anaconda" "ilspy" "vimr" "background-music" "ghostty" ];
+
+    casks = [
+      "anaconda"
+      "ilspy"
+      "vimr"
+      "background-music"
+      "ghostty"
+    ];
+
     taps = [
       "homebrew/bundle"
       "homebrew/services"
-      # "koekeishiya/formulae"
-      # "rockofox/formulae"
       "osx-cross/arm"
       "osx-cross/avr"
       "dimentium/autoraise"
@@ -137,11 +101,6 @@
       "qmk/qmk"
     ];
   };
-  # fonts.fonts = with pkgs; [ nerdfonts julia-mono lato jetbrains-mono ];
-  # fonts.fontDir.enable = true;
-  # fonts.fonts = [];
-  # fonts.fontDir.enable = false;
-
   system = {
     defaults = {
       NSGlobalDomain = {
@@ -155,6 +114,7 @@
         NSNavPanelExpandedStateForSaveMode = true;
         NSNavPanelExpandedStateForSaveMode2 = true;
       };
+
       dock = {
         autohide = true;
         autohide-delay = 0.0;
@@ -162,29 +122,21 @@
       };
     };
   };
-
-  users.users.${sensitive.lib.username} = {
-    name = sensitive.lib.username;
-    home = sensitive.lib.homeDirectory;
-  };
-  # Use a custom configuration.nix location.
-  # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
-  # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
-
   programs.nix-index.enable = true;
-
+  programs.zsh.enable = true;
   nix.gc = {
     automatic = true;
-    interval.Day = 7; #Hours, minutes
+    interval.Day = 7;
     options = "--delete-older-than 7d";
   };
-
-
   nix.extraOptions = ''
     extra-platforms = aarch64-darwin x86_64-darwin
     experimental-features = nix-command flakes
     access-tokens = github.com=${sensitive.lib.gh-acess-token}
+    download-buffer-size = 16777216
   '';
+
+  nix.settings.trusted-users = [ "rocko" ];
 
   nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -192,26 +144,15 @@
     "loony-tools:pr9m4BkM/5/eSTZlkQyRt57Jz7OMBxNSUiMC4FkcNfk="
     "ghc-nix.cachix.org-1:wI8l3tirheIpjRnr2OZh6YXXNdK2fVQeOI4SVz/X8nA="
     "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+    "fox:LUmYKVI6KAUFhj9F7JEHju9kvr4X+rXCGVKVK3+6Fdc="
   ];
+
   nix.settings.substituters = [
-    #    "https://cache.iog.io"
-    # "https://cache.zw3rk.com"
     "https://cache.nixos.org"
     "https://nix-community.cachix.org"
     "https://ghc-nix.cachix.org"
     "https://cache.iog.io"
   ];
-
-  # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true; # default shell on catalina
-
-  # Add ability to used TouchID for sudo authentication
-  # security.pam.services.sudo_local.touchIdAuth = true;
-
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
   system.stateVersion = 4;
-
-  # nix.build-users-group = "nixbld";
   ids.gids.nixbld = 350;
 }

@@ -4,6 +4,7 @@
     executable = true;
     target = ".config/sketchybar/sketchybarrc";
     text = ''
+
       sketchybar -m --bar height=25 \
                           position=top \
                           padding_left=0 \
@@ -15,6 +16,7 @@
                           border_color=0xff2E3440 \
                           display=main \
                           blur_radius=4
+
       sketchybar -m --default updates=when_shown \
                               drawing=on \
                               cache_scripts=on \
@@ -24,10 +26,12 @@
                               label.font="${font}:Bold:14.0" \
                               label.color=0xffECEFF4 \
                               blur_radius=4
+
       sketchybar -m --default label.padding_left=0 \
                               label.padding_right=0 \
                               icon.padding_left=5 \
                               icon.padding_right=5
+
       SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
 
       spaces=()
@@ -35,22 +39,22 @@
       do
         sid=$(($i+1))
         spaces+=(space.$sid)
-        sketchybar --add space space.$sid left                                 \
-                   --set space.$sid associated_space=$sid                      \
-                                    icon=''${SPACE_ICONS[i]}                     \
-                                    background.corner_radius=0                 \
-                                    background.height=25                       \
+        sketchybar --add space space.$sid left \
+                   --set space.$sid associated_space=$sid \
+                                    icon=''${SPACE_ICONS[i]} \
+                                    background.corner_radius=0 \
+                                    background.height=25 \
                                     background.color=0x7f${colorScheme.palette.base02} \
-                                    background.drawing=on                     \
-                                    label.drawing=off                          \
-                                    script="~/.config/sketchybar/plugins/space.sh"              \
+                                    background.drawing=on \
+                                    label.drawing=off \
+                                    script="~/.config/sketchybar/plugins/space.sh" \
                                     click_script="yabai -m space --focus $sid"
       done
+
       sketchybar -m --default label.padding_left=0 \
                               icon.padding_right=8 \
                               icon.padding_left=0 \
                               label.padding_right=0
-
       sketchybar -m --add item clock right \
                     --set clock update_freq=1 \
                                 script="~/.config/sketchybar/plugins/clock.sh" \
@@ -59,17 +63,18 @@
                                 border_width=12 \
                                 border_color=0xff2E3440
       sketchybar -m --add event song_update com.apple.iTunes.playerInfo
-      sketchybar -m --add item music right                         \
-          --set music script="~/.config/sketchybar/plugins/music.sh"  \
-          click_script="~/.config/sketchybar/plugins/music_click.sh"  \
-          label.padding_right=20                                   \
-          drawing=off                                              \
+      sketchybar -m --add item music right \
+          --set music script="~/.config/sketchybar/plugins/music.sh" \
+          click_script="~/.config/sketchybar/plugins/music_click.sh" \
+          label.padding_right=20 \
+          drawing=off \
           --subscribe music media_change
-      sketchybar -m --update
 
+      sketchybar -m --update
       echo "sketchybar configuration loaded..."
     '';
   };
+
   home.file.sketchybarClock = {
     executable = true;
     target = ".config/sketchybar/plugins/clock.sh";
@@ -77,6 +82,7 @@
       sketchybar --set $NAME label="$(date +"%H:%M")"
     '';
   };
+
   home.file.sketchybarSpace = {
     executable = true;
     target = ".config/sketchybar/plugins/space.sh";
@@ -93,6 +99,7 @@
       fi
     '';
   };
+
   home.file.sketchybarMusic = {
     executable = true;
     target = ".config/sketchybar/plugins/music.sh";
@@ -100,7 +107,7 @@
       sleep 1
 
       APP_STATE=$(pgrep -x Music)
-      if [[ ! $APP_STATE ]]; then 
+      if [[ ! $APP_STATE ]]; then
           sketchybar -m --set music drawing=off
           exit 0
       fi
@@ -134,23 +141,23 @@
       ARTIST=$(printf "$(echo $artist | cut -c 1-25)…")
       fi
 
-      sketchybar -m --set music         \
+      sketchybar -m --set music \
           --set music icon="$icon" \
-          --set music label="''${title} – ''${artist}"    \
+          --set music label="''${title} – ''${artist}" \
           --set music drawing=on
-
     '';
   };
+
   home.file.musicClick = {
     executable = true;
     target = ".config/sketchybar/plugins/music_click.sh";
     text = ''
-        PLAYER_STATE=$(osascript -e "tell application \"Music\" to set playerState to (get player state) as text")
-        if [[ $PLAYER_STATE == "paused" ]]; then
-          osascript -e 'tell application "Music" to play'
-              else
-          osascript -e 'tell application "Music" to pause'
-        fi
+      PLAYER_STATE=$(osascript -e "tell application \"Music\" to set playerState to (get player state) as text")
+      if [[ $PLAYER_STATE == "paused" ]]; then
+        osascript -e 'tell application "Music" to play'
+      else
+        osascript -e 'tell application "Music" to pause'
+      fi
     '';
   };
 }

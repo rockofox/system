@@ -5,7 +5,6 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    # enableSyntaxHighlighting = true;
     shellAliases = {
       ls = "eza --icons -L1";
       ll = "eza --tree --icons --long -L1";
@@ -35,7 +34,6 @@
       zvm_after_init_commands+=('source ${pkgs.fzf}/share/fzf/key-bindings.zsh')
 
       ${builtins.readFile ./init.sh}
-      exec fish
     '';
     history = {
       size = 10000;
@@ -58,6 +56,7 @@
     enable = true;
     enableZshIntegration = true;
     settings = {
+      command_timeout = 5000;
       character = {
         success_symbol = "❯";
         error_symbol = "[❯](bold red)";

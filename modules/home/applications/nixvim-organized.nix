@@ -93,26 +93,6 @@
         key = "<leader>fh";
       }
       {
-        action = "<cmd>Oil<CR>";
-        key = "-";
-      }
-      {
-        action = "<cmd>Telescope find_files<CR>";
-        key = "<leader>ff";
-      }
-      {
-        action = "<cmd>Telescope live_grep<CR>";
-        key = "<leader>fg";
-      }
-      {
-        action = "<cmd>Telescope buffers<CR>";
-        key = "<leader>fb";
-      }
-      {
-        action = "<cmd>Telescope help_tags<CR>";
-        key = "<leader>fh";
-      }
-      {
         action = "<cmd>Telescope lsp_references<CR>";
         key = "<leader>fr";
       }
@@ -193,11 +173,32 @@
         };
       };
       gitsigns.enable = true;
+      fugitive.enable = true;
+      git-conflict.enable = true;
+      neogit.enable = true;
       transparent = {
         enable = true;
       };
+      lualine.enable = true;
+      bufferline.enable = true;
+      dressing.enable = true;
+      which-key = {
+        enable = true;
+        settings.preset = "helix";
+      };
+      web-devicons.enable = true;
+      lspkind = {
+        enable = true;
+        settings = {
+          symbol_map = {
+          };
+          maxwidth = 50;
+          ellipsis_char = "...";
+        };
+      };
       helm.enable = true;
-      render-markdown.enable = true;
+      telescope.enable = true;
+      trouble.enable = true;
       copilot-lua = {
         enable = false;
         settings.suggestion.enabled = true;
@@ -300,17 +301,9 @@
           ];
         };
       };
-      dressing.enable = true;
-      fugitive.enable = true;
-      git-conflict.enable = true;
-      neogit.enable = true;
-      lualine.enable = true;
       luasnip.enable = true;
-      bufferline.enable = true;
-      illuminate.enable = true;
       nvim-autopairs.enable = true;
       sleuth.enable = true;
-      trouble.enable = true;
       lsp = {
         enable = true;
         servers = {
@@ -353,9 +346,7 @@
           };
         };
       };
-      none-ls.sources.formatting.black.enable = true;
       oil.enable = true;
-      telescope.enable = true;
       treesitter = {
         enable = true;
         settings = {
@@ -363,20 +354,8 @@
           highlight.enable = true;
         };
       };
-      web-devicons.enable = true;
-      which-key = {
-        enable = true;
-        settings.preset = "helix";
-      };
-      lspkind = {
-        enable = true;
-        settings = {
-          symbol_map = {
-          };
-          maxwidth = 50;
-          ellipsis_char = "...";
-        };
-      };
+      render-markdown.enable = true;
+      none-ls.sources.formatting.black.enable = true;
     };
     viAlias = true;
     vimAlias = true;
