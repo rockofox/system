@@ -1,0 +1,149 @@
+name: Build Nix Darwin Packages
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+        with:
+          extra-conf: |
+            extra-experimental-features = nix-command flakes
+            
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v14
+        with:
+          name: rocko  # Replace with your Cachix cache name
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          
+      - name: Configure Nix to use Cachix
+        run: |
+          echo "substituters = https://cache.nixos.org https://rocko.cachix.org" | sudo tee -a /etc/nix/nix.conf
+          echo "trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= rocko.cachix.org-1:O8Jl/ZW33ReUsK/sYfNLrH6bdoBbkh5QA76u6RAIBLM=" | sudo tee -a /etc/nix/nix.conf
+      
+      - name: Check what needs building
+        continue-on-error: true
+        run: |
+          echo "Checking which packages are not in cache..."
+          
+          CONFIGS=$(nix eval .#darwinConfigurations --apply builtins.attrNames --json 2>/dev/null | jq -r '.[]' || echo "")
+          
+          if [ -z "$CONFIGS" ]; then
+            echo "Could not discover configurations"
+            exit 0
+          fi
+          
+          for config in $CONFIGS; do
+            echo ""
+            echo "Configuration: $config"
+            
+            # Get build plan and check what's missing from cache
+            nix build ".#darwinConfigurations.$config.system" --dry-run 2>&1 | \
+              grep -E "will be (built|fetched)" || echo "All packages available in cache!"
+          done
+      
+      - name: Show flake structure (debug)
+        if: failure()
+        continue-on-error: true
+        run: |
+          echo "Flake structure for debugging:"
+          nix flake show || true
+          echo ""
+          echo "Darwin configurations:"
+          nix eval .#darwinConfigurations --apply builtins.attrNames || true
+
+      - name: Build all Darwin configurations
+        run: |
+          echo "Discovering Darwin configurations..."
+          
+          # Use nix eval to get actual configuration names (more reliable)
+          CONFIGS=$(nix eval .#darwinConfigurations --apply builtins.attrNames --json 2>/dev/null | \
+            jq -r '.[]' || echo "")
+          
+          if [ -z "$CONFIGS" ]; then
+            echo "No darwinConfigurations found in flake"
+            echo "Trying nix flake show as fallback..."
+            # Fallback to nix flake show, filtering out metadata fields
+            CONFIGS=$(nix flake show --json 2>/dev/null | \
+              jq -r '.darwinConfigurations | to_entries[] | select(.value.type == "nixos-configuration" or .value.type == "derivation") | .key' 2>/dev/null || echo "")
+          fi
+          
+          if [ -z "$CONFIGS" ]; then
+            echo "Error: Could not find any darwinConfigurations in flake"
+            echo "Please check your flake.nix structure"
+            exit 1
+          fi
+          
+          echo "Found configurations: $CONFIGS"
+          
+          # Build each configuration
+          for config in $CONFIGS; do
+            echo ""
+            echo "======================================"
+            echo "Building configuration: $config"
+            echo "======================================"
+            
+            nix build ".#darwinConfigurations.$config.system" \
+              --print-build-logs \
+              --fallback \
+              --keep-going || {
+                echo "Warning: Failed to build $config"
+                FAILED_BUILDS="${FAILED_BUILDS:-}$config "
+              }
+          done
+          
+          # Report any failures
+          if [ -n "${FAILED_BUILDS:-}" ]; then
+            echo ""
+            echo "Warning: Some builds failed: $FAILED_BUILDS"
+            echo "Continuing to push successful builds to cache..."
+          fi
+
+      - name: Push to Cachix
+        run: |
+          echo "Pushing built packages to Cachix..."
+          
+          # Get all configurations again
+          CONFIGS=$(nix eval .#darwinConfigurations --apply builtins.attrNames --json 2>/dev/null | jq -r '.[]' || echo "")
+          
+          # Push each successfully built configuration
+          for config in $CONFIGS; do
+            if [ -L "result" ] || nix path-info ".#darwinConfigurations.$config.system" 2>/dev/null; then
+              echo "Pushing $config to cache..."
+              nix path-info ".#darwinConfigurations.$config.system" --recursive | \
+                cachix push rocko || echo "Warning: Failed to push $config"
+            fi
+          done
+
+      - name: Build report
+        if: always()
+        run: |
+          echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          CONFIGS=$(nix eval .#darwinConfigurations --apply builtins.attrNames --json 2>/dev/null | jq -r '.[]' || echo "")
+          
+          for config in $CONFIGS; do
+            if nix path-info ".#darwinConfigurations.$config.system" 2>/dev/null; then
+              echo "✅ **$config**: Built successfully" >> $GITHUB_STEP_SUMMARY
+              SIZE=$(nix path-info ".#darwinConfigurations.$config.system" --json 2>/dev/null | \
+                jq -r '.[].closureSize' || echo "unknown")
+              if [ "$SIZE" != "unknown" ]; then
+                SIZE_GB=$(echo "scale=2; $SIZE / 1024 / 1024 / 1024" | bc)
+                echo "   - Closure size: ${SIZE_GB} GB" >> $GITHUB_STEP_SUMMARY
+              fi
+            else
+              echo "❌ **$config**: Build failed" >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "" >> $GITHUB_STEP_SUMMARY
+          done
